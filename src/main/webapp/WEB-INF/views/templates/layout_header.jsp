@@ -15,7 +15,7 @@
 			          <a class="nav-link active" aria-current="page" href="/">Home</a>
 			        </li>
 			        <li class="nav-item">
-			          <a class="nav-link" href="/products/list">Products</a>
+			          <a class="nav-link" href="/matches/list">경기예매</a>
 			        </li>
 			        <li class="nav-item">
 			          <a class="nav-link" href="/notice/list">공지사항</a>
