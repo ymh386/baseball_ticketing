@@ -8,9 +8,23 @@ public class UserDTO {
 	private String name;
 	private String phone;
 	private String email;
+	private Long teamNum;
+	private String address;
 	
 	
 	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Long getTeamNum() {
+		return teamNum;
+	}
+	public void setTeamNum(Long teamNum) {
+		this.teamNum = teamNum;
+	}
 	public String getUserId() {
 		return userId;
 	}

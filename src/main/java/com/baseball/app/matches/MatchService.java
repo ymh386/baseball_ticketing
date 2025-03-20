@@ -8,5 +8,10 @@ public class MatchService {
 	
 	@Autowired
 	private MatchDAO matchDAO;
+	
+	public MatchDTO getDetail(MatchDTO matchDTO) throws Exception {
+		
+		return matchDAO.getDetail(matchDTO);
+	}
 
 }

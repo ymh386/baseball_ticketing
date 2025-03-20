@@ -2,6 +2,9 @@ package com.baseball.app.matches;
 
 import java.sql.Date;
 
+import com.baseball.app.stadiums.StadiumDTO;
+import com.baseball.app.teams.TeamDTO;
+
 public class MatchDTO {
 	
 	
@@ -11,9 +14,44 @@ public class MatchDTO {
 	private Long homeTeam;
 	private Long awayTeam;
 	private String matchStatus;
+	private Long homeScore;
+	private Long awayScore;
+	private TeamDTO homeTeamDTO;
+	private TeamDTO awayTeamDTO;
+	private StadiumDTO stadiumDTO;
 	
 	
 	
+	public TeamDTO getHomeTeamDTO() {
+		return homeTeamDTO;
+	}
+	public void setHomeTeamDTO(TeamDTO homeTeamDTO) {
+		this.homeTeamDTO = homeTeamDTO;
+	}
+	public TeamDTO getAwayTeamDTO() {
+		return awayTeamDTO;
+	}
+	public void setAwayTeamDTO(TeamDTO awayTeamDTO) {
+		this.awayTeamDTO = awayTeamDTO;
+	}
+	public StadiumDTO getStadiumDTO() {
+		return stadiumDTO;
+	}
+	public void setStadiumDTO(StadiumDTO stadiumDTO) {
+		this.stadiumDTO = stadiumDTO;
+	}
+	public Long getHomeScore() {
+		return homeScore;
+	}
+	public void setHomeScore(Long homeScore) {
+		this.homeScore = homeScore;
+	}
+	public Long getAwayScore() {
+		return awayScore;
+	}
+	public void setAwayScore(Long awayScore) {
+		this.awayScore = awayScore;
+	}
 	public Long getMatchNum() {
 		return matchNum;
 	}

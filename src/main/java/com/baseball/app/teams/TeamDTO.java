@@ -4,7 +4,25 @@ public class TeamDTO {
 	
 	
 	private Long teamNum;
+	private Long stadiumNum;
 	private String teamName;
+	private String field;
+	
+	
+	public Long getStadiumNum() {
+		return stadiumNum;
+	}
+	public void setStadiumNum(Long stadiumNum) {
+		this.stadiumNum = stadiumNum;
+	}
+	public String getField() {
+		return field;
+	}
+	public void setField(String field) {
+		this.field = field;
+	}
+	
+	
 	
 	
 	
