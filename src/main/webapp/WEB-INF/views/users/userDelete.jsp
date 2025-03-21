@@ -14,25 +14,21 @@
 <div class="continer-fluid my-5">
 	<div class="row col-md-8 offset-md-2">
 		<!-- contents 내용 작성 -->
-		<h2>마이페이지</h2>
 		
-		<div class="alert alert-primary" role="alert">
-  			${sessionScope.user.userId}
-		</div>
-		<div class="alert alert-primary" role="alert">
-  			${user.name}
-		</div>
-		<div class="alert alert-primary" role="alert">
-  			${user.email}
-		</div>
-		
-		
-		<button type="button" onclick="location.href='./pwUpdate'">비밀번호 변경</button>
-		<button type="button" onclick="location.href='./getTicket'">티켓확인</button>
-		<button type="button" onclick="location.href='./userDelete'">회원탈퇴</button>
-		
-		
+        <form action="./userDelete" method="post" onsubmit="return confirmDelete();">
+		<h2>그 동안 저희 kbo티켓 예매 서비스를 이용해주셔서 감사합니다 </h2>
+    
+			<h2>id: ${user.userId}</h2>
+            <button type="submit">회원 탈퇴 </button>
+        </form>
 
+        <script>
+            function confirmDelete() {
+                return confirm("정말로 탈퇴하시겠습니까 아이디 복구는 불가합니다");
+            }
+        </script>
+				
+		
 	</div>
 </div>
 

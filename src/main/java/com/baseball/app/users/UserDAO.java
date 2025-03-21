@@ -46,18 +46,25 @@ public class UserDAO {
 	}
 	
 	
-	//비밀번호 변경 
-	
-	public int updatePassword(UserDTO userDTO) throws Exception{
-		return sqlSession.update(NAMESPACE+"updatePassword", userDTO);
-	}
-
-	
 	//티켓 정보
 	
 	public List<Long> getTickets(UserDTO userDTO) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getTickets", userDTO);
 	}
+	
+	// PW 수정 
+	
+	public int pwUpdate(UserDTO userDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"pwUpdate", userDTO);
+		
+	}
+	
+	// 회원 탈퇴 
+	public int userDelete(UserDTO userDTO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"userDelete", userDTO);
+		
+	}
+	
 	
 	
 	

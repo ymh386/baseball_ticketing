@@ -36,7 +36,7 @@
         <p>조회된 티켓이 없습니다.</p>
     </c:if>
 
-    <button type="button" onclick="location.href='ticketList'">뒤로 가기</button>
+    <button type="button" onclick="location.href='./mypage'">뒤로 가기</button>
 		
 		
 		

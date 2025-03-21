@@ -18,6 +18,10 @@ const emailError = document.getElementById("emailError");
 
 
 
+
+
+
+
 userIdError.textContent = "";
 passwordError.textContent ="";
 emailError.textContent = "";
@@ -51,7 +55,7 @@ if (isValid) {
 }
 
 
-
+    
 
 });
 

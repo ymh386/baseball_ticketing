@@ -74,7 +74,28 @@
 	</select>
 	
 	
+	<!--비밀번호 변경 -->
+	
+	<update id="pwUpdate" parameterType="UserDTO">
+	
+	UPDATE USERS SET 
+		PASSWORD =#{password}
+			WHERE USERID =#{userId}
+	</update>
+	
+	
+	<!-- 회원 삭제 -->
+	
+	<delete id="userDelete" parameterType="UserDTO">
+	
+		DELETE FROM USERS WHERE USERID =#{userId}
+	
+	</delete>	
 
+	
+	
+	
+	
 	
 	
   </mapper>
