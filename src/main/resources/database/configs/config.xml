@@ -7,7 +7,7 @@
 <configuration>
 	<typeAliases>
 	
-		
+			<typeAlias type="com.baseball.app.users.UserDTO" alias="UserDTO"/>
 		
 		
 		<typeAlias type="java.util.Map" alias="Map"/>

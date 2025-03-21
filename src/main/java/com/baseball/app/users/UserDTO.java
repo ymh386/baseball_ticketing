@@ -8,6 +8,9 @@ public class UserDTO {
 	private String name;
 	private String phone;
 	private String email;
+	private String address;
+	
+	
 	
 	
 	
@@ -41,8 +44,20 @@ public class UserDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	
 	
 	
 	
 	
 }
+	
+
+	
+	
