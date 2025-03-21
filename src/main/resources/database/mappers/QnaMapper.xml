@@ -60,6 +60,14 @@
 			DELETE QNA WHERE BOARDNUM = #{boardNum}
 		</delete>
 		
+		<delete id="deleteFile" parameterType="BoardFileDTO">
+			DELETE QNAFILES WHERE FILENUM = ${fileNum}
+		</delete>
+		
+		<delete id="deleteAllFile" parameterType="BoardDTO">
+			
+		</delete>
+		
 		<insert id="addFile" parameterType="BoardFileDTO">
 			INSERT INTO QNAFILES (FILENUM, BOARDNUM, FILENAME, ORIGINALNAME) 
 			VALUES (FILES_SEQ.NEXTVAL, #{boardNum}, #{fileName}, #{originalName})

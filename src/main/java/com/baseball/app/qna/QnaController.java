@@ -99,9 +99,9 @@ public class QnaController {
 	
 	
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
-	public String delete(QnaDTO qnaDTO) throws Exception {
+	public String delete(QnaDTO qnaDTO, HttpSession session) throws Exception {
 		
-		int result = qnaService.delete(qnaDTO);
+		int result = qnaService.delete(qnaDTO, session);
 		
 		return "redirect:./list";
 	}
@@ -112,8 +112,19 @@ public class QnaController {
 		
 		boardFileDTO = qnaService.getFileDetail(boardFileDTO);
 		model.addAttribute("file", boardFileDTO);
-		
+		System.out.println("fileDown 리턴 직전");
 		return "fileDownView";
+	}
+	
+	
+	@RequestMapping(value = "fileDelete", method = RequestMethod.POST)
+	public String fileDelete(BoardFileDTO boardFileDTO, Model model, HttpSession session) throws Exception {
+		
+		int result = qnaService.deleteFile(boardFileDTO, session);
+		
+		model.addAttribute("result", result);
+		System.out.println("result : " + result);
+		return "commons/ajaxResult";
 	}
 	
 	
