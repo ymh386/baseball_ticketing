@@ -8,6 +8,8 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baseball.app.ticketing.TicketingDTO;
+
 @Service
 public class UserService {
 	
@@ -16,7 +18,6 @@ public class UserService {
 	
 
 	// 로그인 
-
 	public UserDTO login(UserDTO userDTO) throws Exception {
 	    UserDTO result = userDAO.getDetail(userDTO);
 
@@ -49,9 +50,12 @@ public class UserService {
 	public UserDTO findPassword(UserDTO userDTO) throws Exception{
 		return userDAO.findPassword(userDTO);
 	}
+
+	
+	
 	
 	// 티켓 조회 
-	public List<Long> getTickets(UserDTO userDTO) throws Exception{
+	public List<TicketingDTO> getTickets(UserDTO userDTO) throws Exception{
 		return userDAO.getTickets(userDTO);
 	}
 

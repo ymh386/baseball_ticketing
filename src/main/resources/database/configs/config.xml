@@ -11,6 +11,7 @@
 			<typeAlias type="com.baseball.app.matches.MatchDTO" alias="MatchDTO"/>
 	 		<typeAlias type="com.baseball.app.teams.TeamDTO" alias="TeamDTO"/>
 	 		<typeAlias type="com.baseball.app.stadiums.StadiumDTO" alias="StadiumDTO"/>
+	 		<typeAlias type="com.baseball.app.ticketing.TicketingDTO" alias="TicketingDTO"/>
 		
 		
 		<typeAlias type="java.util.Map" alias="Map"/>

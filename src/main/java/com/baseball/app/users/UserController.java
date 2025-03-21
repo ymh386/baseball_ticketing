@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.baseball.app.ticketing.TicketingDTO;
+
 @Controller
 @RequestMapping(value = "/users/*")
 public class UserController {
@@ -145,9 +147,24 @@ public class UserController {
 	@RequestMapping(value ="getTicket", method = RequestMethod.GET)
 	public String getTickets(HttpSession session, Model model,UserDTO userDTO) throws Exception{
 		
-		return "users/getTicket";
-		
+	    UserDTO user = (UserDTO) session.getAttribute("user");
+
+	    if (user == null) {
+	        // 로그인되지 않았다면 로그인 페이지로 리다이렉트
+	        return "redirect:/login";
+	    }
+
+	    // 사용자의 티켓 정보 가져오기 
+	    List<TicketingDTO> ticketList = userService.getTickets(user);
+
+	    // 티켓 목록을 모델에 추가
+	    model.addAttribute("ticketList", ticketList);
+
+	    // "getTicket" 뷰 페이지로 이동
+	    return "users/getTicket";
 	}
+		
+	
 	
 	@RequestMapping(value ="pwUpdate", method = RequestMethod.GET)
 	public String pwUpdate() throws Exception{
@@ -210,6 +227,12 @@ public class UserController {
 	    // 탈퇴 후 메인 페이지로 리다이렉트
 	    return "redirect:/";
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 		

@@ -19,8 +19,8 @@
 	</select>
 	
 	
-	<select id="getTickets" parameterType="UserDTO" resultType="java.lang.Long">
-	   SELECT t.TICKETNUM
+	<select id="getTickets" parameterType="UserDTO" resultType="TicketingDTO">
+	   SELECT t.*
 	    FROM USERS u
 	    JOIN TICKETING t ON u.USERID = t.USERID
 	    WHERE u.USERID =#{userId}
@@ -72,6 +72,10 @@
 	<select id="findPassword" resultType="UserDTO">
 		SELECT * FROM USERS WHERE USERID=#{userId} AND NAME=#{name} AND EMAIL=#{email}
 	</select>
+	
+	
+	
+	
 	
 	
 	<!--비밀번호 변경 -->
