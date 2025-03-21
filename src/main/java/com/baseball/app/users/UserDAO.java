@@ -4,7 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.baseball.app.ticketing.TicketingDTO;
 
 @Repository
 public class UserDAO {
@@ -13,7 +18,7 @@ public class UserDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.baseball.app.users.UserDAO.";
 	
-	
+   
 	//회원가입
 	public int join(UserDTO userDTO) throws Exception{
 	
@@ -44,20 +49,27 @@ public class UserDAO {
 		return sqlSession.selectOne(NAMESPACE+"findPassword", userDTO);
 		
 	}
-	
-	
-	//비밀번호 변경 
-	
-	public int updatePassword(UserDTO userDTO) throws Exception{
-		return sqlSession.update(NAMESPACE+"updatePassword", userDTO);
-	}
 
 	
 	//티켓 정보
 	
-	public List<Long> getTickets(UserDTO userDTO) throws Exception{
+	public List<TicketingDTO> getTickets(UserDTO userDTO) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getTickets", userDTO);
 	}
+	
+	// PW 수정 
+	
+	public int pwUpdate(UserDTO userDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"pwUpdate", userDTO);
+		
+	}
+	
+	// 회원 탈퇴 
+	public int userDelete(UserDTO userDTO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"userDelete", userDTO);
+		
+	}
+	
 	
 	
 	
