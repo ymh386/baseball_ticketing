@@ -5,7 +5,6 @@ public class StadiumDTO {
 	
 	private Long stadiumNum;
 	private String stadiumName;
-	private Long teamNum;
 	private Double latitude;
 	private Double longitude;
 	
@@ -22,12 +21,6 @@ public class StadiumDTO {
 	}
 	public void setStadiumName(String stadiumName) {
 		this.stadiumName = stadiumName;
-	}
-	public Long getTeamNum() {
-		return teamNum;
-	}
-	public void setTeamNum(Long teamNum) {
-		this.teamNum = teamNum;
 	}
 	public Double getLatitude() {
 		return latitude;
