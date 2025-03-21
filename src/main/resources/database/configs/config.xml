@@ -6,6 +6,14 @@
 <!-- mybatis 설정 -->
 <configuration>
 	<typeAliases>
+		<typeAlias type="com.baseball.app.boards.BoardDTO" alias="BoardDTO"/>
+		<typeAlias type="com.baseball.app.boards.BoardDAO" alias="BoardDAO"/>
+		<typeAlias type="com.baseball.app.boards.BoardFileDTO" alias="BoardFileDTO"/>
+		
+		<typeAlias type="com.baseball.app.qna.QnaDTO" alias="QnaDTO"/>
+		<typeAlias type="com.baseball.app.qna.QnaDAO" alias="QnaDAO"/>
+		
+		<typeAlias type="com.baseball.app.pages.Pager" alias="Pager"/>
 	
 			<typeAlias type="com.baseball.app.users.UserDTO" alias="UserDTO"/>
 			<typeAlias type="com.baseball.app.matches.MatchDTO" alias="MatchDTO"/>

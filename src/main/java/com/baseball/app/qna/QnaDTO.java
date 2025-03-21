@@ -1,27 +1,25 @@
 package com.baseball.app.qna;
 
-public class QnaDTO {
+import java.util.List;
+
+import com.baseball.app.boards.BoardDTO;
+import com.baseball.app.boards.BoardFileDTO;
+
+public class QnaDTO extends BoardDTO {
 	
 	
-	private String boardTitle;
-	private Long boardHit;
 	private Long boardRef;
 	private Long boardStep;
 	private Long boardDepth;
+	private List<BoardFileDTO> boardFileDTOs;
 	
 	
 	
-	public String getBoardTitle() {
-		return boardTitle;
+	public List<BoardFileDTO> getBoardFileDTOs() {
+		return boardFileDTOs;
 	}
-	public void setBoardTitle(String boardTitle) {
-		this.boardTitle = boardTitle;
-	}
-	public Long getBoardHit() {
-		return boardHit;
-	}
-	public void setBoardHit(Long boardHit) {
-		this.boardHit = boardHit;
+	public void setBoardFileDTOs(List<BoardFileDTO> boardFileDTOs) {
+		this.boardFileDTOs = boardFileDTOs;
 	}
 	public Long getBoardRef() {
 		return boardRef;
