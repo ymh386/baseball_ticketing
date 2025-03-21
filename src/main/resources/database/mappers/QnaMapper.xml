@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.baseball.app.qna.QnaDAO" >
+  		<select id="getList" resultType="QnaDTO">
+  			SELECT * FROM QNA ORDER BY BOARDNUM DESC
+  		</select>
+		
+		<select id="getDetail" resultType="QnaDTO" parameterType="QnaDTO">
+			SELECT * FROM QNA WHERE BOARDNUM = #{boardNum}
+		</select>
+		
+		<insert id="add" parameterType="QnaDTO">
+			INSERT INTO QNA (BOARDNUM, BOARDTITLE, BOARDDATE, BOARDCONTENT, BOARDHIT, USERID) 
+			VALUES (QNA_SEQ.NEXTVAL, #{boardTitle}, SYSDATE, #{boardContent}, 0, #{userId})
+		</insert>
+		
+		<update id="update" parameterType="QnaDTO">
+			UPDATE QNA SET
+			BOARDTITLE = #{boardTitle}, 
+			BOARDCONTENT = #{boardContent}
+			WHERE BOARDNUM = #{boardNum}
+		</update>
+		
+		<delete id="delete" parameterType="QnaDTO">
+			DELETE QNA WHERE BOARDNUM = #{boardNum}
+		</delete>
+		
+		<insert id="addFile" parameterType="BoardFileDTO">
+			INSERT INTO QNAFILES (FILENUM, BOARDNUM, FILENAME, ORIGINALNAME) 
+			VALUES (FILES_SEQ.NEXTVAL, #{boardNum}, #{fileName}, #{originalName})
+		</insert>
+		
+		
+  </mapper>
