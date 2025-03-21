@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.baseball.app.boards.BoardDTO;
+import com.baseball.app.boards.BoardFileDTO;
 import com.baseball.app.pages.Pager;
 
 
@@ -98,11 +99,32 @@ public class QnaController {
 	
 	
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
-	public String delete(QnaDTO qnaDTO) throws Exception {
+	public String delete(QnaDTO qnaDTO, HttpSession session) throws Exception {
 		
-		int result = qnaService.delete(qnaDTO);
+		int result = qnaService.delete(qnaDTO, session);
 		
 		return "redirect:./list";
+	}
+	
+	
+	@RequestMapping(value = "fileDown", method = RequestMethod.GET)
+	public String fileDown(BoardFileDTO boardFileDTO, Model model) throws Exception {
+		
+		boardFileDTO = qnaService.getFileDetail(boardFileDTO);
+		model.addAttribute("file", boardFileDTO);
+		System.out.println("fileDown 리턴 직전");
+		return "fileDownView";
+	}
+	
+	
+	@RequestMapping(value = "fileDelete", method = RequestMethod.POST)
+	public String fileDelete(BoardFileDTO boardFileDTO, Model model, HttpSession session) throws Exception {
+		
+		int result = qnaService.deleteFile(boardFileDTO, session);
+		
+		model.addAttribute("result", result);
+		System.out.println("result : " + result);
+		return "commons/ajaxResult";
 	}
 	
 	

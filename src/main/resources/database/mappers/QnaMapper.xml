@@ -4,17 +4,49 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.baseball.app.qna.QnaDAO" >
+  		
+  		<select id="getFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
+  			SELECT * FROM QNAFILES WHERE FILENUM = #{fileNum}
+  		</select>
+  		
   		<select id="getList" resultType="QnaDTO">
   			SELECT * FROM QNA ORDER BY BOARDNUM DESC
   		</select>
-		
-		<select id="getDetail" resultType="QnaDTO" parameterType="QnaDTO">
-			SELECT * FROM QNA WHERE BOARDNUM = #{boardNum}
-		</select>
+				
+		<select id="getDetail" parameterType="QnaDTO" resultMap="getDetailResult">
+  		SELECT *
+		FROM QNA N
+			 LEFT OUTER JOIN 
+			 QNAFILES NF
+			 USING(BOARDNUM)
+		WHERE BOARDNUM = #{boardNum}
+  		</select>
+  	
+	  	 <resultMap type="QnaDTO" id="getDetailResult">
+	  		<id column="BOARDNUM" property="boardNum"/>
+	  		<result column="BOARDTITLE" property="boardTitle"/>
+	  		<result column="BOARDDATE" property="boardDate"/>
+	  		<result column="BOARDCONTENT" property="boardContent"/>
+	  		<result column="BOARDHIT" property="boardHit"/>
+	  		<result column="USERID" property="userId"/>
+	  		
+	  		<!-- 1:N ofType="Generic type명" -->
+	  		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+	  			<id column="FILENUM" property="fileNum"/>
+	  			<result column="FILENAME" property="fileName"/>
+	  			<result column="ORIGINALNAME" property="originalName"/>
+	  		</collection>
+	  	
+	  	</resultMap>		
 		
 		<insert id="add" parameterType="QnaDTO">
-			INSERT INTO QNA (BOARDNUM, BOARDTITLE, BOARDDATE, BOARDCONTENT, BOARDHIT, USERID) 
-			VALUES (QNA_SEQ.NEXTVAL, #{boardTitle}, SYSDATE, #{boardContent}, 0, #{userId})
+			<!-- 메인쿼리 실행전(Beafore)에 SELECTKEY의 결과물인 Long타입의 값을 NoticeDTO의 boardNum에 대입 -->
+	  		<selectKey order="BEFORE" keyProperty="boardNum" resultType="Long">
+	  			SELECT QNA_SEQ.NEXTVAL FROM DUAL
+	  		</selectKey>
+
+	  		INSERT INTO QNA (BOARDNUM, BOARDTITLE, BOARDDATE, BOARDCONTENT, BOARDHIT, USERID)
+	  		VALUES (#{boardNum}, #{boardTitle}, SYSDATE, #{boardContent}, 0, #{userId})
 		</insert>
 		
 		<update id="update" parameterType="QnaDTO">
@@ -26,6 +58,14 @@
 		
 		<delete id="delete" parameterType="QnaDTO">
 			DELETE QNA WHERE BOARDNUM = #{boardNum}
+		</delete>
+		
+		<delete id="deleteFile" parameterType="BoardFileDTO">
+			DELETE QNAFILES WHERE FILENUM = ${fileNum}
+		</delete>
+		
+		<delete id="deleteAllFile" parameterType="BoardDTO">
+			
 		</delete>
 		
 		<insert id="addFile" parameterType="BoardFileDTO">

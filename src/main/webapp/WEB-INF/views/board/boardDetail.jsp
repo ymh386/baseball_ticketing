@@ -42,11 +42,17 @@
 		</div>
 	
 	
-		<%-- <div>
+		<div>
 			<c:forEach items="${dto.boardFileDTOs}" var="f">
-				<a href="./fileDown?fileNum=${f.fileNum}">${f.oldName}</a>
+				<a href="./fileDown?fileNum=${f.fileNum}">${f.originalName}</a>
 			</c:forEach>
-		</div> --%>
+		</div>
+		
+		<div>
+			<c:forEach items="${dto.boardFileDTOs}" var="f">
+				<a href="/resources/images/${kind}/${f.fileName}">${f.originalName}</a>
+			</c:forEach>
+		</div>
 	
 		
 		<div>

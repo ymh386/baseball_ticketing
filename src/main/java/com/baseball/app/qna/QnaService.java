@@ -45,7 +45,7 @@ public class QnaService implements BoardService {
 	@Override
 	public int add(BoardDTO boardDTO, MultipartFile[] attaches, HttpSession session) throws Exception {
 		
-		int result = qnaDAO.add(boardDTO);
+		int result = qnaDAO.add(boardDTO); System.out.println("add 후 boardNum : " + boardDTO.getBoardNum());		
 		
 		for (MultipartFile attach : attaches) {
 			if(attach.isEmpty()) {
@@ -88,9 +88,29 @@ public class QnaService implements BoardService {
 	
 
 	@Override
-	public int delete(BoardDTO boardDTO) throws Exception {
+	public int delete(BoardDTO boardDTO, HttpSession session) throws Exception {
 
-		return qnaDAO.delete(boardDTO);
+		// 1. 게시글 정보 조회
+		boardDTO = qnaDAO.getDetail(boardDTO);
+		
+		// 2. DB file들 삭제
+		int result = qnaDAO.deleteAllFile(boardDTO);
+		
+		// 3. HDD file들 삭제
+		String path = session.getServletContext().getRealPath("/resources/images/qna/");
+		System.out.println(path);
+		
+		if(result>0) {
+			for(BoardFileDTO boardFileDTO : ((QnaDTO)boardDTO).getBoardFileDTOs()) {
+				fileManager.fileDelete(path, boardFileDTO.getFileName());
+				
+			}
+		}
+		
+		// 4. DB 게시글 삭제
+		result = qnaDAO.delete(boardDTO);		
+		
+		return result;
 	}
 	
 	
@@ -113,9 +133,31 @@ public class QnaService implements BoardService {
 	}
 	
 	
+	// 파일 다운로드	
+	public BoardFileDTO getFileDetail(BoardFileDTO boardFileDTO) throws Exception {
+		
+		return qnaDAO.getFileDetail(boardFileDTO);				
+	}
 	
 	
-	
+	// 파일 삭제
+	public int deleteFile(BoardFileDTO boardFileDTO, HttpSession session) throws Exception {
+		
+		//1. 정보 조회
+		boardFileDTO = qnaDAO.getFileDetail(boardFileDTO);
+		
+		//2. DB에서 삭제
+		int result = qnaDAO.deleteFile(boardFileDTO); 
+		System.out.println("QNA서비스 result"+result);
+		//3. HDD에서 삭제
+		if (result > 0) {
+			String path = session.getServletContext().getRealPath("/resources/images/qna/");
+			System.out.println(path);
+			fileManager.fileDelete(path, boardFileDTO.getFileName());
+		}		
+		
+		return result;
+	}
 	
 	
 	
