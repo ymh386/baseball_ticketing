@@ -30,6 +30,15 @@
 			<textarea class="form-control" name="boardContent" id="boardContent" rows="10">${dto.boardContent}</textarea>
 		   </div>
 		   
+		   <!-- dto 안에 있는 boardFileDTO들을 뿌려줌 -->
+		   <div class="mb-3">
+		   	<c:forEach items="${dto.boardFileDTOs}" var="f">
+		   		<div class="alert alert-success" role="alert">
+  					${f.originalName} <button type="button" data-file-num="${f.fileNum}" data-kind="${kind}" class="btn btn-outline-light badge text-bg-secondary file-delete">X</button>
+				</div>
+		   	</c:forEach>
+		   </div>
+		   
 		   <div id="files" class="mb-3" data-files-size="${dto.boardFileDTOs.size()}">
 				<div class="mb-3">
 					<button class="btn btn-success" type="button" id="add_file">파일추가</button>

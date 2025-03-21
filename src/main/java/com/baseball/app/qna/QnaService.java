@@ -45,7 +45,7 @@ public class QnaService implements BoardService {
 	@Override
 	public int add(BoardDTO boardDTO, MultipartFile[] attaches, HttpSession session) throws Exception {
 		
-		int result = qnaDAO.add(boardDTO);
+		int result = qnaDAO.add(boardDTO); System.out.println("add 후 boardNum : " + boardDTO.getBoardNum());		
 		
 		for (MultipartFile attach : attaches) {
 			if(attach.isEmpty()) {
@@ -113,6 +113,11 @@ public class QnaService implements BoardService {
 	}
 	
 	
+	// 파일 다운로드	
+	public BoardFileDTO getFileDetail(BoardFileDTO boardFileDTO) throws Exception {
+		
+		return qnaDAO.getFileDetail(boardFileDTO);				
+	}
 	
 	
 	

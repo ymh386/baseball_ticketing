@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.baseball.app.boards.BoardDTO;
+import com.baseball.app.boards.BoardFileDTO;
 import com.baseball.app.pages.Pager;
 
 
@@ -103,6 +104,16 @@ public class QnaController {
 		int result = qnaService.delete(qnaDTO);
 		
 		return "redirect:./list";
+	}
+	
+	
+	@RequestMapping(value = "fileDown", method = RequestMethod.GET)
+	public String fileDown(BoardFileDTO boardFileDTO, Model model) throws Exception {
+		
+		boardFileDTO = qnaService.getFileDetail(boardFileDTO);
+		model.addAttribute("file", boardFileDTO);
+		
+		return "fileDownView";
 	}
 	
 	
