@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.baseball.app.ticketing.TicketingDTO;
+import com.baseball.app.tickets.TicketsDTO;
 
 @Controller
 @RequestMapping(value = "/users/*")
@@ -155,7 +155,7 @@ public class UserController {
 	    }
 
 	    // 사용자의 티켓 정보 가져오기 
-	    List<TicketingDTO> ticketList = userService.getTickets(user);
+	    List<TicketsDTO> ticketList = userService.getTickets(user);
 
 	    // 티켓 목록을 모델에 추가
 	    model.addAttribute("ticketList", ticketList);

@@ -1,6 +1,8 @@
 package com.baseball.app.users;
 
-public class User_ImageDTO {
+import com.baseball.app.files.FileDTO;
+
+public class User_ImageDTO extends FileDTO{
 	
 	
 	private Long imageNum;

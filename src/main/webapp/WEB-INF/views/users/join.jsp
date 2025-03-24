@@ -53,6 +53,25 @@
 			<input type="text" class="form-control" name="address" id="address">
 		   </div>
 		   
+		   <div class="mb-3">
+    <label for="teamNum" class="form-label">응원 하는 팀</label>
+    <select class="form-control" name="teamNum" id="teamNum">
+        <option value="">없음</option>
+        <option value="1">기아 타이거즈</option>
+        <option value="2">SSG 랜더스</option>
+        <option value="3">한화 이글스</option>
+        <option value="4">키움 히어로즈</option>
+        <option value="5">삼성 라이온즈</option>
+        <option value="6">롯데 자이언츠</option>
+        <option value="7">케이티 위즈</option>
+        <option value="8">엘지 트윈스</option>
+        <option value="9">엔씨 다이노스</option>
+        <option value="10">두산 베어스</option>
+    </select>
+</div>
+		   
+		   
+		   
 		
 		  <button type="submit" class="btn btn-primary">회원가입</button>
 		</form>	
