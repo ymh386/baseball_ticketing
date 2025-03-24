@@ -72,7 +72,7 @@
 				<a class="btn btn-info" href="../stadiums/detail?stadiumNum=${dto.stadiumNum}">경기장 정보 보러가기</a>
 			  </div>
 			  <div class="col align-self-end">
-					<a class="btn btn-success" href="../ticketing/add?matchNum=${dto.matchNum}">예매하기</a>
+					<a class="btn btn-success" href="./seatList?matchNum=${dto.matchNum}">예매하기</a>
 			  </div>
 			</div>
 		</div>
