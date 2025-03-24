@@ -11,7 +11,7 @@
 
   		<select id="getList" resultType="QnaDTO">
   			SELECT * FROM QNA ORDER BY BOARDNUM DESC
-  			
+  			asdf
   			
   		</select>
   		
