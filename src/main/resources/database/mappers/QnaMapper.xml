@@ -61,11 +61,11 @@
 		</delete>
 		
 		<delete id="deleteFile" parameterType="BoardFileDTO">
-			DELETE QNAFILES WHERE FILENUM = ${fileNum}
+			DELETE QNAFILES WHERE FILENUM = #{fileNum}
 		</delete>
 		
 		<delete id="deleteAllFile" parameterType="BoardDTO">
-			
+			DELETE QNAFILES WHERE BOARDNUM = #{boardNum}
 		</delete>
 		
 		<insert id="addFile" parameterType="BoardFileDTO">
