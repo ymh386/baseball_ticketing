@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.baseball.app.tickets.TicketsDTO;
+
 @Controller
 @RequestMapping(value = "/users/*")
 public class UserController {
@@ -145,9 +147,90 @@ public class UserController {
 	@RequestMapping(value ="getTicket", method = RequestMethod.GET)
 	public String getTickets(HttpSession session, Model model,UserDTO userDTO) throws Exception{
 		
-		return "";
-		
+	    UserDTO user = (UserDTO) session.getAttribute("user");
+
+	    if (user == null) {
+	        // 로그인되지 않았다면 로그인 페이지로 리다이렉트
+	        return "redirect:/login";
+	    }
+
+	    // 사용자의 티켓 정보 가져오기 
+	    List<TicketsDTO> ticketList = userService.getTickets(user);
+
+	    // 티켓 목록을 모델에 추가
+	    model.addAttribute("ticketList", ticketList);
+
+	    // "getTicket" 뷰 페이지로 이동
+	    return "users/getTicket";
 	}
+		
+	
+	
+	@RequestMapping(value ="pwUpdate", method = RequestMethod.GET)
+	public String pwUpdate() throws Exception{
+		
+		return "users/pwUpdate";
+			
+	}
+	
+	
+	
+	
+	@RequestMapping(value="pwUpdate", method = RequestMethod.POST)
+	public String pwUpdate(UserDTO userDTO,@RequestParam String currentPassword,@RequestParam String newPassword, 
+	        @RequestParam String confirmPassword,HttpSession session, Model model) throws Exception{
+		 UserDTO user = (UserDTO)session.getAttribute("user");
+		 
+	     String result = userService.pwUpdate(user, currentPassword, newPassword, confirmPassword);
+	     System.out.println(user.getPassword());
+	     System.out.println(currentPassword);
+	     System.out.println(newPassword);
+	     System.out.println(confirmPassword);
+
+	        if (result.equals("success")) {
+	            return "redirect:./mypage"; // 비밀번호 변경 성공 후 프로필 페이지로 리다이렉트
+	        } else {
+	            model.addAttribute("message", result); // 오류 메시지를 JSP로 전달
+	            return "users/pwUpdate"; // 실패 시 다시 비밀번호 변경 페이지로
+	        }
+		
+	}	
+	
+	
+	@RequestMapping(value="userDelete", method= RequestMethod.GET)
+	public String userDelete() throws Exception{
+		
+		
+		
+		return "users/userDelete";
+	}
+	
+	
+	@RequestMapping(value="userDelete", method=RequestMethod.POST)
+	public String userDelete(UserDTO userDTO,HttpSession session) throws Exception{
+	    UserDTO user = (UserDTO) session.getAttribute("user");
+	    
+	    if (user == null) {
+	        // 세션에 사용자 정보가 없으면 로그인 페이지로 리다이렉트
+	        return "redirect:/login";
+	    }
+	    
+	    // 탈퇴 서비스 호출 (세션에서 가져온 user 정보 사용)
+	    int result = userService.userDelete(user);
+	    
+	    // 탈퇴 성공 여부 확인
+	    if (result > 0) {
+	        // 탈퇴 성공 시 세션에서 사용자 정보 제거
+	        session.removeAttribute("user");
+	    }
+	    
+	    // 탈퇴 후 메인 페이지로 리다이렉트
+	    return "redirect:/";
+	}
+	
+	
+	
+	
 	
 	
 	

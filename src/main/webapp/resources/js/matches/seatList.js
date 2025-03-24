@@ -13,7 +13,11 @@ for(let sb of seatBtn) {
         fetch('../tickets/add', {
             method:'POST',
             body: f
+        }).catch(e=>{
+            alert("매진된 좌석 입니다.")
         })
+
+        
     })
     
 }

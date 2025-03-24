@@ -15,27 +15,19 @@
 	<div class="row col-md-8 offset-md-2">
 		<!-- contents 내용 작성 -->
 		
-		<h1>로그인</h1>
-		<h3>${result}</h3>
-		<form id="login_form" action="./login" method="post">
-		  <div class="mb-3">
-		    <label for="userID" class="form-label">아이디</label>
-		    <input type="text" value="test" name="userId" placeholder="ID" class="form-control" id="userId">
-		  </div>
+        <form action="./userDelete" method="post" onsubmit="return confirmDelete();">
+		<h2>그 동안 저희 kbo티켓 예매 서비스를 이용해주셔서 감사합니다 </h2>
+    
+			<h2>id: ${user.userId}</h2>
+            <button type="submit">회원 탈퇴 </button>
+        </form>
 
-		  <div class="mb-3">
-		    <label for="password" class="form-label">비밀번호</label>
-		    <input type="password" value="1234" name="password" placeholder="PW" class="form-control" id="password">
-		  </div>	
-			
-			
-			<a href="./findId">id찾기</a>	
-			<a href="./findPassword">PW찾기</a>	
-		  <button type="submit" class="btn btn-primary" id="login_button">로그인</button>
-	
-		</form>	
-		
-		
+        <script>
+            function confirmDelete() {
+                return confirm("정말로 탈퇴하시겠습니까 아이디 복구는 불가합니다");
+            }
+        </script>
+				
 		
 	</div>
 </div>

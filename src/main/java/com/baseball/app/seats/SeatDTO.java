@@ -7,6 +7,7 @@ public class SeatDTO {
 	private Long stadiumNum;
 	private String seatLevel;
 	private Long seatPrice;
+	private Long seatcount;
 	private Long seatCount;
 	
 	
@@ -41,6 +42,22 @@ public class SeatDTO {
 	public void setSeatPrice(Long seatPrice) {
 		this.seatPrice = seatPrice;
 	}
+	public Long getSeatcount() {
+		return seatcount;
+	}
+	public void setSeatcount(Long seatcount) {
+		this.seatcount = seatcount;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

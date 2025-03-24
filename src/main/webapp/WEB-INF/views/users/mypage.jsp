@@ -26,8 +26,26 @@
   			${user.email}
 		</div>
 		
+		<c:set var="teamName" value="${user.teamNum == 1 ? '기아 타이거즈' : 
+                             user.teamNum == 2 ? 'SSG 랜더스' : 
+                             user.teamNum == 3 ? '한화 이글스' :
+                             user.teamNum == 4 ? '키움 히어로즈' : 
+                             user.teamNum == 5 ? '삼성 라이온즈' : 
+                             user.teamNum == 6 ? '롯데 자이언츠' : 
+                             user.teamNum == 7 ? '케이티 위즈' : 
+                             user.teamNum == 8 ? '엘지 트윈스' : 
+                             user.teamNum == 9 ? '엔씨 다이노스' : 
+                             user.teamNum == 10 ? '두산 베어스' : '미지정'}" />
+
+<div class="alert alert-primary" role="alert">
+    응원하는 팀: ${teamName} <!-- 응원하는 팀 출력 -->
+</div>
 		
-		<button type="button" onclick="location.href='./getTicket'">티켓</button>
+		
+		<button type="button" onclick="location.href='./pwUpdate'">비밀번호 변경</button>
+		<button type="button" onclick="location.href='./getTicket'">티켓확인</button>
+		<button type="button" onclick="location.href='./userDelete'">회원탈퇴</button>
+		
 		
 
 	</div>

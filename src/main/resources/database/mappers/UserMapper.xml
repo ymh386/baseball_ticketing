@@ -19,10 +19,10 @@
 	</select>
 	
 	
-	<select id="getTickets" parameterType="UserDTO" resultType="java.lang.Long">
-	   SELECT t.TICKETNUM
+	<select id="getTickets" parameterType="UserDTO" resultType="TicketsDTO">
+	   SELECT t.*
 	    FROM USERS u
-	    JOIN TICKETING t ON u.USERID = t.USERID
+	    JOIN TICKETS t ON u.USERID = t.USERID
 	    WHERE u.USERID =#{userId}
 		
 	</select>
@@ -53,10 +53,8 @@
 
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="UserDTO">
-	
-	INSERT INTO USERS 
-	VALUES(#{userId},#{password},#{name},#{phone},#{email},#{address})
-	
+	    INSERT INTO USERS (USERID, PASSWORD, NAME, PHONE, EMAIL, ADDRESS, TEAMNUM)
+	    VALUES (#{userId}, #{password}, #{name}, #{phone}, #{email}, #{address}, #{teamNum, jdbcType=NUMERIC})
 	</insert>
 	
 	
@@ -74,7 +72,32 @@
 	</select>
 	
 	
+	
+	
+	
+	
+	<!--비밀번호 변경 -->
+	
+	<update id="pwUpdate" parameterType="UserDTO">
+	
+	UPDATE USERS SET 
+		PASSWORD =#{password}
+			WHERE USERID =#{userId}
+	</update>
+	
+	
+	<!-- 회원 삭제 -->
+	
+	<delete id="userDelete" parameterType="UserDTO">
+	
+		DELETE FROM USERS WHERE USERID =#{userId}
+	
+	</delete>	
 
+	
+	
+	
+	
 	
 	
   </mapper>
