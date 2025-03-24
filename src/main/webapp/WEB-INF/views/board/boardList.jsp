@@ -11,7 +11,7 @@
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
-<div class="continer-fluid my-5">
+<div class="container-fluid my-5">
 	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
 		<!-- contents 내용 작성 -->
 		<h1>${kind } 리스트</h1>
@@ -46,26 +46,31 @@
 		</table>
 		
 		<!-- 페이징 버튼 -->
+		
+		<form id="pageForm">
+			<input type="hidden" id="page" name="page">
+		</form>
+		
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination">
 		  
-		    <%-- <li class="page-item">
-		      <button class="page-link pages" data-page-num="${pager.start-1}" aria-label="Previous">
+		    <li class="page-item">
+		      <button class="page-link pages" onclick="location.href='./list?page=${pager.startBtn-1}'" aria-label="Previous">
 		        <span aria-hidden="true">&laquo;</span>
 			  </button>
-		    </li> --%>
+		    </li>
 		    
-		    <c:forEach begin="${pager.start}" end="${pager.end}" var="i">
+		    <c:forEach begin="${pager.startBtn}" end="${pager.endBtn}" var="i">
 		   		<li class="page-item">
-					<button class="page-link pages" data-page-num="${i}">${i}</button>
+					<button class="page-link pages" onclick="location.href='./list?page=${i}'">${i}</button>
 				</li>
 		    </c:forEach>
 		    
-		    <%-- <li class="page-item ${pager.endCheck?'disabled':''}">
-		      <button class="page-link pages" data-page-num="${pager.end+1}" aria-label="Next">
+		    <li class="page-item ${pager.endCheck?'disabled':''}">
+		      <button class="page-link pages" onclick="location.href='./list?page=${pager.endBtn+1}'" aria-label="Next">
 		        <span aria-hidden="true">&raquo;</span>
 			  </button>
-		    </li> --%>
+		    </li>
 		    
 		  </ul>
 		</nav>
@@ -75,6 +80,8 @@
 		</div>
 	</div>
 </div>
+
+
 
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>

@@ -10,9 +10,16 @@
 		</select>
 
   		<select id="getList" resultType="QnaDTO">
-  			SELECT * FROM QNA ORDER BY BOARDNUM DESC
-  			asdf
-  			
+  			SELECT * FROM
+			(SELECT ROWNUM R, M.* FROM
+				(
+					SELECT * 
+					FROM QNA
+
+					ORDER BY BOARDNUM DESC
+				) M
+			)
+			WHERE R BETWEEN #{startNum} AND #{endNum}
   		</select>
   		
   		<select id="getFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
