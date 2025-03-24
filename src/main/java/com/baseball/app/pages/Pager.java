@@ -10,7 +10,7 @@ public class Pager {
 //	//검색어
 //	private String search;
 	
-	private boolean endCheck;		
+	private boolean endCheck;
 	
 	//시작 번호
 	private Long startNum;
@@ -31,19 +31,21 @@ public class Pager {
 	// 마지막 페이지 버튼 번호
 	private Long endBtn;
 	
+	// 마지막 페이지 번호
+	private Long lastPage;
 
+//-------------------------------------------------	
 
 	// 한번에 가져오는 리스트의 갯수와 시작 번호, 끝번호를 계산하는 메서드 makeListNum
-	public void makeListNum() {
+	public void makeListNum(Long totalCount) {
 		this.startNum = ((this.getPage()-1) * this.getPerPage()) + 1; // 1일 때 1, 2일 때 4, 3일 때 7
-		this.endNum = this.getPage() * this.getPerPage(); // 1일 때 3, 2일 때 6, 3일 때 9
+		this.endNum = this.getPage() * this.getPerPage(); // 1일 때 3, 2일 때 6, 3일 때 9		
 	}
-	
 //-------------------------------------------------
 		
 	public Long getPage() {
 		// 적절한 값 없을 시 첫번째 페이지로 간다
-		if(this.page == null || this.page < 1) {
+		if(this.page == null || this.page < 1 || this.page > this.lastPage) {
 			this.page=1L;
 		}
 		return page;
@@ -109,7 +111,8 @@ public class Pager {
 		if(totalCount%3 != 0) { // 나머지가 있으면 +1
 			totalPage++;
 		}
-				
+		this.lastPage = totalPage;
+		
 		//2. TotalBlock 총 블록 갯수 구하기
 		Long totalBlock = totalPage/5;
 		if(totalPage%5 != 0) {

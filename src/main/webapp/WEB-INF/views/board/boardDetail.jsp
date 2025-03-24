@@ -55,8 +55,7 @@
 		</div>
 	
 		
-		<div>
-			
+		<div>			
 			<a href="./update?boardNum=${dto.boardNum}" class="btn btn-outline-success">수정</a>
 			<a href="./delete?boardNum=${dto.boardNum}" class="btn btn-outline-danger">삭제</a>
 			
@@ -64,7 +63,76 @@
 			<a href="./reply?boardNum=${dto.boardNum}" class="btn btn-outline-primary">답글</a>
 			</c:if> --%>
 		</div>	
+				
+	</div>
+</div>
+
+<div class="container-fluid my-5">
+	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
+		<!-- contents 내용 작성 -->
+		<h1>답글 리스트</h1>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>답글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${list}" var="v">
+				<tr>
+					<td>${v.boardNum}</td>
+					<td>
+						<a href="./detail?boardNum=${v.boardNum}">
+							<%-- <c:catch>
+								<c:forEach begin="1" end="${v.boardDepth}">--</c:forEach>
+							</c:catch> --%>
+							${v.boardTitle}
+						</a>
+					</td>
+					<td>${v.userId}</td>
+					<td>${v.boardDate}</td>					
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 		
+		<!-- 페이징 버튼 -->
+		
+		<form id="pageForm">
+			<input type="hidden" id="page" name="page">
+		</form>
+		
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination">
+		  
+		    <li class="page-item">
+		      <button class="page-link pages" onclick="location.href='./list?page=${pager.startBtn-1}'" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+			  </button>
+		    </li>
+		    
+		    <c:forEach begin="${pager.startBtn}" end="${pager.endBtn}" var="i">
+		   		<li class="page-item">
+					<button class="page-link pages" onclick="location.href='./list?page=${i}'">${i}</button>
+				</li>
+		    </c:forEach>
+		    
+		    <li class="page-item ${pager.endCheck?'disabled':''}">
+		      <button class="page-link pages" onclick="location.href='./list?page=${pager.endBtn+1}'" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+			  </button>
+		    </li>
+		    
+		  </ul>
+		</nav>
+		
+		<div>
+		<a href="./add" class="btn btn-outline-success">글 작성</a>
+		</div>
 	</div>
 </div>
 
