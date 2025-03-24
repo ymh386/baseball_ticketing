@@ -33,7 +33,13 @@ public class QnaService implements BoardService {
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 
-		return qnaDAO.getList(pager);
+		Long totalCount = qnaDAO.getTotalCount(pager);
+		pager.Calculate_PageAndBlock(totalCount);
+		pager.makeListNum();
+		
+		List<BoardDTO> list = qnaDAO.getList(pager);
+		
+		return list;
 	}
 
 	@Override
@@ -158,6 +164,9 @@ public class QnaService implements BoardService {
 		
 		return result;
 	}
+	
+	
+	// 
 	
 	
 	
