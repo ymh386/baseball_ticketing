@@ -5,8 +5,14 @@
   
 <mapper namespace="com.baseball.app.tickets.TicketDAO">
 
+	<select id="getDetail" parameterType="TicketDTO" resultType="TicketDTO">
+		SELECT * FROM TICKETS WHERE MATCHNUM=#{matchNum} AND SEATNUM=#{seatNum}
+	</select>
+
 	<insert id="add" parameterType="TicketDTO">
-		INSERT INTO TICKETS VALUES
+		INSERT INTO TICKETS
+		(MATCHNUM, SEATNUM, TICKETNUM, USERID, TICKETSTATUS)
+		VALUES
 		(
 			#{matchNum},
 			#{seatNum},

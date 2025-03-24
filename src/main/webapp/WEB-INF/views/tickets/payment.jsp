@@ -15,7 +15,7 @@
 	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
 		<!-- contents 내용 작성 -->
 		<h1>결제창(미완성)</h1>
-		<button id="cancel" type="button" class="btn btn-warning">결제취소</button>
+		<button data-matchnum="${dto.matchNum}" data-seatnum="${dto.seatNum}" id="cancel" type="button" class="btn btn-warning">결제취소</button>
 	</div>
 </div>
 
