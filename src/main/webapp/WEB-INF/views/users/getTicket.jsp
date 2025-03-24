@@ -38,7 +38,7 @@
                                 <td>${ticket.seatNum}</td>
                                 <td>${ticket.ticketNum}</td>
                                 <td>${ticket.userId}</td>
-                                <td>${ticket.somStatus}</td>
+                                <td>${ticket.ticketStatus}</td>
                             </tr>
                         </c:forEach>
                     </tbody>

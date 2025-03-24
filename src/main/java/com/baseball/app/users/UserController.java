@@ -143,6 +143,26 @@ public class UserController {
 		
 	}
 	
+	private String getTeamName(int teamNum) {
+	    switch(teamNum) {
+	        case 1: return "기아 타이거즈";
+	        case 2: return "SSG 랜더스";
+	        case 3: return "한화 이글스";
+	        case 4: return "키움 히어로즈";
+	        case 5: return "삼성 라이온즈";
+	        case 6: return "롯데 자이언츠";
+	        case 7: return "케이티 위즈";
+	        case 8: return "엘지 트윈스";
+	        case 9: return "엔씨 다이노스";
+	        case 10: return "두산 베어스";
+	        default: return "미지정";
+	    }
+	    
+	}
+	
+	
+	
+	
 	
 	@RequestMapping(value ="getTicket", method = RequestMethod.GET)
 	public String getTickets(HttpSession session, Model model,UserDTO userDTO) throws Exception{
