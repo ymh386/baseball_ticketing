@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.baseball.app.ticketing.TicketingDTO;
+import com.baseball.app.tickets.TicketsDTO;
 
 @Repository
 public class UserDAO {
@@ -53,7 +53,7 @@ public class UserDAO {
 	
 	//티켓 정보
 	
-	public List<TicketingDTO> getTickets(UserDTO userDTO) throws Exception{
+	public List<TicketsDTO> getTickets(UserDTO userDTO) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getTickets", userDTO);
 	}
 	
