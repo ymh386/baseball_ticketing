@@ -1,12 +1,12 @@
-package com.baseball.app.ticketing;
+package com.baseball.app.tickets;
 
-public class TicketingDTO {
+public class TicketDTO {
 
 	
-	private Long ticketNum;
 	private Long matchNum;
+	private Long seatNum;
+	private Long ticketNum;
 	private String userId;
-	private Long seatId;
 	private String ticketStatus;
 	
 	
@@ -29,11 +29,11 @@ public class TicketingDTO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Long getSeatId() {
-		return seatId;
+	public Long getSeatNum() {
+		return seatNum;
 	}
-	public void setSeatId(Long seatId) {
-		this.seatId = seatId;
+	public void setSeatNum(Long seatNum) {
+		this.seatNum = seatNum;
 	}
 	public String getTicketStatus() {
 		return ticketStatus;

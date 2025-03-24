@@ -1,8 +1,12 @@
 package com.baseball.app.matches;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.baseball.app.seats.SeatDTO;
 
 @Repository
 public class MatchDAO {
@@ -15,6 +19,13 @@ public class MatchDAO {
 	public MatchDTO getDetail(MatchDTO matchDTO) throws Exception {
 		
 		return sqlSession.selectOne(NAMESPACE + "getDetail", matchDTO);
+	}
+	
+	//seatList
+	public List<SeatDTO> getSeatList(MatchDTO matchDTO) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + "getSeatList", matchDTO);
+		
 	}
 
 }

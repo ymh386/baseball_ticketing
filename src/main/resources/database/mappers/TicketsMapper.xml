@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.baseball.app.tickets.TicketDAO">
+
+	<insert id="add" parameterType="TicketDTO">
+		INSERT INTO TICKETS VALUES
+		(
+			#{matchNum},
+			#{seatNum},
+			TICKETS_SEQ.NEXTVAL,
+			#{userId},
+			'결제중'
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="TicketDTO">
+		DELETE TICKETS WHERE MATCHNUM=#{matchNum} AND SEATNUM=#{seatNum}
+	</delete>
+
+</mapper>
