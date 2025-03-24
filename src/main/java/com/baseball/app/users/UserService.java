@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.baseball.app.files.FileManager;
 import com.baseball.app.tickets.TicketDTO;
 
 @Service
@@ -15,6 +17,8 @@ public class UserService {
 	
 	@Autowired
 	private UserDAO userDAO;
+	@Autowired
+	private FileManager fileManager;
 	
 
 	// 로그인 
@@ -85,6 +89,12 @@ public class UserService {
 		return userDAO.userDelete(userDTO);
 		
 	}
+	
+	
+
+	
+	
+	
 	
 	
 	
