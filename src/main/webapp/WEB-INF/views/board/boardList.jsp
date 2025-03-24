@@ -44,6 +44,32 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		
+		<!-- 페이징 버튼 -->
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination">
+		  
+		    <%-- <li class="page-item">
+		      <button class="page-link pages" data-page-num="${pager.start-1}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+			  </button>
+		    </li> --%>
+		    
+		    <c:forEach begin="${pager.start}" end="${pager.end}" var="i">
+		   		<li class="page-item">
+					<button class="page-link pages" data-page-num="${i}">${i}</button>
+				</li>
+		    </c:forEach>
+		    
+		    <%-- <li class="page-item ${pager.endCheck?'disabled':''}">
+		      <button class="page-link pages" data-page-num="${pager.end+1}" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+			  </button>
+		    </li> --%>
+		    
+		  </ul>
+		</nav>
+		
 		<div>
 		<a href="./add" class="btn btn-outline-success">글 작성</a>
 		</div>

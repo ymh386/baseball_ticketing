@@ -41,6 +41,7 @@ public class QnaController {
 	public String getList(Pager pager, Model model) throws Exception {
 		
 		List<BoardDTO> list = qnaService.getList(pager);
+		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		
 		return "board/boardList";
