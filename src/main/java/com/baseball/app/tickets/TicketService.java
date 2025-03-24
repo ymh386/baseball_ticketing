@@ -9,6 +9,10 @@ public class TicketService {
 	@Autowired
 	private TicketDAO ticketDAO;
 	
+	public TicketDTO getDetail(TicketDTO ticketDTO) throws Exception {
+		return ticketDAO.getDetail(ticketDTO);
+	}
+	
 	public int add(TicketDTO ticketDTO) throws Exception {
 		return ticketDAO.add(ticketDTO);
 	}

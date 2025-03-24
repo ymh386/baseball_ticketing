@@ -11,6 +11,10 @@ public class TicketDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.baseball.app.tickets.TicketDAO.";
 	
+	public TicketDTO getDetail(TicketDTO ticketDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getDetail", ticketDTO);
+	}
+	
 	public int add(TicketDTO ticketDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE + "add", ticketDTO);
 	}
