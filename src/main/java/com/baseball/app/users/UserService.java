@@ -8,7 +8,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baseball.app.tickets.TicketsDTO;
+import com.baseball.app.tickets.TicketDTO;
 
 @Service
 public class UserService {
@@ -55,7 +55,7 @@ public class UserService {
 	
 	
 	// 티켓 조회 
-	public List<TicketsDTO> getTickets(UserDTO userDTO) throws Exception{
+	public List<TicketDTO> getTickets(UserDTO userDTO) throws Exception{
 		return userDAO.getTickets(userDTO);
 	}
 
