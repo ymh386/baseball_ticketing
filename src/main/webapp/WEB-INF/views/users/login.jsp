@@ -32,6 +32,7 @@
 			<a href="./findId">id찾기</a>	
 			<a href="./findPassword">PW찾기</a>	
 		  <button type="submit" class="btn btn-primary" id="login_button">로그인</button>
+	
 		</form>	
 		
 		
