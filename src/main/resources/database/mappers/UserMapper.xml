@@ -19,7 +19,7 @@
 	</select>
 	
 	
-	<select id="getTickets" parameterType="UserDTO" resultType="TicketsDTO">
+	<select id="getTickets" parameterType="UserDTO" resultType="TicketDTO">
 	   SELECT t.*
 	    FROM USERS u
 	    JOIN TICKETS t ON u.USERID = t.USERID

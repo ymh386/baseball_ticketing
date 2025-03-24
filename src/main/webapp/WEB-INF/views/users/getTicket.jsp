@@ -26,7 +26,6 @@
                             <th>좌석 번호</th>
                             <th>티켓 번호</th>
                             <th>구매자</th>
-                            <th>좌석 등급</th>
                             <th>상태</th>
                         </tr>
                     </thead>
@@ -39,7 +38,6 @@
                                 <td>${ticket.seatNum}</td>
                                 <td>${ticket.ticketNum}</td>
                                 <td>${ticket.userId}</td>
-                                <td>${ticket.seatLevel}</td>
                                 <td>${ticket.somStatus}</td>
                             </tr>
                         </c:forEach>

@@ -13,7 +13,7 @@
 		
 		<typeAlias type="com.baseball.app.qna.QnaDTO" alias="QnaDTO"/>
 		<typeAlias type="com.baseball.app.qna.QnaDAO" alias="QnaDAO"/>
-		<typeAlias type="com.baseball.app.tickets.TicketsDTO" alias="TicketsDTO"/>
+		<typeAlias type="com.baseball.app.tickets.TicketDTO" alias="TicketDTO"/>
 		<typeAlias type="com.baseball.app.pages.Pager" alias="Pager"/>
 	
 		<typeAlias type="com.baseball.app.users.UserDTO" alias="UserDTO"/>
