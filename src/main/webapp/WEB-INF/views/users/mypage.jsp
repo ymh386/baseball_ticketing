@@ -40,7 +40,22 @@
 <div class="alert alert-primary" role="alert">
     응원하는 팀: ${teamName} <!-- 응원하는 팀 출력 -->
 </div>
-		
+
+<!-- 팀 로고 이미지 출력 -->
+<div class="alert alert-primary" role="alert">
+    <img src="${pageContext.request.contextPath}/resources/images/teams/${empty teamNum ? 'kbo' : 
+                  teamName == '기아 타이거즈' ? 'kia' :
+                  teamName == 'SSG 랜더스' ? 'ssg' :
+                  teamName == '한화 이글스' ? 'hanwha' :
+                  teamName == '키움 히어로즈' ? 'kiwoom' :
+                  teamName == '삼성 라이온즈' ? 'samsung' :
+                  teamName == '롯데 자이언츠' ? 'lotte' :
+                  teamName == '케이티 위즈' ? 'kt' :
+                  teamName == '엘지 트윈스' ? 'lg' :
+                  teamName == '엔씨 다이노스' ? 'nc' :
+                  teamName == '두산 베어스' ? 'doosan' : 'default'}.jpg"
+         alt="${teamName} 로고" style="width: 200px; height: 150px;">
+</div>
 		
 		<button type="button" onclick="location.href='./pwUpdate'">비밀번호 변경</button>
 		<button type="button" onclick="location.href='./getTicket'">티켓확인</button>
