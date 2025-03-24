@@ -14,6 +14,16 @@
 	 		<typeAlias type="com.baseball.app.seats.SeatDTO" alias="SeatDTO"/>
 	 		<typeAlias type="com.baseball.app.tickets.TicketDTO" alias="TicketDTO"/>
 		
+		<typeAlias type="com.baseball.app.qna.QnaDTO" alias="QnaDTO"/>
+		<typeAlias type="com.baseball.app.qna.QnaDAO" alias="QnaDAO"/>
+		<typeAlias type="com.baseball.app.tickets.TicketsDTO" alias="TicketsDTO"/>
+		<typeAlias type="com.baseball.app.pages.Pager" alias="Pager"/>
+	
+		<typeAlias type="com.baseball.app.users.UserDTO" alias="UserDTO"/>
+		<typeAlias type="com.baseball.app.matches.MatchDTO" alias="MatchDTO"/>
+ 		<typeAlias type="com.baseball.app.teams.TeamDTO" alias="TeamDTO"/>
+ 		<typeAlias type="com.baseball.app.stadiums.StadiumDTO" alias="StadiumDTO"/>
+	
 		
 		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="java.util.List" alias="List"/>

@@ -4,13 +4,28 @@ import java.sql.Date;
 
 public class BoardDTO {
 	
+	
+	private String boardTitle;	
 	private Long boardNum;	
 	private Date boardDate;
 	private String boardContent;
 	private String userId;
+	private Long boardHit;
 	
 	
 	
+	public Long getBoardHit() {
+		return boardHit;
+	}
+	public void setBoardHit(Long boardHit) {
+		this.boardHit = boardHit;
+	}	
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
+	}	
 	public Long getBoardNum() {
 		return boardNum;
 	}
