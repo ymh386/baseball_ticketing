@@ -7,7 +7,7 @@ public class TicketDTO {
 	private Long seatNum;
 	private Long ticketNum;
 	private String userId;
-	private String somStatus;
+	private String ticketStatus;
 	
 	
 	
@@ -36,12 +36,6 @@ public class TicketDTO {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-	public String getSomStatus() {
-		return somStatus;
-	}
-	public void setSomStatus(String somStatus) {
-		this.somStatus = somStatus;
 	}
 	
 	

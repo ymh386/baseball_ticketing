@@ -48,4 +48,20 @@
 		</association>
 	</resultMap>
 	
+	<select id="getSeatList" resultType="SeatDTO" parameterType="MatchDTO">
+		SELECT *
+		FROM SEATS
+		WHERE STADIUMNUM =
+		(
+			SELECT STADIUMNUM
+			FROM STADIUMS
+			WHERE STADIUMNUM =
+			(
+				SELECT STADIUMNUM
+				FROM MATCHES
+				WHERE MATCHNUM = #{matchNum}
+			)
+		)
+	</select>
+	
 </mapper>

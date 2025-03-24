@@ -24,8 +24,8 @@ public class QnaDAO implements BoardDAO {
 
 	@Override
 	public Long getTotalCount(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount");
 	}
 
 	@Override
@@ -97,6 +97,13 @@ public class QnaDAO implements BoardDAO {
 		
 		return sqlSession.delete(NAMESPACE+"deleteAllFile", boardDTO);
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
