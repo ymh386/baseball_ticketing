@@ -1,27 +1,24 @@
 package com.baseball.app.notice;
 
-public class NoticeDTO {
-	
-	
-	private String boardTitle;
-	private Long boardHit;
-	
-	
-	
-	public String getBoardTitle() {
-		return boardTitle;
-	}
-	public void setBoardTitle(String boardTitle) {
-		this.boardTitle = boardTitle;
-	}
-	public Long getBoardHit() {
-		return boardHit;
-	}
-	public void setBoardHit(Long boardHit) {
-		this.boardHit = boardHit;
-	}
-	
-	
-	
+import java.util.List;
 
+import com.baseball.app.boards.BoardDTO;
+import com.baseball.app.boards.BoardFileDTO;
+
+public class NoticeDTO extends BoardDTO{
+	
+	
+	
+	private List<BoardFileDTO> boardFileDTOs;
+
+	public List<BoardFileDTO> getBoardFileDTOs() {
+		return boardFileDTOs;
+	}
+
+	public void setBoardFileDTOs(List<BoardFileDTO> boardFileDTOs) {
+		this.boardFileDTOs = boardFileDTOs;
+	}
+	
+	
+	
 }
