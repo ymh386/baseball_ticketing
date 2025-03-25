@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.baseball.app.boards.BoardDTO;
 import com.baseball.app.boards.BoardFileDTO;
 import com.baseball.app.boards.BoardService;
+import com.baseball.app.boards.CommentDTO;
 import com.baseball.app.files.FileManager;
 import com.baseball.app.pages.Pager;
 
@@ -43,8 +44,8 @@ public class QnaService implements BoardService {
 	}
 
 	@Override
-	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
-
+	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {		
+		
 		return qnaDAO.getDetail(boardDTO);
 	}
 
@@ -166,7 +167,23 @@ public class QnaService implements BoardService {
 	}
 	
 	
-	// 
+	// 댓글 작성
+	public int addComment(CommentDTO commentDTO) throws Exception {
+		
+		int result = qnaDAO.addComment(commentDTO);
+		
+		return result;
+	}
+	
+		
+	// 댓글 삭제
+		public int deleteComment(CommentDTO commentDTO) throws Exception {
+			
+			int result = qnaDAO.deleteComment(commentDTO);
+			
+			return result;
+		}
+	
 	
 	
 	

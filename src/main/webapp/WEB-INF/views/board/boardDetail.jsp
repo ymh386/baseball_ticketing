@@ -74,68 +74,44 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>답글번호</th>
-					<th>제목</th>
+					<th>부모글</th>
+					<th>답글번호</th>					
 					<th>작성자</th>
+					<th>내용</th>
 					<th>작성일</th>
-					<th>조회</th>
+					<th>삭제</th>	
+					<th>답글</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${list}" var="v">
+				<c:forEach items="${dto.commentDTOs}" var="v">
 				<tr>
-					<td>${v.boardNum}</td>
-					<td>
-						<a href="./detail?boardNum=${v.boardNum}">
-							<%-- <c:catch>
-								<c:forEach begin="1" end="${v.boardDepth}">--</c:forEach>
-							</c:catch> --%>
-							${v.boardTitle}
-						</a>
-					</td>
+					<td>${v.boardNum }</td>
+					<td>${v.commentNum}</td>
 					<td>${v.userId}</td>
-					<td>${v.boardDate}</td>					
+					<td>${v.boardContent}
+					<td>${v.boardDate}</td>
+					<td><button onclick="location.href='./deleteComment?commentNum=${v.commentNum}
+					&boardNum=${v.boardNum}'">X</button></td>
+					<td><button class="ctcs" id="ctc${v.commentNum}" data-num="${v.commentNum}">답글</button></td>					
 				</tr>
+				<tr class="subComments" id="subComment${v.commentNum}" data-num="${v.commentNum}" >
+					
+				</tr>				
 				</c:forEach>
 			</tbody>
 		</table>
 		
-		<!-- 페이징 버튼 -->
-		
-		<form id="pageForm">
-			<input type="hidden" id="page" name="page">
+		<form action="./addComment?boardNum=${dto.boardNum}" method="post" enctype="multipart/form-data">
+			<label for="commentLabel" class="comment-label">내용</label>			
+			<textarea class="row col-md-12 mb-3" id="boardContent" name="boardContent"></textarea>
+			<button type="submit" id="commentSubmit" name="commentSubmit">댓글 등록</button>
 		</form>
 		
-		<nav aria-label="Page navigation example">
-		  <ul class="pagination">
-		  
-		    <li class="page-item">
-		      <button class="page-link pages" onclick="location.href='./list?page=${pager.startBtn-1}'" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-			  </button>
-		    </li>
-		    
-		    <c:forEach begin="${pager.startBtn}" end="${pager.endBtn}" var="i">
-		   		<li class="page-item">
-					<button class="page-link pages" onclick="location.href='./list?page=${i}'">${i}</button>
-				</li>
-		    </c:forEach>
-		    
-		    <li class="page-item ${pager.endCheck?'disabled':''}">
-		      <button class="page-link pages" onclick="location.href='./list?page=${pager.endBtn+1}'" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-			  </button>
-		    </li>
-		    
-		  </ul>
-		</nav>
-		
-		<div>
-		<a href="./add" class="btn btn-outline-success">글 작성</a>
-		</div>
 	</div>
 </div>
 
+<script src="/resources/js/qna/comment.js"></script>
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
 </body>

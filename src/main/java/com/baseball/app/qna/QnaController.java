@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.baseball.app.boards.BoardDTO;
 import com.baseball.app.boards.BoardFileDTO;
+import com.baseball.app.boards.CommentDTO;
 import com.baseball.app.pages.Pager;
 
 
@@ -129,7 +130,24 @@ public class QnaController {
 	}
 	
 	
+	@RequestMapping(value = "addComment", method = RequestMethod.POST)
+	public String addComment(CommentDTO commentDTO) throws Exception {
+		System.out.println("controller reply : " + commentDTO.getBoardContent() + commentDTO.getBoardNum());
+
+		commentDTO.setUserId("a3"); // 테스트용 유저 아이디 값
+		int result = qnaService.addComment(commentDTO);
+		
+		return "redirect:./detail?boardNum="+commentDTO.getBoardNum();
+	}
 	
+	
+	@RequestMapping(value = "deleteComment", method = RequestMethod.GET)
+	public String deleteComment(CommentDTO commentDTO) throws Exception {
+		
+		int result = qnaService.deleteComment(commentDTO);
+		
+		return "redirect:./detail?boardNum="+commentDTO.getBoardNum();
+	}
 	
 	
 	

@@ -4,14 +4,14 @@ import java.util.List;
 
 import com.baseball.app.boards.BoardDTO;
 import com.baseball.app.boards.BoardFileDTO;
+import com.baseball.app.boards.CommentDTO;
 
 public class QnaDTO extends BoardDTO {
 	
 	
-	private Long boardRef;
-	private Long boardStep;
-	private Long boardDepth;
+	
 	private List<BoardFileDTO> boardFileDTOs;
+	private List<CommentDTO> commentDTOs;
 	
 	
 	
@@ -21,24 +21,13 @@ public class QnaDTO extends BoardDTO {
 	public void setBoardFileDTOs(List<BoardFileDTO> boardFileDTOs) {
 		this.boardFileDTOs = boardFileDTOs;
 	}
-	public Long getBoardRef() {
-		return boardRef;
+	public List<CommentDTO> getCommentDTOs() {
+		return commentDTOs;
 	}
-	public void setBoardRef(Long boardRef) {
-		this.boardRef = boardRef;
+	public void setCommentDTOs(List<CommentDTO> commentDTOs) {
+		this.commentDTOs = commentDTOs;
 	}
-	public Long getBoardStep() {
-		return boardStep;
-	}
-	public void setBoardStep(Long boardStep) {
-		this.boardStep = boardStep;
-	}
-	public Long getBoardDepth() {
-		return boardDepth;
-	}
-	public void setBoardDepth(Long boardDepth) {
-		this.boardDepth = boardDepth;
-	} 
+	
 	
 	
 

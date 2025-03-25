@@ -40,12 +40,6 @@ public class TicketDTO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getTicketStatus() {
-		return ticketStatus;
-	}
-	public void setTicketStatus(String ticketStatus) {
-		this.ticketStatus = ticketStatus;
-	}
 	
 	
 	
