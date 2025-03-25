@@ -22,7 +22,8 @@
 					<h3>좌석선택</h3>
 				</div>
 				<div class="col">
-					<p>C : <button type="button" class="btn btn-warning"></button> B : <button type="button" class="btn btn-success"></button> A : <button type="button" class="btn btn-primary"></button></p>
+					<p>C : <button type="button" class="btn btn-warning"></button> 15000원 B : <button type="button" class="btn btn-success"></button>20000원</p>
+					<p>A : <button type="button" class="btn btn-primary"></button> 30000원 매진 : <button type="button" class="btn btn-secondary"></button></p>
 				</div>
 			</div>
 		  <div class="row align-items-center">
@@ -30,13 +31,22 @@
 		  		<div class="col align-self-center">
 		     		<c:forEach begin="1" end="${l.seatCount}" var="i">
 		     			<c:choose>
-		     				<c:when test="${l.seatLevel eq 'C'}"><button data-seatlevel="${l.seatLevel}" type="button" class="btn btn-outline-warning seatBtn">${i}</button></c:when>
-		     				<c:when test="${l.seatLevel eq 'B'}"><button data-seatlevel="${l.seatLevel}" type="button" class="btn btn-outline-success seatBtn">${i}</button></c:when>
-		     				<c:when test="${l.seatLevel eq 'A'}"><button data-seatlevel="${l.seatLevel}" type="button" class="btn btn-outline-primary seatBtn">${i}</button></c:when>
+		     				<c:when test="${l.seatLevel eq 'C'}">
+								<button data-seatlevel="${l.seatLevel}" type="button" class="btn btn-outline-warning seatBtn">${i}</button>	
+							</c:when>
+		     				<c:when test="${l.seatLevel eq 'B'}">
+		     					<button data-seatlevel="${l.seatLevel}" type="button" class="btn btn-outline-success seatBtn">${i}</button>
+		     					</c:when>
+		     				<c:when test="${l.seatLevel eq 'A'}">
+		     					<button data-seatlevel="${l.seatLevel}" type="button" class="btn btn-outline-primary seatBtn">${i}</button>
+		     					</c:when>
 		     			</c:choose>
 		     		</c:forEach>
 		    	</div>
 		  	</c:forEach>
+			  <c:forEach items="${tlist}" var="t">
+				<input data-ticketseat="${t.seatNum}" type="hidden" value="" class="ticketseat">
+			</c:forEach>
 		  </div>
 		</div>
 	</div>

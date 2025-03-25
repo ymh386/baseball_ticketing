@@ -30,11 +30,20 @@ public class TicketController {
 	}
 	
 	@RequestMapping(value="payment", method=RequestMethod.GET)
-	public String payment(TicketDTO ticketDTO, Model model) throws Exception {
+	public String payment(TicketDTO ticketDTO,HttpSession session, Model model) throws Exception {
 		ticketDTO = ticketService.getDetail(ticketDTO);
 		
-		model.addAttribute("dto", ticketDTO);
+		session.setAttribute("dto", ticketDTO);
 		return "tickets/payment";
+	}
+	
+	@RequestMapping(value="delete", method=RequestMethod.POST)
+	public String delete(TicketDTO ticketDTO, HttpSession session, Model model) throws Exception {
+		int result = ticketService.delete(ticketDTO);
+		session.setAttribute("dto", null);
+		model.addAttribute("result", result);
+		
+		return "commons/ajaxResult";
 	}
 
 }
