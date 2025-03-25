@@ -43,7 +43,7 @@
 
 <!-- 팀 로고 이미지 출력 -->
 <div class="alert alert-primary" role="alert">
-    <img src="${pageContext.request.contextPath}/resources/images/teams/${empty teamNum ? 'kbo' : 
+    <img src="${pageContext.request.contextPath}/resources/images/teams/${
                   teamName == '기아 타이거즈' ? 'kia' :
                   teamName == 'SSG 랜더스' ? 'ssg' :
                   teamName == '한화 이글스' ? 'hanwha' :
@@ -53,7 +53,7 @@
                   teamName == '케이티 위즈' ? 'kt' :
                   teamName == '엘지 트윈스' ? 'lg' :
                   teamName == '엔씨 다이노스' ? 'nc' :
-                  teamName == '두산 베어스' ? 'doosan' : 'default'}.jpg"
+                  teamName == '두산 베어스' ? 'doosan' : 'kbo'}.jpg"
          alt="${teamName} 로고" style="width: 200px; height: 150px;">
 </div>
 		
