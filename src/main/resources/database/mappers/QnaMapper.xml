@@ -22,17 +22,24 @@
 			WHERE R BETWEEN #{startNum} AND #{endNum}
   		</select>
   		
+  		<select id="getCommentList" parameterType="CommentDTO" resultType="CommentDTO">
+  			SELECT * FROM COMMENTS WHERE BOARDNUM=#{boardNum} ORDER BY COMMENTNUM DESC
+  		</select>
+  		
   		<select id="getFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
   			SELECT * FROM QNAFILES WHERE FILENUM = #{fileNum}
   		</select>
  						
 		<select id="getDetail" parameterType="QnaDTO" resultMap="getDetailResult">
-  		SELECT *
-		FROM QNA N
-			 LEFT OUTER JOIN 
-			 QNAFILES NF
-			 USING(BOARDNUM)
-		WHERE BOARDNUM = #{boardNum}
+  		SELECT * FROM COMMENTS C
+		RIGHT OUTER JOIN (
+			SELECT * FROM QNA N
+			LEFT OUTER JOIN QNAFILES QF
+			USING(BOARDNUM)
+			WHERE BOARDNUM = #{boardNum}
+		) QQF
+		USING(BOARDNUM)
+		WHERE BOARDNUM = #{boardNum} ORDER BY COMMENTNUM DESC
   		</select>
   	
 	  	 <resultMap type="QnaDTO" id="getDetailResult">
@@ -49,8 +56,20 @@
 	  			<result column="FILENAME" property="fileName"/>
 	  			<result column="ORIGINALNAME" property="originalName"/>
 	  		</collection>
+	  		
+	  		<collection property="commentDTOs" javaType="List" ofType="CommentDTO">
+	  			<id column="COMMENTNUM" property="commentNum"/>
+	  			<result column="BOARDNUM" property="boardNum"/>
+	  			<result column="COMMENTDATE" property="boardDate"/>
+	  			<result column="COMMENTCONTENT" property="boardContent"/>
+	  			<result column="USERID" property="userId"/>
+	  			<result column="COMMENTREF" property="commentRef"/>
+	  			<result column="COMMENTSTEP" property="commentStep"/>
+	  			<result column="COMMENTDEPTH" property="commentDepth"/>
+	  		</collection>
 	  	
 	  	</resultMap>		
+		
 		
 		<insert id="add" parameterType="QnaDTO">
 			<!-- 메인쿼리 실행전(Beafore)에 SELECTKEY의 결과물인 Long타입의 값을 NoticeDTO의 boardNum에 대입 -->
@@ -62,12 +81,27 @@
 	  		VALUES (#{boardNum}, #{boardTitle}, SYSDATE, #{boardContent}, 0, #{userId})
 		</insert>
 		
+		<insert id="addFile" parameterType="BoardFileDTO">
+			INSERT INTO QNAFILES (FILENUM, BOARDNUM, FILENAME, ORIGINALNAME) 
+			VALUES (FILES_SEQ.NEXTVAL, #{boardNum}, #{fileName}, #{originalName})
+		</insert>
+		
+		<insert id="addComment" parameterType="CommentDTO">
+			INSERT INTO COMMENTS (COMMENTNUM, BOARDNUM, COMMENTDATE, COMMENTCONTENT, USERID, 
+			COMMENTREF, COMMENTSTEP, COMMENTDEPTH)
+			
+			VALUES (COMMENTS_SEQ.NEXTVAL, #{boardNum}, SYSDATE, #{boardContent}, #{userId}, 
+			COMMENTS_SEQ.CURRVAL, 0, 0)
+		</insert>
+		
+		
 		<update id="update" parameterType="QnaDTO">
 			UPDATE QNA SET
 			BOARDTITLE = #{boardTitle}, 
 			BOARDCONTENT = #{boardContent}
 			WHERE BOARDNUM = #{boardNum}
 		</update>
+		
 		
 		<delete id="delete" parameterType="QnaDTO">
 			DELETE QNA WHERE BOARDNUM = #{boardNum}
@@ -81,10 +115,11 @@
 			DELETE QNAFILES WHERE BOARDNUM = #{boardNum}
 		</delete>
 		
-		<insert id="addFile" parameterType="BoardFileDTO">
-			INSERT INTO QNAFILES (FILENUM, BOARDNUM, FILENAME, ORIGINALNAME) 
-			VALUES (FILES_SEQ.NEXTVAL, #{boardNum}, #{fileName}, #{originalName})
-		</insert>
+		<delete id="deleteComment" parameterType="CommentDTO">
+			DELETE COMMENTS WHERE COMMENTNUM = #{commentNum}
+		</delete>
+		
+		
 		
 		
   </mapper>

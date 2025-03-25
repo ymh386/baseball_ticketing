@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.baseball.app.boards.BoardDAO;
 import com.baseball.app.boards.BoardDTO;
 import com.baseball.app.boards.BoardFileDTO;
+import com.baseball.app.boards.CommentDTO;
 import com.baseball.app.pages.Pager;
 
 @Repository
@@ -99,12 +100,25 @@ public class QnaDAO implements BoardDAO {
 	}
 	
 	
+	//
+	public int addComment(BoardDTO boardDTO) throws Exception {
+		
+		return sqlSession.insert(NAMESPACE+"addComment", boardDTO);
+	}
 	
 	
+	//
+	public List<CommentDTO> getCommentList(BoardDTO boardDTO) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE+"getCommentList", boardDTO);
+	}
 	
 	
-	
-	
+	//
+	public int deleteComment(BoardDTO boardDTO) throws Exception {
+		
+		return sqlSession.delete(NAMESPACE+"deleteComment", boardDTO);
+	}
 	
 	
 
