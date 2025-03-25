@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.baseball.app.seats.SeatDTO;
+import com.baseball.app.tickets.TicketDTO;
 
 @Repository
 public class MatchDAO {
@@ -23,9 +24,13 @@ public class MatchDAO {
 	
 	//seatList
 	public List<SeatDTO> getSeatList(MatchDTO matchDTO) throws Exception {
-		
 		return sqlSession.selectList(NAMESPACE + "getSeatList", matchDTO);
 		
+	}
+	
+	//ticketPayList
+	public List<TicketDTO> getTicketPayment(TicketDTO ticketDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getTicketPayment", ticketDTO);
 	}
 
 }

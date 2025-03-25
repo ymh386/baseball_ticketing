@@ -24,7 +24,19 @@
 			  <div class="col">
 				<div class="card" style="width: 18rem;">
 					<h3 class="card-title">HOME</h3>
-					<img src="..." class="card-img-top" alt="...">
+					<c:choose>
+						<c:when test="${dto.homeTeam eq 1}"><img src="/resources/images/teams/kia.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.homeTeam eq 2}"><img src="/resources/images/teams/ssg.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.homeTeam eq 3}"><img src="/resources/images/teams/hanwha.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.homeTeam eq 4}"><img src="/resources/images/teams/kiwoom.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.homeTeam eq 5}"><img src="/resources/images/teams/samsung.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.homeTeam eq 6}"><img src="/resources/images/teams/lotte.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.homeTeam eq 7}"><img src="/resources/images/teams/kt.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.homeTeam eq 8}"><img src="/resources/images/teams/lg.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.homeTeam eq 9}"><img src="/resources/images/teams/nc.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.homeTeam eq 10}"><img src="/resources/images/teams/doosan.jpg" class="card-img-top"></c:when>
+						<c:otherwise><img src="/resources/images/teams/kbo.jpg" class="card-img-top"></c:otherwise>
+					</c:choose>
 					<div class="card-body">
 						<h5 class="card-semititle">${dto.homeTeamDTO.teamName}</h5>
 						<p class="card-text">연고지 : ${dto.homeTeamDTO.field}</p>
@@ -43,7 +55,19 @@
 			  <div class="col">
 				<div class="card" style="width: 18rem;">
 					<h3 class="card-title">AWAY</h3>
-					<img src="..." class="card-img-top" alt="...">
+					<c:choose>
+						<c:when test="${dto.awayTeam eq 1}"><img src="/resources/images/teams/kia.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.awayTeam eq 2}"><img src="/resources/images/teams/ssg.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.awayTeam eq 3}"><img src="/resources/images/teams/hanwha.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.awayTeam eq 4}"><img src="/resources/images/teams/kiwoom.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.awayTeam eq 5}"><img src="/resources/images/teams/samsung.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.awayTeam eq 6}"><img src="/resources/images/teams/lotte.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.awayTeam eq 7}"><img src="/resources/images/teams/kt.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.awayTeam eq 8}"><img src="/resources/images/teams/lg.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.awayTeam eq 9}"><img src="/resources/images/teams/nc.jpg" class="card-img-top"></c:when>
+						<c:when test="${dto.awayTeam eq 10}"><img src="/resources/images/teams/doosan.jpg" class="card-img-top"></c:when>
+						<c:otherwise><img src="/resources/images/teams/kbo.jpg" class="card-img-top"></c:otherwise>
+					</c:choose>
 					<div class="card-body">
 						<h5 class="card-semititle">${dto.awayTeamDTO.teamName}</h5>
 						<p class="card-text">연고지 : ${dto.awayTeamDTO.field}</p>

@@ -64,4 +64,8 @@
 		)
 	</select>
 	
+	<select id="getTicketPayment" resultType="TicketDTO" parameterType="TicketDTO">
+		SELECT * FROM TICKETS WHERE MATCHNUM=#{matchNum} AND TICKETSTATUS IN ('결제중', '결제완료')
+	</select>
+	
 </mapper>

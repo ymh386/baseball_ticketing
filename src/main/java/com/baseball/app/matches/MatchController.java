@@ -2,6 +2,8 @@ package com.baseball.app.matches;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.baseball.app.seats.SeatDTO;
+import com.baseball.app.tickets.TicketDTO;
+import com.baseball.app.tickets.TicketService;
 
 @Controller
 @RequestMapping("/matches/*")
@@ -31,11 +35,13 @@ public class MatchController {
 	}
 	
 	@RequestMapping(value = "seatList", method = RequestMethod.GET)
-	public String getSeatList(MatchDTO matchDTO, Model model) throws Exception {
+	public String getSeatList(MatchDTO matchDTO, TicketDTO ticketDTO, HttpSession session, Model model) throws Exception {
+		List<TicketDTO> ar2 = matchService.getTicketPayment(ticketDTO);
 		
 		List<SeatDTO> ar = matchService.getSeatList(matchDTO);
 		
 		model.addAttribute("list", ar);
+		model.addAttribute("tlist", ar2);
 		
 		return "matches/seatList";
 	}
