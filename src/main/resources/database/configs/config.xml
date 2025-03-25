@@ -20,6 +20,8 @@
 	
 		<typeAlias type="com.baseball.app.qna.QnaDTO" alias="QnaDTO"/>
 		<typeAlias type="com.baseball.app.qna.QnaDAO" alias="QnaDAO"/>
+		<typeAlias type="com.baseball.app.notice.NoticeDTO" alias="NoticeDTO"/>
+		
 		
 		<typeAlias type="com.baseball.app.pages.Pager" alias="Pager"/>
 	

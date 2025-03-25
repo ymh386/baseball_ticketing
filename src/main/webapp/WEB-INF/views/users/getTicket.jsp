@@ -39,7 +39,7 @@
                                 <td>${ticket.ticketNum}</td>
                                 <td>${ticket.userId}</td>
                                 <td>${ticket.ticketStatus}</td>
-                            </tr>
+                            </tr>	
                         </c:forEach>
                     </tbody>
                 </table>
