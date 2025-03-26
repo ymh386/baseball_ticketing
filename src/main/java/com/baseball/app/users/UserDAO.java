@@ -70,6 +70,18 @@ public class UserDAO {
 		
 	}
 	
+	
+	
+    // 이메일로 사용자 찾기
+    public UserDTO findByEmail(UserDTO userDTO) throws Exception {
+        return sqlSession.selectOne(NAMESPACE + "findByEmail", userDTO);
+    }
+
+    // 비밀번호 업데이트
+    public int findPwUpdate(UserDTO userDTO) throws Exception {
+        return sqlSession.update(NAMESPACE + "findPwUpdate", userDTO);
+    }
+
 
 	
 	
