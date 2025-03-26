@@ -22,8 +22,8 @@
 			WHERE R BETWEEN #{startNum} AND #{endNum}
   		</select>
   		
-  		<select id="getCommentList" parameterType="CommentDTO" resultType="CommentDTO">
-  			SELECT * FROM COMMENTS WHERE BOARDNUM=#{boardNum} ORDER BY COMMENTNUM DESC
+  		<select id="getSubCommentList" parameterType="CommentDTO" resultType="CommentDTO">
+  			SELECT * FROM COMMENTS WHERE COMMENTREF=#{commentRef} AND COMMENTSTEP > 0 ORDER BY COMMENTSTEP ASC
   		</select>
   		
   		<select id="getFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
@@ -39,7 +39,7 @@
 			WHERE BOARDNUM = #{boardNum}
 		) QQF
 		USING(BOARDNUM)
-		WHERE BOARDNUM = #{boardNum} ORDER BY COMMENTNUM DESC
+		WHERE BOARDNUM = #{boardNum} AND COMMENTSTEP = 0 ORDER BY COMMENTNUM DESC
   		</select>
   	
 	  	 <resultMap type="QnaDTO" id="getDetailResult">

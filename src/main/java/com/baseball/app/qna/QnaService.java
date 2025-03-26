@@ -1,6 +1,9 @@
 package com.baseball.app.qna;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -21,11 +24,14 @@ import com.baseball.app.pages.Pager;
 public class QnaService implements BoardService {
 	
 	
+	
 	@Autowired
 	private QnaDAO qnaDAO;
 	
 	@Autowired
 	private FileManager fileManager;
+	
+	
 	
 	
 	//-----------------------------------------------------------------	
@@ -139,7 +145,6 @@ public class QnaService implements BoardService {
 		return boardFileDTO;
 	}
 	
-	
 	// 파일 다운로드	
 	public BoardFileDTO getFileDetail(BoardFileDTO boardFileDTO) throws Exception {
 		
@@ -177,16 +182,47 @@ public class QnaService implements BoardService {
 	
 		
 	// 댓글 삭제
-		public int deleteComment(CommentDTO commentDTO) throws Exception {
+	public int deleteComment(CommentDTO commentDTO) throws Exception {
 			
-			int result = qnaDAO.deleteComment(commentDTO);
+		int result = qnaDAO.deleteComment(commentDTO);
+		
+		return result;
+	}
+	
+	
+	// 대댓글 조회
+	public Map<String, Object> getSubCommentList(CommentDTO commentDTO) throws Exception {
+		
+		List<CommentDTO> getList = qnaDAO.getSubCommentList(commentDTO);
+		
+		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
+		Map<String, String> data = null;
+		
+		// DB에서 정보를 가져와서 반복 처리
+		for (CommentDTO dto : getList) {
+			data = new HashMap<String, String>();
 			
-			return result;
+			data.put("commentRef", String.valueOf(dto.getCommentRef()));
+			data.put("commentStep", String.valueOf(dto.getCommentStep()));
+			data.put("userId", dto.getUserId());
+			
+			data.put("commentContent", dto.getBoardContent());
+			System.out.println("content :" + dto.getBoardContent());
+			
+			data.put("commentDate", String.valueOf(dto.getBoardDate()));
+			System.out.println("date :" + dto.getBoardDate());
+			
+			list.add(data);
 		}
-	
-	
-	
-	
+		
+		// 결과를 담을 Map을 생성
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("list", list);
+		
+		
+		return result; 
+	}
 	
 
+		
 }

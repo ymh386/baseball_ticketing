@@ -30,6 +30,7 @@
             })
             .then(r => r.text())
             .then(r => {
+                console.log(r)
                 if(r.trim()*1 > 0){
                     //1.파일갯수 count 수 수정
                     count--;
