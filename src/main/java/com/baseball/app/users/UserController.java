@@ -7,9 +7,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.baseball.app.tickets.TicketDTO;
 
@@ -118,23 +120,37 @@ public class UserController {
 		
 		}
 	
-	
-	@RequestMapping(value = "findPassword", method = RequestMethod.POST)
-	public String findPassword(UserDTO userDTO, Model model) throws Exception{
-		UserDTO user = userService.findPassword(userDTO);
-		
-		if(user == null) {
-			model.addAttribute("check", 1);
-		}else {
-			model.addAttribute("check", 0);
-			model.addAttribute("password", user.getPassword());
-		}
-		
-		return "users/findPassword";
-		
-		
-	
+	@RequestMapping(value = "/findPassword", method = RequestMethod.POST)
+	public String findPassword(UserDTO userDTO, Model model) throws Exception {
+	    // 이메일이 존재하는지 확인
+	    if (!userService.isEmailExists(userDTO)) {
+	        model.addAttribute("message", "등록되지 않은 이메일입니다.");
+	        model.addAttribute("check", 1); // 이메일이 존재하지 않는 경우
+	        return "users/findPassword"; // 포워드 방식으로 비밀번호 찾기 페이지로 리턴
+	    }
+
+	    // 임시 비밀번호 생성 및 이메일 전송
+	    String tempPassword = userService.generateTempPassword();
+	    boolean isUpdated = userService.updatePassword(userDTO.getEmail(), tempPassword); // DB에 임시 비밀번호 업데이트
+
+	    if (isUpdated) {
+	        // 임시 비밀번호 이메일로 전송
+	        userService.sendTempPassword(userDTO.getEmail(), tempPassword);
+	        model.addAttribute("message", "임시 비밀번호가 이메일로 전송되었습니다. 로그인 후 비밀번호를 변경해주세요!");
+	        model.addAttribute("check", 0); // 임시 비밀번호 전송 성공
+
+	        // 로그인 페이지로 포워드
+	        return "users/findPassword";
+	    } else {
+	        // 비밀번호 업데이트 실패한 경우
+	        model.addAttribute("message", "비밀번호 변경에 실패했습니다. 다시 시도해주세요.");
+	        model.addAttribute("check", 1); // 실패 처리
+	        return "users/findPassword"; // 다시 비밀번호 찾기 페이지로 포워드
+	    }
 	}
+
+
+
 	
 	@RequestMapping(value ="mypage",method = RequestMethod.GET)
 	public void mypage() throws Exception{

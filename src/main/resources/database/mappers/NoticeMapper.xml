@@ -6,13 +6,71 @@
   <mapper namespace="com.baseball.app.notice.NoticeDAO">
 	
 	<select id="getList" resultType="NoticeDTO">
-		SELECT * FROM NOTICE ORDER BY BOARDNUM DESC;
+		SELECT * FROM NOTICE ORDER BY BOARDNUM DESC
 	
 	</select>
 	
+	<select id="getDetail" parameterType="NoticeDTO" resultMap="getDetailResult">
+
+		SELECT *
+		FROM NOTICE N
+			 LEFT OUTER JOIN 
+			 NOTICEFILES NF
+			 USING(BOARDNUM)
+		WHERE BOARDNUM = #{boardNum}
+		
+	</select>
+		  	<resultMap type="NoticeDTO" id="getDetailResult">
+  		<id column="BOARDNUM" property="boardNum"/>
+  		<result column="BOARDTITLE" property="boardTitle"/>
+  		<result column="BOARDDATE" property="boardDate"/>
+  		<result column="BOARDCONTENT" property="boardContent"/>
+  		<result column="BOARDHIT" property="boardHit"/>
+  		<result column="USERID" property="userId"/>
+  		<!-- 1:N ofType="Generic type명" -->
+  		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="oldName" property="oldName"/>
+  		</collection>
+  	
+  	</resultMap>
+  	
+  	
+   	<update id="updateHit" parameterType="NoticeDTO">
+  		UPDATE NOTICE SET BOARDHIT=BOARDHIT+1
+  		WHERE BOARDNUM=#{boardNum}
+  	</update>
+  	
+  	
+  	<insert id="add" parameterType="NoticeDTO">
+  	<!-- 메인쿼리 실행전(Beafore)에 SELECTKEY의 결과물인 Long타입의 값을 NoticeDTO의 boardNum에 대입 -->
+  		<selectKey order="BEFORE" keyProperty="boardNum" resultType="Long">
+  			SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		
+  		INSERT INTO NOTICE (BOARDNUM, BOARDTITLE, BOARDDATE, BOARDCONTENT, BOARDHIT, USERID)
+  		 VALUES(#{boardNum},#{boardTitle},sysdate,#{boardContent},0,#{userId})
+  	
+  	</insert>
+  	
+  	<update id="update" parameterType="NoticeDTO">
+  		UPDATE NOTICE SET
+  			BOARDTITLE=#{boardTitle},
+  			BOARDCONTENT=#{boardContent}
+  		WHERE BOARDNUM =#{boardNum}
+  		
+  	</update>
+  	
+  	
+  	
+  	<delete id="delete" parameterType="NoticeDTO">
+  		DELETE FROM NOTICE WHERE BOARDNUM=#{boardNum}
+  	
+  	</delete>
 	
 	
 	
 	
 	
-  </mapper>
+  </mapper>	

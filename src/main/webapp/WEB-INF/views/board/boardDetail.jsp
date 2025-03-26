@@ -67,8 +67,12 @@
 	</div>
 </div>
 
-<div class="container-fluid my-5">
-	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
+
+	
+	<c:if test="${kind ne 'notice'}">
+	
+		<div class="container-fluid my-5">
+			<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
 		<!-- contents 내용 작성 -->
 		<h1>답글 리스트</h1>
 		<table class="table table-striped">
@@ -86,7 +90,7 @@
 			<tbody>
 				<c:forEach items="${dto.commentDTOs}" var="v">
 				<tr>
-					<td>${v.boardNum }</td>
+					<td>${v.boardNum}</td>
 					<td>${v.commentNum}</td>
 					<td>${v.userId}</td>
 					<td>${v.boardContent}
@@ -110,6 +114,8 @@
 		
 	</div>
 </div>
+
+</c:if>
 
 <script src="/resources/js/qna/comment.js"></script>
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
