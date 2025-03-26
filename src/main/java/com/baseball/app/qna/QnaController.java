@@ -1,6 +1,9 @@
 package com.baseball.app.qna;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.baseball.app.boards.BoardDTO;
@@ -150,6 +154,37 @@ public class QnaController {
 	}
 	
 	
+	@RequestMapping(value = "getSubCommentList", method = RequestMethod.POST)	
+	public String getSubCommentList(CommentDTO commentDTO, Model model) throws Exception {
+		
+		Map<String, Object> result = qnaService.getSubCommentList(commentDTO);
+		
+		model.addAttribute("result", result);
+		System.out.println(result);
+		return "commons/ajaxResult";
+		
+	}
+	
+	//-----------------------
+	
+//	// 데이터 리스트 생성
+//	List<Map<String, String>> dataList = new ArrayList<Map<String,String>>();
+//	
+//	// 데이터 항목 추가
+//	Map<String, String> data = new HashMap<String, String>();
+//	data.put("name", "홍");
+//	data.put("age", "33");
+//	dataList.add(data);
+//	
+//	data = new HashMap<String, String>();
+//	data.put("name", "길");
+//	data.put("age", "11");
+//	dataList.add(data);
+//	
+//	data = new HashMap<String, String>();
+//	data.put("name", "동");
+//	data.put("age", "22");
+//	dataList.add(data);
 	
 
 }

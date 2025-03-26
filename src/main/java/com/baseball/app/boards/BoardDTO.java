@@ -5,7 +5,7 @@ import java.sql.Date;
 public class BoardDTO {
 	
 	
-	private String boardTitle;	
+	private String boardTitle;
 	private Long boardNum;	
 	private Date boardDate;
 	private String boardContent;

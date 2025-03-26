@@ -108,9 +108,9 @@ public class QnaDAO implements BoardDAO {
 	
 	
 	//
-	public List<CommentDTO> getCommentList(BoardDTO boardDTO) throws Exception {
+	public List<CommentDTO> getSubCommentList(BoardDTO boardDTO) throws Exception {
 		
-		return sqlSession.selectList(NAMESPACE+"getCommentList", boardDTO);
+		return sqlSession.selectList(NAMESPACE+"getSubCommentList", boardDTO);
 	}
 	
 	

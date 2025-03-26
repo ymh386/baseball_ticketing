@@ -70,7 +70,7 @@
 <div class="container-fluid my-5">
 	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
 		<!-- contents 내용 작성 -->
-		<h1>답글 리스트</h1>
+		<h1>댓글 리스트</h1>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -93,7 +93,7 @@
 					<td>${v.boardDate}</td>
 					<td><button onclick="location.href='./deleteComment?commentNum=${v.commentNum}
 					&boardNum=${v.boardNum}'">X</button></td>
-					<td><button class="ctcs" id="ctc${v.commentNum}" data-num="${v.commentNum}">답글</button></td>					
+					<td><button class="ctcs" id="ctc${v.commentNum}" data-num="${v.commentNum}" data-check="1">답글</button></td>					
 				</tr>
 				<tr class="subComments" id="subComment${v.commentNum}" data-num="${v.commentNum}" >
 					
