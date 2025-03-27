@@ -1,6 +1,8 @@
-package com.baseball.app.review_images;
+package com.baseball.app.boards;
 
-public class Review_ImageDTO {
+import com.baseball.app.files.FileDTO;
+
+public class ReviewImageDTO extends FileDTO {
 
 	
 	private Long imageNum;

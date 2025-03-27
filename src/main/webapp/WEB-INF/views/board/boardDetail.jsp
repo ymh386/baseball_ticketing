@@ -39,6 +39,7 @@
 		
 		<div class="alert alert-primary" role="alert" style="min-height: 60vh">
 		  ${dto.boardContent}
+		  <img src="/resources/images/qna/dffaa971-caff-4e64-aeed-dac7b9f566da_img3.jpg">
 		</div>
 	
 	
@@ -93,7 +94,7 @@
 					<td>${v.boardNum}</td>
 					<td>${v.commentNum}</td>
 					<td>${v.userId}</td>
-					<td>${v.boardContent}
+					<td>${v.boardContent}</td>
 					<td>${v.boardDate}</td>
 					<td><button onclick="location.href='./deleteComment?commentNum=${v.commentNum}
 					&boardNum=${v.boardNum}'">X</button></td>

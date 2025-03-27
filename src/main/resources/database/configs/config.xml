@@ -11,6 +11,9 @@
 		<typeAlias type="com.baseball.app.boards.BoardDAO" alias="BoardDAO"/>
 		<typeAlias type="com.baseball.app.boards.BoardFileDTO" alias="BoardFileDTO"/>
 		<typeAlias type="com.baseball.app.boards.CommentDTO" alias="CommentDTO"/>
+		<typeAlias type="com.baseball.app.boards.ReviewImageDTO" alias="ReviewImageDTO"/>
+		<typeAlias type="com.baseball.app.boards.ReviewDTO" alias="ReviewDTO"/>
+		
 	
 			<typeAlias type="com.baseball.app.users.UserDTO" alias="UserDTO"/>
 			<typeAlias type="com.baseball.app.matches.MatchDTO" alias="MatchDTO"/>

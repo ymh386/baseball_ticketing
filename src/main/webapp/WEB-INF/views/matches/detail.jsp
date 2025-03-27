@@ -97,6 +97,7 @@
 			  </div>
 			  <div class="col align-self-end">
 					<a class="btn btn-success" href="./seatList?matchNum=${dto.matchNum}">예매하기</a>
+					<a class="btn btn-danger" href="./getReviewList?matchNum=${dto.matchNum}">경기 리뷰</a>
 			  </div>
 			</div>
 		</div>

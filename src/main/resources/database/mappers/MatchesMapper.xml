@@ -68,4 +68,27 @@
 		SELECT * FROM TICKETS WHERE MATCHNUM=#{matchNum} AND TICKETSTATUS IN ('결제중', '결제완료')
 	</select>
 	
+	<select id="getReviewList" resultType="ReviewDTO" parameterType="MatchDTO">
+		SELECT * FROM REVIEWS WHERE MATCHNUM = #{matchNum} ORDER BY REVIEWNUM DESC
+	</select>
+	
+	
+	<!-- Delete -->
+	<delete id="deleteReview" parameterType="ReviewDTO">
+		DELETE REVIEWS WHERE REVIEWNUM = #{reviewNum}
+	</delete>
+	
+	
+	<!-- Insert -->
+	<insert id="addReview" parameterType="ReviewDTO">
+		INSERT INTO REVIEWS (REVIEWNUM, MATCHNUM, USERID, BOARDDATE, BOARDCONTENT)
+		VALUES (REVIEWS_SEQ.NEXTVAL, #{matchNum}, #{userId}, SYSDATE, #{boardContent})
+	</insert>
+	
+	
+	
+	
+	
+	
+	
 </mapper>
