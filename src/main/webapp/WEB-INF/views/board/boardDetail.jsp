@@ -38,10 +38,22 @@
 		
 		
 		<div class="alert alert-primary" role="alert" style="min-height: 60vh">
+		  
+				<c:if test="${kind eq 'notice'}">
+				 	   <div>
+				        <c:forEach items="${dto.boardFileDTOs}" var="f">
+				            <img src="/resources/images/notice/${f.fileName}" 
+				                 alt="${f.originalName}" 
+				               style="max-width: 800px; height: auto; display: block; margin: 0 auto 10px;">
+				        </c:forEach>
+				    </div>
+					</c:if>
+
 		  ${dto.boardContent}
 		  <img src="/resources/images/qna/dffaa971-caff-4e64-aeed-dac7b9f566da_img3.jpg">
 		</div>
-	
+		
+					
 	
 		<div>
 			<c:forEach items="${dto.boardFileDTOs}" var="f">
