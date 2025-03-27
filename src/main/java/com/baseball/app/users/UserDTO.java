@@ -14,7 +14,6 @@ public class UserDTO {
 	
 	
 	
-	
 	public String getUserId() {
 		return userId;
 	}
@@ -57,8 +56,6 @@ public class UserDTO {
 	public void setTeamNum(Long teamNum) {
 		this.teamNum = teamNum;
 	}
-	
-
 	
 	
 	

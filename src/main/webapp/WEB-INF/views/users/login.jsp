@@ -41,40 +41,8 @@
 </div>
 
 
-<!-- <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<a href="javascript:void(0);" onclick="kakaoLogin(event);">
-    <img src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png" style="height: 30px;width: auto;">
-</a>
 
-<script>
-    // Kakao SDK 초기화
-    Kakao.init('1dfd8db15495713d79e3735cc1f2c94b'); // 카카오 앱의 JavaScript 키
 
-    function kakaoLogin(event) {
-        // 로그인 이벤트를 처리할 때 페이지 새로고침 방지
-        event.preventDefault(); // 기본 동작을 막습니다.
-
-        Kakao.Auth.login({
-            scope: 'profile_nickname,profile_image', // 요구하는 권한 범위
-            success: function(authObj) {
-                console.log(authObj);
-                Kakao.API.request({
-                    url: '/v2/user/me',
-                    success: function(res) {
-                        const kakao_account = res.kakao_account; // 사용자 계정 정보
-                        console.log(kakao_account);
-                    },
-                    fail: function(error) {
-                        console.error('API 요청 실패:', error);
-                    }
-                });
-            },
-            fail: function(error) {
-                console.log('로그인 실패:', error); // 로그인 실패 시 에러 처리
-            }
-        });
-    }
-</script> -->
 
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
