@@ -1,7 +1,11 @@
 package com.baseball.app.users;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -264,6 +268,24 @@ public class UserController {
 	    return "redirect:/";
 	}
 	
+	
+
+
+	    
+	    
+	    
+	    
+	}
+	  
+	  
+	  
+	
+	
+
+    
+
+    
+    
 
 	
 	
@@ -273,9 +295,8 @@ public class UserController {
 	
 	
 	
-	
 		
-}
+
 	
 	
 	

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.baseball.app.boards.BoardDTO;
+import com.baseball.app.boards.BoardFileDTO;
 import com.baseball.app.pages.Pager;
 import com.baseball.app.users.UserDTO;
 
@@ -36,9 +37,10 @@ public class NoticeController {
 	@RequestMapping(value="list", method=RequestMethod.GET)
 	public String getList(Pager pager,Model model) throws Exception{
 		
-		List<BoardDTO> ar = noticeService.getList(pager);
+		List<BoardDTO> list = noticeService.getList(pager);
 		
-		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
+		model.addAttribute("list", list);
 	
 		
 		
@@ -105,6 +107,28 @@ public class NoticeController {
 		
 		
 		
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "fileDown", method = RequestMethod.GET)
+	public String fileDown(BoardFileDTO boardFileDTO, Model model) throws Exception {
+		
+		boardFileDTO = noticeService.getFileDetail(boardFileDTO);
+		model.addAttribute("file", boardFileDTO);
+		return "fileDownView";
+	}
+	
+	
+	@RequestMapping(value = "fileDelete", method = RequestMethod.POST)
+	public String fileDelete(BoardFileDTO boardFileDTO, Model model, HttpSession session) throws Exception {
+		
+		int result = noticeService.fileDelete(boardFileDTO, session);
+		
+		model.addAttribute("result", result);
+		System.out.println("result : " + result);
+		return "commons/ajaxResult";
 	}
 		
 	

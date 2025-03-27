@@ -4,9 +4,22 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.baseball.app.notice.NoticeDAO">
+  
+  	<select id="getTotalCount" resultType="java.lang.Long">
+  		SELECT COUNT(BOARDNUM) FROM NOTICE
+  	</select>
 	
 	<select id="getList" resultType="NoticeDTO">
-		SELECT * FROM NOTICE ORDER BY BOARDNUM DESC
+				SELECT * FROM
+			(SELECT ROWNUM R, M.* FROM
+				(
+					SELECT * 
+					FROM NOTICE
+
+					ORDER BY BOARDNUM DESC
+				) M
+			)
+			WHERE R BETWEEN #{startNum} AND #{endNum}
 	
 	</select>
 	
@@ -69,6 +82,33 @@
   	
   	</delete>
 	
+	
+	<insert id="addFile" parameterType="BoardFileDTO">
+		INSERT INTO NOTICEFILES (FILENUM, BOARDNUM, FILENAME, ORIGINALNAME)
+			VALUES (FILES_SEQ.NEXTVAL, #{boardNum},#{fileName},#{originalName})
+	
+	</insert>
+	
+	
+	
+	
+	    <!-- 특정 게시글에 대한 파일 리스트 가져오기 -->
+    <select id="getFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
+        SELECT *
+        FROM NOTICEFILES
+        WHERE FILENUM = #{fileNum}
+    </select>
+
+    <!-- 특정 파일 삭제 -->
+    <delete id="fileDelete" parameterType="BoardFileDTO">
+        DELETE FROM NOTICEFILES WHERE FILENUM = #{fileNum}
+    </delete>
+
+    <!-- 특정 게시글의 모든 파일 삭제 -->
+    <delete id="deleteAll" parameterType="BoardDTO">
+        DELETE FROM NOTICEFILES WHERE BOARDNUM = #{boardNum}
+    </delete>
+		
 	
 	
 	
