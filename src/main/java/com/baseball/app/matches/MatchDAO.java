@@ -34,6 +34,12 @@ public class MatchDAO {
 		return sqlSession.selectList(NAMESPACE + "getTicketPayment", ticketDTO);
 	}
 	
+	//getMatchList
+	public List<MatchDTO> getMatchList() throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + "getMatchList");
+	}
+	
 	//getReviewList
 	public List<ReviewDTO> getReviewList(MatchDTO matchDTO) throws Exception {
 		

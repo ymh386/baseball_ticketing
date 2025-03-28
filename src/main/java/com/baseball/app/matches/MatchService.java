@@ -31,6 +31,13 @@ public class MatchService {
 	
 	
 	//
+	public List<MatchDTO> getMatchList() throws Exception {
+		
+		return matchDAO.getMatchList();
+	}
+	
+	
+	//
 	public List<ReviewDTO> getReviewList(MatchDTO matchDTO) throws Exception {
 		
 		return matchDAO.getReviewList(matchDTO);

@@ -48,6 +48,17 @@ public class MatchController {
 		return "matches/seatList";
 	}
 	
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public String getMatchList(Model model) throws Exception {
+		
+		List<MatchDTO> list = matchService.getMatchList();
+		
+		model.addAttribute("list", list);
+		
+		return "matches/reviewList";
+	}
+	
+	
 	@RequestMapping(value = "getReviewList", method = RequestMethod.GET)
 	public String getReviewList(MatchDTO matchDTO, Model model) throws Exception {
 		System.out.println("list getMatchNum : " + matchDTO.getMatchNum());
@@ -56,7 +67,7 @@ public class MatchController {
 		model.addAttribute("list", list);
 		model.addAttribute("matchNum", matchDTO.getMatchNum());
 		
-		return "matches/ReviewList";
+		return "matches/reviewList";
 	}
 	
 	@RequestMapping(value = "deleteReview", method = RequestMethod.GET)
