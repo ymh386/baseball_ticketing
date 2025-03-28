@@ -34,10 +34,22 @@ public class MatchDAO {
 		return sqlSession.selectList(NAMESPACE + "getTicketPayment", ticketDTO);
 	}
 	
+	//getMatchList
+	public List<MatchDTO> getMatchList() throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + "getMatchList");
+	}
+	
 	//getReviewList
 	public List<ReviewDTO> getReviewList(MatchDTO matchDTO) throws Exception {
 		
 		return sqlSession.selectList(NAMESPACE + "getReviewList", matchDTO);
+	}
+	
+	//getReviewDetail
+	public ReviewDTO getReviewDetail(ReviewDTO reviewDTO) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE + "getReviewDetail", reviewDTO);
 	}
 	
 	//deleteReview
@@ -50,6 +62,12 @@ public class MatchDAO {
 	public int addReview(ReviewDTO reviewDTO) throws Exception {
 		
 		return sqlSession.insert(NAMESPACE + "addReview", reviewDTO);
+	}
+	
+	//updateReview
+	public int updateReview(ReviewDTO reviewDTO) throws Exception {	
+		
+		return sqlSession.update(NAMESPACE + "updateReview", reviewDTO);
 	}
 	
 

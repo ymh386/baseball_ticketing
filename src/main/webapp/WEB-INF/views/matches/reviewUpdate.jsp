@@ -14,11 +14,11 @@
 <div class="container-fluid my-5">
 	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
 		<!-- contents 내용 작성 -->
-		<h1>${matchNum} 경기 리뷰 리스트</h1>
+		<h1>리뷰 수정</h1>
 		
 		<div id="EditorWrapper">
 			<div id="idImageEditor" contenteditable="true" style="border: solid 1px; height: 300px;">
-				
+				${dto.boardContent}
 			</div>			
 		</div>
 		<div class="mb-2">
@@ -28,41 +28,17 @@
 			
 		</div>
 		
-		<form id="idForm" action="./addReview" method="POST" enctype="multipart/form-data">
-			<input type="hidden" name="matchNum" value="${matchNum}">
+		<form id="idFormToUpdate" action="./updateReview" method="POST" enctype="multipart/form-data">
+			<input type="hidden" name="matchNum" value="${dto.matchNum}">
+			<input type="hidden" name="reviewNum" value="${dto.reviewNum}">
 			<input id="idBoardContent" type="hidden" name="boardContent">
 			
-			<button id="idSubmit" type="button" class="btn btn-outline-success">리뷰 등록</button>
+			<button id="idSubmit" type="button" class="btn btn-outline-success">수정하기</button>
 			
 		</form>
 			
 		
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>작성자</th>
-					<th>내용</th>
-					<th>작성일</th>
-					<th>수정</th>
-					<th>삭제</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${list}" var="v">
-				<tr>
-					<td>${v.reviewNum}</td>					
-					<td>${v.userId}</td>
-					<td>${v.boardContent}</td>
-					<td>${v.boardDate}</td>
-					<td><button onclick="location.href='./updateReview?reviewNum=${v.reviewNum}&matchNum=${v.matchNum}'">
-					수정</button></td>
-					<td><button onclick="location.href='./deleteReview?reviewNum=${v.reviewNum}&matchNum=${v.matchNum}'">
-					X</button></td>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		
 				
 	</div>
 </div>
