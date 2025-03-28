@@ -1,6 +1,8 @@
 package com.baseball.app.users;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +55,7 @@ public class UserDAO {
 	
 	//티켓 정보
 	
-	public List<TicketDTO> getTickets(UserDTO userDTO) throws Exception{
+	public List<Map<String, Object>> getTickets(UserDTO userDTO) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getTickets", userDTO);
 	}
 	
@@ -84,6 +86,15 @@ public class UserDAO {
 
 
 
+    // 티켓 상태 업데이트 메서드
+    public int updateState(Map<String, Object> params) throws Exception {
+        return sqlSession.update(NAMESPACE + "updateState", params); // update 쿼리 실행
+    }
+    
+    
+    
+}
+
 	
 
-}
+

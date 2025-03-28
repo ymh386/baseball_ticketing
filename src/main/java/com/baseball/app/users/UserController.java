@@ -3,6 +3,7 @@ package com.baseball.app.users;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.baseball.app.tickets.TicketDTO;
@@ -183,10 +185,9 @@ public class UserController {
 	
 	
 	
-	
-	@RequestMapping(value ="getTicket", method = RequestMethod.GET)
-	public String getTickets(HttpSession session, Model model,UserDTO userDTO) throws Exception{
-		
+	@RequestMapping(value = "getTicket", method = RequestMethod.GET)
+	public String getTickets(HttpSession session, Model model, UserDTO userDTO) throws Exception {
+
 	    UserDTO user = (UserDTO) session.getAttribute("user");
 
 	    if (user == null) {
@@ -194,8 +195,8 @@ public class UserController {
 	        return "redirect:/login";
 	    }
 
-	    // 사용자의 티켓 정보 가져오기 
-	    List<TicketDTO> ticketList = userService.getTickets(user);
+	    // 사용자의 티켓 정보 가져오기 (Map 형태로 반환)
+	    List<Map<String, Object>> ticketList = userService.getTickets(user);
 
 	    // 티켓 목록을 모델에 추가
 	    model.addAttribute("ticketList", ticketList);
@@ -203,7 +204,6 @@ public class UserController {
 	    // "getTicket" 뷰 페이지로 이동
 	    return "users/getTicket";
 	}
-		
 	
 	
 	@RequestMapping(value ="pwUpdate", method = RequestMethod.GET)
@@ -268,10 +268,30 @@ public class UserController {
 	    return "redirect:/";
 	}
 	
-	
+	@RequestMapping(value = "/refund", method = RequestMethod.POST)
+	public String refundTicket(@RequestParam("ticketNum") Long ticketNum, HttpSession session) {
+	    try {
+	        // 세션에서 UserDTO 객체를 가져오기
+	        UserDTO user = (UserDTO) session.getAttribute("user");
+	        if (user == null) {
+	            return "redirect:./login";  // 로그인 페이지로 리다이렉트
+	        }
+
+	        // 티켓 상태를 '환불완료'로 변경
+	        int result = userService.updateState(ticketNum, "환불완료");
+
+	        if (result == 1) {
+	            return "redirect:./getTicket";  // 티켓 조회 페이지로 리다이렉트
+	        } else {
+	            return "redirect:./getTicket?error=true";  // 티켓 조회 페이지로 오류 메시지와 함께 리다이렉트
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "redirect:./getTicket?error=true";  // 오류가 발생하면 티켓 조회 페이지로 리다이렉트
+	    }
+	}
 
 
-	    
 	    
 	    
 	    

@@ -2,7 +2,10 @@ package com.baseball.app.users;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
@@ -87,8 +90,7 @@ public class UserService {
     	return userDAO.findByEmail(userDTO);
     }
 
-    // 티켓 조회 
-    public List<TicketDTO> getTickets(UserDTO userDTO) throws Exception {
+    public List<Map<String, Object>> getTickets(UserDTO userDTO) throws Exception{
         return userDAO.getTickets(userDTO);
     }
     
@@ -137,7 +139,7 @@ public class UserService {
 
             helper.setFrom("wlsdnjs652@gmail.com", "baseball Ticket Team");
             helper.setTo(toEmail);
-            helper.setSubject("임시 비밀번호 발급 안내");
+            helper.setSubject("baseball_ticketing 임시 비밀번호 발급 안내");
             helper.setText("안녕하세요 kbo 티켓 예매서비스입니다.\n\n임시 비밀번호는 [" + tempPassword + "] 입니다.\n로그인 후 비밀번호를 변경해주세요.");
 
             mailSender.send(message);
@@ -147,6 +149,28 @@ public class UserService {
     }
     
 
+    // 티켓 상태 변경 메서드
+    public int updateState(Long ticketNum, String ticketStatus) throws Exception {
+        Map<String, Object> params = new HashMap();
+        params.put("ticketNum", ticketNum);
+        params.put("ticketStatus", ticketStatus);
+
+        return userDAO.updateState(params); // DAO 호출
+    }
+
+    // 환불 처리 메서드
+    public boolean refundTickets(String userId, Long ticketNum) {
+        try {
+            // 티켓 상태를 '환불완료'로 변경
+            int result = updateState(ticketNum, "환불완료");
+            return result == 1; // 성공적으로 업데이트되면 true 반환
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    
     
     
     
