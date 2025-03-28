@@ -12,7 +12,7 @@
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
 <div class="container-fluid my-5">
-	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
+	<div class="row col-md-8 offset-md-2">
 		<!-- contents 내용 작성 -->
 		<h1>경기 리스트</h1>
 		

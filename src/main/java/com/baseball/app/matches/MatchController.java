@@ -1,6 +1,8 @@
 package com.baseball.app.matches;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,9 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.baseball.app.boards.ReviewDTO;
 import com.baseball.app.seats.SeatDTO;
+import com.baseball.app.test.MyModel;
 import com.baseball.app.tickets.TicketDTO;
 import com.baseball.app.tickets.TicketService;
 
@@ -23,6 +28,9 @@ public class MatchController {
 	
 	@Autowired
 	private MatchService matchService;
+	
+	@Autowired
+	private MyModel myModel;
 			
 	
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
@@ -55,7 +63,7 @@ public class MatchController {
 		
 		model.addAttribute("list", list);
 		
-		return "matches/reviewList";
+		return "matches/matchList";
 	}
 	
 	
@@ -92,6 +100,60 @@ public class MatchController {
 		return "redirect:./getReviewList?matchNum=" + reviewDTO.getMatchNum();
 	}
 	
+	@RequestMapping(value = "updateReview", method = RequestMethod.GET)
+	public String updateReviewG(ReviewDTO reviewDTO, Model model) throws Exception {
+		
+		System.out.println("add getMatchNum : " + reviewDTO.getMatchNum());
+		System.out.println("add getReviewNum : " + reviewDTO.getReviewNum());
+		System.out.println("add getBoardContent : " + reviewDTO.getBoardContent());
+		
+		ReviewDTO result = matchService.getReviewDetail(reviewDTO);
+		model.addAttribute("dto", result);
+		
+		return "matches/reviewUpdate";
+	}
+	
+	@RequestMapping(value = "updateReview", method = RequestMethod.POST)
+	public String updateReviewP(ReviewDTO reviewDTO, Model model) throws Exception {
+		
+		System.out.println("add getMatchNum : " + reviewDTO.getMatchNum());
+		System.out.println("add getReviewNum : " + reviewDTO.getReviewNum());
+		System.out.println("add getBoardContent : " + reviewDTO.getBoardContent());
+				
+		return null;
+	}
+	
+	@RequestMapping(value = "tempImage", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> tempImage(MultipartFile[] attaches, HttpSession session) throws Exception {
+		
+		String result = matchService.tempImage(attaches, session);
+		Map<String, String> map = new HashMap<String, String>(); 
+		map.put("tempImage", result);
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "deleteTempImage", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> deleteTempImage(String src, HttpSession session) throws Exception {
+		
+		String result = matchService.deleteTempImage(src, session);
+		Map<String, String> map = new HashMap<String, String>(); 
+		map.put("result", result);
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "test", method = RequestMethod.GET)
+	@ResponseBody
+	public MyModel test() throws Exception {
+		
+		myModel.setName("paul");
+		myModel.setSkills(new String[] {"123", "456"});
+		System.out.println("test");
+		return myModel;
+	}
 	
 	
 

@@ -76,6 +76,9 @@
 		SELECT * FROM REVIEWS WHERE MATCHNUM = #{matchNum} ORDER BY REVIEWNUM DESC
 	</select>
 	
+	<select id="getReviewDetail" resultType="ReviewDTO" parameterType="ReviewDTO">
+		SELECT * FROM REVIEWS WHERE REVIEWNUM = #{reviewNum}
+	</select>
 	
 	<!-- Delete -->
 	<delete id="deleteReview" parameterType="ReviewDTO">
@@ -90,7 +93,10 @@
 	</insert>
 	
 	
-	
+	<!-- Update -->
+	<update id="updateReview" parameterType="ReviewDTO">
+		UPDATE REVIEWS SET BOARDCONTENT = #{boardContent} WHERE REVIEWNUM = #{reviewNum}
+	</update>
 	
 	
 	

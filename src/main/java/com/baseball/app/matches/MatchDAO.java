@@ -46,6 +46,12 @@ public class MatchDAO {
 		return sqlSession.selectList(NAMESPACE + "getReviewList", matchDTO);
 	}
 	
+	//getReviewDetail
+	public ReviewDTO getReviewDetail(ReviewDTO reviewDTO) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE + "getReviewDetail", reviewDTO);
+	}
+	
 	//deleteReview
 	public int deleteReview(ReviewDTO reviewDTO) throws Exception {
 		
@@ -56,6 +62,12 @@ public class MatchDAO {
 	public int addReview(ReviewDTO reviewDTO) throws Exception {
 		
 		return sqlSession.insert(NAMESPACE + "addReview", reviewDTO);
+	}
+	
+	//updateReview
+	public int updateReview(ReviewDTO reviewDTO) throws Exception {	
+		
+		return sqlSession.update(NAMESPACE + "updateReview", reviewDTO);
 	}
 	
 

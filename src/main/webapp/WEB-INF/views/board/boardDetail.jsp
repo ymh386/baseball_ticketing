@@ -120,7 +120,7 @@
 		</table>
 		
 		<form action="./addComment?boardNum=${dto.boardNum}" method="post" enctype="multipart/form-data">
-			<label for="commentLabel" class="comment-label">내용</label>			
+			<label for="commentLabel" class="comment-label">내용</label>
 			<textarea class="row col-md-12 mb-3" id="boardContent" name="boardContent"></textarea>
 			<button type="submit" id="commentSubmit" name="commentSubmit">댓글 등록</button>
 		</form>
