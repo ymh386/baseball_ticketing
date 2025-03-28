@@ -19,15 +19,13 @@
 	</select>
 	
 	
-	<select id="getTickets" parameterType="UserDTO" resultType="TicketDTO">
-	   SELECT t.*
-	    FROM USERS u
-	    JOIN TICKETS t ON u.USERID = t.USERID
-	    WHERE u.USERID =#{userId}
-		
-	</select>
-	
-	
+<select id="getTickets" parameterType="UserDTO" resultType="java.util.Map">
+    SELECT t.*, m.HOMETEAM, m.AWAYTEAM, m.MATCHDATE
+    FROM USERS u
+    JOIN TICKETS t ON u.USERID = t.USERID
+    JOIN MATCHES m ON t.MATCHNUM = m.MATCHNUM
+    WHERE u.USERID = #{userId}
+</select>
 
 
 
@@ -107,6 +105,9 @@
     </select>
 
 
+	<update id="updateState" parameterType="TicketDTO">
+		UPDATE TICKETS SET TICKETSTATUS = #{ticketStatus} WHERE TICKETNUM = #{ticketNum}
+	</update>
 
 	
 
