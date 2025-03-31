@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,51 +31,43 @@ public class UserController {
 	private UserService userService;
 	
 	
-	@RequestMapping(value="join", method = RequestMethod.GET)
-	public void join()throws Exception{
-		
-	}
-	
-	
-	@RequestMapping(value="join", method = RequestMethod.POST)
-	public String join(UserDTO userDTO,HttpSession session) throws Exception{
-		
-		int result = userService.join(userDTO,session.getServletContext());
-		
-		return "redirect:/";
-		
-		
-	}
-	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public void login()throws Exception{
-		
-	}
-	
+    // 회원가입 화면
+    @RequestMapping(value="join", method = RequestMethod.GET)
+    public void join() throws Exception {
+    }
 
-	
-	@RequestMapping(value ="login", method = RequestMethod.POST)
-	public String login(UserDTO userDTO, HttpSession session, Model model) {
-		
-		try {
-			userDTO = userService.login(userDTO);
-			
-		}catch (Exception e) {
-			model.addAttribute("result", e.getMessage());
-			return "users/login";
-		}
-		
-		if(userDTO != null) {
-			session.setAttribute("user", userDTO);
-			return "redirect:../";
-		}
-		
-		model.addAttribute("result", "로그인을 다시 시도해주세요");
-		model.addAttribute("path","./login");
-		
-		return "commons/result";
-		
-		
-	}
+    // 회원가입 처리
+    @RequestMapping(value="join", method = RequestMethod.POST)
+    public String join(UserDTO userDTO, HttpSession session) throws Exception {
+        int result = userService.join(userDTO, session.getServletContext());
+        return "redirect:/";
+    }
+    // 로그인 화면
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public void login() throws Exception {
+    	
+    }
+
+    // 로그인 처리
+    @RequestMapping(value ="login", method = RequestMethod.POST)
+    public String login(UserDTO userDTO, HttpSession session, Model model) {
+        try {
+            userDTO = userService.login(userDTO);
+        } catch (Exception e) {
+            model.addAttribute("result", e.getMessage());
+            return "users/login";
+        }
+
+        if (userDTO != null) {
+            session.setAttribute("user", userDTO);
+            return "redirect:../";
+        }
+
+        model.addAttribute("result", "로그인을 다시 시도해주세요");
+        model.addAttribute("path", "./login");
+
+        return "commons/result";
+    }
 	
 	
 	@RequestMapping(value ="logout", method = RequestMethod.GET)
@@ -217,24 +211,22 @@ public class UserController {
 	
 	
 	@RequestMapping(value="pwUpdate", method = RequestMethod.POST)
-	public String pwUpdate(UserDTO userDTO,@RequestParam String currentPassword,@RequestParam String newPassword, 
-	        @RequestParam String confirmPassword,HttpSession session, Model model) throws Exception{
-		 UserDTO user = (UserDTO)session.getAttribute("user");
-		 
-	     String result = userService.pwUpdate(user, currentPassword, newPassword, confirmPassword);
-	     System.out.println(user.getPassword());
-	     System.out.println(currentPassword);
-	     System.out.println(newPassword);
-	     System.out.println(confirmPassword);
+	public String pwUpdate(UserDTO userDTO, @RequestParam String currentPassword, @RequestParam String newPassword, 
+	        @RequestParam String confirmPassword, HttpSession session, Model model) throws Exception {
+	    // 세션에서 현재 사용자 정보 가져오기
+	    userDTO = (UserDTO) session.getAttribute("user");
 
-	        if (result.equals("success")) {
-	            return "redirect:./mypage"; // 비밀번호 변경 성공 후 프로필 페이지로 리다이렉트
-	        } else {
-	            model.addAttribute("message", result); // 오류 메시지를 JSP로 전달
-	            return "users/pwUpdate"; // 실패 시 다시 비밀번호 변경 페이지로
-	        }
-		
-	}	
+	    // 서비스에서 비밀번호 변경 처리
+	    String result = userService.pwUpdate(userDTO, currentPassword, newPassword, confirmPassword);
+
+	    // 비밀번호 변경 결과 처리
+	    if (result.equals("success")) {
+	        return "redirect:./mypage"; // 비밀번호 변경 성공 후 프로필 페이지로 리다이렉트
+	    } else {
+	        model.addAttribute("message", result); // 오류 메시지를 JSP로 전달
+	        return "users/pwUpdate"; // 실패 시 다시 비밀번호 변경 페이지로
+	    }
+	}
 	
 	
 	@RequestMapping(value="userDelete", method= RequestMethod.GET)
@@ -290,7 +282,8 @@ public class UserController {
 	        return "redirect:./getTicket?error=true";  // 오류가 발생하면 티켓 조회 페이지로 리다이렉트
 	    }
 	}
-
+	
+	
 
 	    
 	    

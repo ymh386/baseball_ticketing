@@ -12,6 +12,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.baseball.app.files.FileManager;
@@ -22,6 +23,8 @@ public class UserService {
     
     @Autowired
     private UserDAO userDAO;
+    
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // BCrypt 인코더
     
     @Autowired
     private FileManager fileManager;
@@ -37,7 +40,8 @@ public class UserService {
             return null;
         }
 
-        if (Objects.equals(result.getPassword(), userDTO.getPassword())) {
+        // DB에 저장된 해시된 비밀번호와 입력된 비밀번호 비교
+        if (passwordEncoder.matches(userDTO.getPassword(), result.getPassword())) {
             return result;
         }
 
@@ -56,10 +60,13 @@ public class UserService {
     public boolean updatePassword(String email, String tempPassword) throws Exception {
         UserDTO userDTO = new UserDTO();
         userDTO.setEmail(email);
-        userDTO.setPassword(tempPassword);
         
+        // 임시 비밀번호를 해시화하여 저장
+        String hashedPassword = passwordEncoder.encode(tempPassword);
+        userDTO.setPassword(hashedPassword);
+
         try {
-            // 비밀번호 업데이트 수행
+            // 해시화된 비밀번호로 DB 업데이트 수행
             userDAO.findPwUpdate(userDTO);
             return true; // 업데이트 성공
         } catch (Exception e) {
@@ -70,9 +77,13 @@ public class UserService {
     }
 
 
-
     // 회원가입
     public int join(UserDTO userDTO, ServletContext context) throws Exception {
+        // 비밀번호 해시화
+        String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
+        userDTO.setPassword(encodedPassword);  // 해시화된 비밀번호를 세팅
+
+        // 해시화된 비밀번호로 사용자 정보 저장
         return userDAO.join(userDTO);
     }
 
@@ -102,18 +113,20 @@ public class UserService {
             return "새 비밀번호와 확인 비밀번호가 일치하지 않습니다.";
         }
 
-        // 현재 비밀번호가 맞는지 확인 (암호화하지 않고 평문으로 비교)
-        if (!userDTO.getPassword().equals(currentPassword)) {
+        // 현재 비밀번호가 맞는지 확인 (암호화된 비밀번호 비교)
+        if (!passwordEncoder.matches(currentPassword, userDTO.getPassword())) {
             return "현재 비밀번호가 올바르지 않습니다.";
         }
 
-        // 비밀번호 변경 로직 (암호화하지 않고 바로 변경)
-        userDTO.setPassword(newPassword); // 새 비밀번호를 그대로 저장
+        // 새 비밀번호를 해시화
+        String hashedPassword = passwordEncoder.encode(newPassword);
+        userDTO.setPassword(hashedPassword); // 새 비밀번호를 해시화하여 설정
+
+        // 비밀번호 변경
         userDAO.pwUpdate(userDTO);
 
         return "success";
     }
-
 
     // 회원 탈퇴
     public int userDelete(UserDTO userDTO) throws Exception {
@@ -170,6 +183,7 @@ public class UserService {
         }
     }
     
+
     
     
     

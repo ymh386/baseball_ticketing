@@ -19,16 +19,22 @@
 			
 			
 			
+			<!-- 비밀번호 해시화 -->
+	    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-crypto</artifactId>
+        <version>5.7.1</version> 
+    </dependency>
+					
+			
 			<!-- 메일  -->
 			<dependency>
 				    <groupId>com.sun.mail</groupId>
 				    <artifactId>javax.mail</artifactId>
-				    <version>1.6.2</version>  <!-- 버전에 맞게 수정 -->
+				    <version>1.6.2</version>  
 				</dependency>
 						
-		
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-		<dependency>
+				<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.17.2</version>
@@ -38,7 +44,7 @@
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-context-support</artifactId>
-		    <version>${org.springframework-version}</version>  <!-- Spring 버전에 맞게 수정 -->
+		    <version>${org.springframework-version}</version>  
 		</dependency>
 				<!-- 메일  -->
 					

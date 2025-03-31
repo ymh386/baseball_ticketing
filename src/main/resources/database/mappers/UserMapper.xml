@@ -18,16 +18,6 @@
 
 	</select>
 	
-	
-<select id="getTickets" parameterType="UserDTO" resultType="java.util.Map">
-    SELECT t.*, m.HOMETEAM, m.AWAYTEAM, m.MATCHDATE
-    FROM USERS u
-    JOIN TICKETS t ON u.USERID = t.USERID
-    JOIN MATCHES m ON t.MATCHNUM = m.MATCHNUM
-    WHERE u.USERID = #{userId}
-</select>
-
-
 
   	<resultMap type="UserDTO" id="getDetailResult">
   		<!-- PK  column: 컬럼명, property: setter의 이름 -->
@@ -41,6 +31,17 @@
   		<!-- 1:1 property="setter의 이름" javaType="데이터타입"-->
   		
   	</resultMap>
+		
+		
+	<select id="getTickets" parameterType="UserDTO" resultType="java.util.Map">
+	    SELECT t.*, m.HOMETEAM, m.AWAYTEAM, m.MATCHDATE
+	    FROM USERS u
+	    JOIN TICKETS t ON u.USERID = t.USERID
+	    JOIN MATCHES m ON t.MATCHNUM = m.MATCHNUM
+	    WHERE u.USERID = #{userId}
+	</select>
+	
+
 
 
 
@@ -105,11 +106,16 @@
     </select>
 
 
+
+	<!-- 티켓상태 환불완료로 변경 -->
 	<update id="updateState" parameterType="TicketDTO">
 		UPDATE TICKETS SET TICKETSTATUS = #{ticketStatus} WHERE TICKETNUM = #{ticketNum}
 	</update>
 
+	<delete id="ticketDelete" parameterType="TicketDTO">
+		DELETE FROM TICKETS WHERE MATCHNUM =#{matchNum} AND SEATNUM= #{seatNum}
 	
+	</delete>
 
 
 

@@ -16,7 +16,7 @@
 		<!-- contents 내용 작성 -->
 		
         <form action="./userDelete" method="post" onsubmit="return confirmDelete();">
-		<h2>그 동안 저희 kbo티켓 예매 서비스를 이용해주셔서 감사합니다 </h2>
+		<h2>그 동안 저희 baseball ticketing 예매 서비스를 이용해주셔서 감사합니다 </h2>
     
 			<h2>id: ${user.userId}</h2>
             <button type="submit">회원 탈퇴 </button>
