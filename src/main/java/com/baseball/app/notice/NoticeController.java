@@ -50,6 +50,30 @@ public class NoticeController {
 	@RequestMapping(value="detail", method=RequestMethod.GET)
 	public String getDetail(NoticeDTO boardDTO, Model model,HttpSession session) throws Exception{
 		
+		Object obj = session.getAttribute("board");
+		
+		boolean check = false;
+		
+		if(obj != null) {
+			HashSet<Long> ar = (HashSet<Long>)obj;
+		
+			if(!ar.contains(boardDTO.getBoardNum())) {
+				check=true;
+			}else {
+				ar.add(boardDTO.getBoardNum());
+			}
+			
+			
+		}else {
+			HashSet<Long> num = new HashSet<Long>();
+			num.add(boardDTO.getBoardNum());
+			session.setAttribute("board", num);
+			check=true;
+			
+			
+		}
+		
+		
 		boardDTO =(NoticeDTO)noticeService.getDetail(boardDTO);
 		model.addAttribute("dto", boardDTO);
 		return "board/boardDetail";

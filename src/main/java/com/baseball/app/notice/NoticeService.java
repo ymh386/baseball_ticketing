@@ -40,6 +40,14 @@ public class NoticeService implements BoardService{
 	@Override
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
+	
+		boolean check = true;
+		
+		if(check) {
+			noticeDAO.updateHit(boardDTO);
+			
+		}
+		
 		return noticeDAO.getDetail(boardDTO);
 	}
 

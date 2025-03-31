@@ -16,10 +16,19 @@
 
 <div class="container-fluid my-5">
     <div class="row col-md-8 offset-md-2">
-        <h2>티켓 정보</h2>
+        <h2>티켓 구매 내역</h2>
+        
+        <!-- 상태 선택 필터 추가 -->
+        <form id="statusFilterForm">
+            <select class="form-control" id="statusFilter" onchange="filterTickets()">
+                <option value="">모든 상태</option>
+                <option value="예매완료">예매완료</option>
+                <option value="환불완료">환불완료</option>
+            </select>
+        </form>
 
         <c:if test="${not empty ticketList}">
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="ticketTable">
                 <thead>
                     <tr>
                         <th>매치 번호</th>
@@ -34,44 +43,48 @@
                 </thead>
                 <tbody>
                     <c:forEach var="ticket" items="${ticketList}">
-                        <tr>
+                        <tr class="ticketRow" data-status="${ticket['TICKETSTATUS']}">
                             <td>${ticket['MATCHNUM']}</td>
                             <td>${ticket['SEATNUM']}</td>
                             <td>${ticket['TICKETNUM']}</td>
                             <td>
-                                <!-- 구매자 이름 클릭 시 모달 창 띄우기 -->
                                 <a href="#" data-toggle="modal" data-target="#ticketModal" 
                                    onclick="setTicketInfo('${ticket['USERID']}', '${ticket['TICKETNUM']}', '${ticket['MATCHNUM']}', '${ticket['SEATNUM']}', '${ticket['MATCHDATE']}', '${ticket['TICKETSTATUS']}')">
                                     ${ticket['USERID']}
                                 </a>
                             </td>
-                            <td>${ticket['TICKETSTATUS']}</td>
-
-                            <!-- 팀 번호를 팀 이름으로 변환 -->
-                            <c:set var="homeTeamName" value="${ticket['HOMETEAM'] == 1 ? '기아 타이거즈' : 
-                                                             ticket['HOMETEAM'] == 2 ? 'SSG 랜더스' : 
-                                                             ticket['HOMETEAM'] == 3 ? '한화 이글스' :
-                                                             ticket['HOMETEAM'] == 4 ? '키움 히어로즈' : 
-                                                             ticket['HOMETEAM'] == 5 ? '삼성 라이온즈' : 
-                                                             ticket['HOMETEAM'] == 6 ? '롯데 자이언츠' : 
-                                                             ticket['HOMETEAM'] == 7 ? '케이티 위즈' : 
-                                                             ticket['HOMETEAM'] == 8 ? '엘지 트윈스' : 
-                                                             ticket['HOMETEAM'] == 9 ? '엔씨 다이노스' : 
-                                                             ticket['HOMETEAM'] == 10 ? '두산 베어스' : '미지정'}" />
-
-                            <c:set var="awayTeamName" value="${ticket['AWAYTEAM'] == 1 ? '기아 타이거즈' : 
-                                                             ticket['AWAYTEAM'] == 2 ? 'SSG 랜더스' : 
-                                                             ticket['AWAYTEAM'] == 3 ? '한화 이글스' :
-                                                             ticket['AWAYTEAM'] == 4 ? '키움 히어로즈' : 
-                                                             ticket['AWAYTEAM'] == 5 ? '삼성 라이온즈' : 
-                                                             ticket['AWAYTEAM'] == 6 ? '롯데 자이언츠' : 
-                                                             ticket['AWAYTEAM'] == 7 ? '케이티 위즈' : 
-                                                             ticket['AWAYTEAM'] == 8 ? '엘지 트윈스' : 
-                                                             ticket['AWAYTEAM'] == 9 ? '엔씨 다이노스' : 
-                                                             ticket['AWAYTEAM'] == 10 ? '두산 베어스' : '미지정'}" />
-
-                            <td>${homeTeamName}</td>
-                            <td>${awayTeamName}</td>
+                            <td>
+                                <select class="form-control" disabled>
+                                    <option value="예매완료" ${ticket['TICKETSTATUS'] == '예매완료' ? 'selected' : ''}>예매완료</option>
+                                    <option value="환불완료" ${ticket['TICKETSTATUS'] == '환불완료' ? 'selected' : ''}>환불완료</option>
+                                </select>
+                            </td>
+                            <td>
+                                <c:set var="homeTeamName" value="${ticket['HOMETEAM'] == 1 ? '기아 타이거즈' : 
+                                                                 ticket['HOMETEAM'] == 2 ? 'SSG 랜더스' : 
+                                                                 ticket['HOMETEAM'] == 3 ? '한화 이글스' :
+                                                                 ticket['HOMETEAM'] == 4 ? '키움 히어로즈' : 
+                                                                 ticket['HOMETEAM'] == 5 ? '삼성 라이온즈' : 
+                                                                 ticket['HOMETEAM'] == 6 ? '롯데 자이언츠' : 
+                                                                 ticket['HOMETEAM'] == 7 ? '케이티 위즈' : 
+                                                                 ticket['HOMETEAM'] == 8 ? '엘지 트윈스' : 
+                                                                 ticket['HOMETEAM'] == 9 ? '엔씨 다이노스' : 
+                                                                 ticket['HOMETEAM'] == 10 ? '두산 베어스' : '미지정'}" />
+                                ${homeTeamName}
+                            </td>
+                            <td>
+                                <c:set var="awayTeamName" value="${ticket['AWAYTEAM'] == 1 ? '기아 타이거즈' : 
+                                                                 ticket['AWAYTEAM'] == 2 ? 'SSG 랜더스' : 
+                                                                 ticket['AWAYTEAM'] == 3 ? '한화 이글스' :
+                                                                 ticket['AWAYTEAM'] == 4 ? '키움 히어로즈' : 
+                                                                 ticket['AWAYTEAM'] == 5 ? '삼성 라이온즈' : 
+                                                                 ticket['AWAYTEAM'] == 6 ? '롯데 자이언츠' : 
+                                                                 ticket['AWAYTEAM'] == 7 ? '케이티 위즈' : 
+                                                                 ticket['AWAYTEAM'] == 8 ? '엘지 트윈스' : 
+                                                                 ticket['AWAYTEAM'] == 9 ? '엔씨 다이노스' : 
+                                                                 ticket['AWAYTEAM'] == 10 ? '두산 베어스' : '미지정'}" />
+                                ${awayTeamName}
+                            </td>
                             <td>${ticket['MATCHDATE']}</td>
                         </tr>
                     </c:forEach>
@@ -108,9 +121,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                 <!-- 환불 신청 버튼 -->
-                <form action="./refund" method="POST">
+                <form action="./refund" method="POST" onsubmit="return confirmRefund()">
                     <input type="hidden" id="modalTicketNumHidden" name="ticketNum">
-                    <!-- 환불 버튼, ID 'refundButton' 추가 -->
                     <button type="submit" class="btn btn-danger" id="refundButton">환불 신청</button>
                 </form>
             </div>
@@ -119,33 +131,13 @@
 </div>
 
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
-<c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
-
-<!-- Bootstrap JS & jQuery 추가 -->
+<!-- getTicket.js 추가 -->
+<script src="/resources/js/users/getTicket.js"></script>
+<!-- jQuery 추가 -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
-// 모달에 정보 세팅
-function setTicketInfo(userId, ticketNum, matchNum, seatNum, matchDate, ticketStatus) {
-    // 모달에 정보 세팅
-    document.getElementById('modalUserId').textContent = userId;
-    document.getElementById('modalTicketNum').textContent = ticketNum;
-    document.getElementById('modalMatchNum').textContent = matchNum;
-    document.getElementById('modalSeatNum').textContent = seatNum;
-    document.getElementById('modalMatchDate').textContent = matchDate;
-    document.getElementById('modalTicketNumHidden').value = ticketNum;
-    
-    // 상태가 '환불완료'일 경우 환불 버튼 숨기기
-    if (ticketStatus === '환불완료') {
-        document.getElementById('refundButton').style.display = 'none';  // 환불 버튼 숨김
-    } else {
-        document.getElementById('refundButton').style.display = 'inline-block';  // 환불 버튼 보이기
-    }
-}
-</script>
+<!-- Bootstrap JS 추가 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
-<script src="/resources/js/users/login.js"></script>
 </body>
 </html>
