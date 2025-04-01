@@ -1,12 +1,15 @@
 package com.baseball.app.matches;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.baseball.app.boards.ReviewDTO;
+import com.baseball.app.pages.Pager;
 import com.baseball.app.seats.SeatDTO;
 import com.baseball.app.tickets.TicketDTO;
 
@@ -40,10 +43,16 @@ public class MatchDAO {
 		return sqlSession.selectList(NAMESPACE + "getMatchList");
 	}
 	
-	//getReviewList
-	public List<ReviewDTO> getReviewList(MatchDTO matchDTO) throws Exception {
+	//getTotalCount
+	public Long getTotalCount(MatchDTO matchDTO) throws Exception {
 		
-		return sqlSession.selectList(NAMESPACE + "getReviewList", matchDTO);
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount", matchDTO);
+	} 
+	
+	//getReviewList
+	public List<ReviewDTO> getReviewList(Map<String, Object> map) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + "getReviewList", map);
 	}
 	
 	//getReviewDetail

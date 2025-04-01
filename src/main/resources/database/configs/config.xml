@@ -31,7 +31,7 @@
 	
 		
 	
-		
+		<typeAlias type="java.util.HashMap" alias="HashMap"/>
 		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="java.util.List" alias="List"/>
 	</typeAliases>

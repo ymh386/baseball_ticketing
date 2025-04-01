@@ -44,10 +44,12 @@ public class Pager {
 //-------------------------------------------------
 		
 	public Long getPage() {
+		System.out.println("page의 값은 : " + page);
 		// 적절한 값 없을 시 첫번째 페이지로 간다
 		if(this.page == null || this.page < 1 || this.page > this.lastPage) {
 			this.page=1L;
 		}
+		
 		return page;
 	}
 

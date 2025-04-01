@@ -1,5 +1,6 @@
 package com.baseball.app.matches;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.baseball.app.boards.ReviewDTO;
+import com.baseball.app.pages.Pager;
 import com.baseball.app.seats.SeatDTO;
 import com.baseball.app.test.MyModel;
 import com.baseball.app.tickets.TicketDTO;
@@ -68,14 +70,35 @@ public class MatchController {
 	
 	
 	@RequestMapping(value = "getReviewList", method = RequestMethod.GET)
-	public String getReviewList(MatchDTO matchDTO, Model model) throws Exception {
-		System.out.println("list getMatchNum : " + matchDTO.getMatchNum());
+	public String getReviewListG(MatchDTO matchDTO, Pager pager, Model model) throws Exception {
 		
-		List<ReviewDTO> list = matchService.getReviewList(matchDTO);
+		List<ReviewDTO> list = matchService.getReviewList(matchDTO, pager);
+		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		model.addAttribute("matchNum", matchDTO.getMatchNum());
 		
 		return "matches/reviewList";
+	}
+	
+	@RequestMapping(value = "getReviewList", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Map<String, String>> getReviewListP(MatchDTO matchDTO, Pager pager, Model model) throws Exception {
+		System.out.println("getReview post");
+		
+		List<ReviewDTO> list = matchService.getReviewList(matchDTO, pager);
+				
+		List<Map<String, String>> result = new ArrayList<Map<String,String>>();
+				
+		for(ReviewDTO dto : list) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("reviewNum", String.valueOf(dto.getReviewNum()));
+			map.put("userId", dto.getUserId());
+			map.put("boardContent", dto.getBoardContent());
+			map.put("boardDate", String.valueOf(dto.getBoardDate()));
+			result.add(map);
+		}
+		
+		return result;
 	}
 	
 	@RequestMapping(value = "deleteReview", method = RequestMethod.GET)

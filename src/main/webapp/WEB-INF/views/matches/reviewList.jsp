@@ -7,6 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
+<style>
+	.divTable{
+	  	  
+	  overflow-y: auto;
+	  height: 150px;
+}
+</style>
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
@@ -16,8 +23,8 @@
 		<!-- contents 내용 작성 -->
 		<h1>${matchNum} 경기 리뷰 리스트</h1>
 		
-		<div id="EditorWrapper">
-			<div id="idImageEditor" contenteditable="true" style="border: solid 1px; height: 300px;">
+		<div id="EditorWrapper" class="mb-2">
+			<div id="idImageEditor" contenteditable="true" style="border: solid 1px; height: 200px;">
 				
 			</div>			
 		</div>
@@ -36,7 +43,7 @@
 			
 		</form>
 			
-		
+		<div class="divTable">
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -48,10 +55,10 @@
 					<th>삭제</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="idReviewTbody">
 				<c:forEach items="${list}" var="v">
 				<tr>
-					<td>${v.reviewNum}</td>					
+					<td>${v.reviewNum}</td>
 					<td>${v.userId}</td>
 					<td>${v.boardContent}</td>
 					<td>${v.boardDate}</td>
@@ -63,12 +70,26 @@
 				</c:forEach>
 			</tbody>
 		</table>
-				
+		</div>
+		
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination">
+		    
+		    <li class="page-item">
+		      <button id="idNextPage" class="page-link" data-matchNum="${matchNum}" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+			  </button>
+		    </li>
+		    
+		  </ul>
+		</nav>
+		
 	</div>
 </div>
+		
 
-
-<script src="/resources/js/matches/review.js"></script>
+<script src="/resources/js/matches/reviewEditor.js"></script>
+<script src="/resources/js/matches/reviewPage.js"></script>
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
 </body>

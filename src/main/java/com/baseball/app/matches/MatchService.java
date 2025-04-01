@@ -1,6 +1,8 @@
 package com.baseball.app.matches;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.baseball.app.boards.BoardFileDTO;
 import com.baseball.app.boards.ReviewDTO;
 import com.baseball.app.files.FileManager;
+import com.baseball.app.pages.Pager;
 import com.baseball.app.seats.SeatDTO;
 import com.baseball.app.tickets.TicketDTO;
 
@@ -48,9 +51,17 @@ public class MatchService {
 	
 	
 	//
-	public List<ReviewDTO> getReviewList(MatchDTO matchDTO) throws Exception {
+	public List<ReviewDTO> getReviewList(MatchDTO matchDTO, Pager pager) throws Exception {
 		
-		return matchDAO.getReviewList(matchDTO);
+		Long totalCount = matchDAO.getTotalCount(matchDTO);
+		pager.Calculate_PageAndBlock(totalCount);
+		pager.makeListNum(totalCount);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("matchDTO", matchDTO);
+		map.put("pager", pager);
+		
+		return matchDAO.getReviewList(map);
 	}
 	
 	

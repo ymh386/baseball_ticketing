@@ -72,8 +72,16 @@
 		SELECT * FROM MATCHES ORDER BY MATCHNUM ASC
 	</select>
 	
-	<select id="getReviewList" resultType="ReviewDTO" parameterType="MatchDTO">
-		SELECT * FROM REVIEWS WHERE MATCHNUM = #{matchNum} ORDER BY REVIEWNUM DESC
+	<select id="getTotalCount" resultType="java.lang.Long" parameterType="MatchDTO">
+		SELECT COUNT(REVIEWNUM) FROM REVIEWS WHERE MATCHNUM=#{matchNum}
+	</select>
+	
+	<select id="getReviewList" resultType="ReviewDTO" parameterType="Map">
+		SELECT * FROM (
+		SELECT ROWNUM R, M.* FROM(
+		SELECT * FROM REVIEWS WHERE MATCHNUM=#{matchDTO.matchNum} ORDER BY REVIEWNUM DESC
+		) M )
+		WHERE R BETWEEN #{pager.startNum} AND #{pager.endNum}
 	</select>
 	
 	<select id="getReviewDetail" resultType="ReviewDTO" parameterType="ReviewDTO">

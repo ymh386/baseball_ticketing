@@ -9,9 +9,9 @@
 			SELECT COUNT(BOARDNUM) FROM QNA
 		</select>
 
-  		<select id="getList" resultType="QnaDTO">
+  		<select id="getList" parameterType="Pager" resultType="QnaDTO">
   			SELECT * FROM
-			(SELECT ROWNUM R, M.* FROM
+			(SELECT ROWNUM R, M.* FROM	
 				(
 					SELECT * 
 					FROM QNA
