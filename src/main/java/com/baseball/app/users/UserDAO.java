@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.baseball.app.matches.MatchDTO;
 import com.baseball.app.tickets.TicketDTO;
 
 @Repository
@@ -90,6 +91,10 @@ public class UserDAO {
     public int updateState(Map<String, Object> params) throws Exception {
         return sqlSession.update(NAMESPACE + "updateState", params); // update 쿼리 실행
     }
+    
+
+    
+    
     
 
     

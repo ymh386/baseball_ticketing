@@ -153,9 +153,16 @@ public class UserController {
 
 	
 	@RequestMapping(value ="mypage",method = RequestMethod.GET)
-	public void mypage() throws Exception{
+	public String mypage(HttpSession session) throws Exception{
 		
+		 UserDTO user = (UserDTO) session.getAttribute("user");
 		
+	    if (user == null) {
+	        // 로그인되지 않았다면 로그인 페이지로 리다이렉트
+	        return "redirect:./login";
+	    }
+
+		return "users/mypage";
 		
 	}
 	
@@ -283,7 +290,7 @@ public class UserController {
 	    }
 	}
 	
-	
+
 
 	    
 	    
