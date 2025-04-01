@@ -1,0 +1,80 @@
+/* mypage.css */
+
+/* 전체 페이지 스타일 */
+.container {
+    max-width: 900px;
+}
+
+/* 카드 스타일 */
+.card {
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 프로필 정보 */
+.card h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.alert {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* 버튼 스타일 */
+.btn {
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* 포인트 카드 */
+.card-point {
+    background: linear-gradient(135deg, #009688, #004d40);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-point h5 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-point p {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* MY TEAM */
+.team-section {
+    text-align: center;
+    padding: 20px;
+}
+
+.team-logo img {
+    width: 200px;
+    height: 100px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 최근 경기 리스트 */
+.list-group-item {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.list-group-item-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.list-group-item-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}

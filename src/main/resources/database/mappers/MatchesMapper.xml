@@ -48,6 +48,11 @@
 		</association>
 	</resultMap>
 	
+
+	
+	
+	
+	
 	<select id="getSeatList" resultType="SeatDTO" parameterType="MatchDTO">
 		SELECT *
 		FROM SEATS
@@ -71,6 +76,7 @@
 	<select id="getMatchList" resultType="MatchDTO">
 		SELECT * FROM MATCHES ORDER BY MATCHNUM ASC
 	</select>
+	
 	
 	<select id="getReviewList" resultType="ReviewDTO" parameterType="MatchDTO">
 		SELECT * FROM REVIEWS WHERE MATCHNUM = #{matchNum} ORDER BY REVIEWNUM DESC
@@ -97,6 +103,11 @@
 	<update id="updateReview" parameterType="ReviewDTO">
 		UPDATE REVIEWS SET BOARDCONTENT = #{boardContent} WHERE REVIEWNUM = #{reviewNum}
 	</update>
+	
+
+	
+	
+	
 	
 	
 	
