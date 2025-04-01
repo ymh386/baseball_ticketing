@@ -68,6 +68,9 @@ public class MatchController {
 		return "matches/matchList";
 	}
 	
+
+	
+	
 	
 	@RequestMapping(value = "getReviewList", method = RequestMethod.GET)
 	public String getReviewListG(MatchDTO matchDTO, Pager pager, Model model) throws Exception {
@@ -177,6 +180,16 @@ public class MatchController {
 		System.out.println("test");
 		return myModel;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 
