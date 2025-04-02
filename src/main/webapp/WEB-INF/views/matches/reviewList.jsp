@@ -8,10 +8,13 @@
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
 <style>
-	.divTable{
-	  	  
-	  overflow-y: auto;
-	  height: 150px;
+ .divTable{  	  
+	overflow-y: auto;
+	height: 150px;
+}
+
+ tr {
+	height:100px;
 }
 </style>
 </head>
@@ -24,9 +27,7 @@
 		<h1>${matchNum} 경기 리뷰 리스트</h1>
 		
 		<div id="EditorWrapper" class="mb-2">
-			<div id="idImageEditor" contenteditable="true" style="border: solid 1px; height: 200px;">
-				
-			</div>			
+			<div id="idImageEditor" contenteditable="true" style="border: solid 1px; height: 200px;"></div>			
 		</div>
 		<div class="mb-2">
 			<!-- <p id="idImageInput" contenteditable="true" style="border: solid 1px; height: 50px;"></p> -->
@@ -42,10 +43,10 @@
 			<button id="idSubmit" type="button" class="btn btn-outline-success">리뷰 등록</button>
 			
 		</form>
-			
-		<div class="divTable">
+		
+		<div id="idDivTable" class="divTable">
 		<table class="table table-striped">
-			<thead>
+			<!-- <thead>
 				<tr>
 					<th>번호</th>
 					<th>작성자</th>
@@ -54,7 +55,7 @@
 					<th>수정</th>
 					<th>삭제</th>
 				</tr>
-			</thead>
+			</thead> -->
 			<tbody id="idReviewTbody">
 				<c:forEach items="${list}" var="v">
 				<tr>

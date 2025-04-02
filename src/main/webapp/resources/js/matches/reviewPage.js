@@ -6,16 +6,23 @@ const idNextPage = document.getElementById("idNextPage");
 const matchNum = idNextPage.getAttribute("data-matchNum");
 const idReviewTbody = document.getElementById("idReviewTbody");
 
+const idDivTable = document.getElementById("idDivTable");
+let maxScrollHeight = idDivTable.scrollHeight - idDivTable.clientHeight; // 지금은 367이다.
 
+
+idDivTable.addEventListener("click", function() {
+    
+    console.log(maxScrollHeight);
+
+})
 
 //
-window.addEventListener('scroll', function(){
-    const isScrollEnded =
-    window.innerHeight + window.scrollY >= document.body.offsetHeight;
+idDivTable.addEventListener("scroll", function() {
+    
+    console.log(idDivTable.scrollTop);
 
-    if (isScrollEnded) {
-        f1(); sleep(1000);
-
+    if(idDivTable.scrollTop == maxScrollHeight-1){
+        f1();
     }
 })
 
@@ -39,6 +46,7 @@ let f1 = function(){
         console.log(data);
 
         for(let dto of data){
+            maxScrollHeight = maxScrollHeight + 100;
             let tr = document.createElement("tr");
             let td1 = document.createElement("td");
             let td2 = document.createElement("td");

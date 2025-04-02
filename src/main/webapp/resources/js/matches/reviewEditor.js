@@ -76,11 +76,11 @@ idAddImage.addEventListener("click", function(){
         .then(function(data) {
             console.log(data); // JSON 데이터를 출력
             idCount += 1;
-            let strHead = "<img class='imgs' id='idImg"+ idCount +"' src='";            
-            let strFoot = "' style='width:100px; height:100px;'>";
+            let strHead = "<img class='imgs' id='idImg"+ idCount +"' src='";
+            let strFoot = "' style='width:80px; height:80px;'>";
 
             // let strHead = "<div class='imgWrapper'><img class='imgs' id='idImg"+ idCount +"' src='";            
-            // let strFoot = "' style='width:100px; height:100px;'></div>";
+            // let strFoot = "' style='width:80px; height:80px;'></div>";
 
             let strBody = data.tempImage;
             let strSum = strHead + strBody + strFoot;

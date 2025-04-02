@@ -76,11 +76,6 @@
 	<select id="getMatchList" resultType="MatchDTO">
 		SELECT * FROM MATCHES ORDER BY MATCHNUM ASC
 	</select>
-	
-	
-	<select id="getReviewList" resultType="ReviewDTO" parameterType="MatchDTO">
-		SELECT * FROM REVIEWS WHERE MATCHNUM = #{matchNum} ORDER BY REVIEWNUM DESC
-		
 		
 	<select id="getTotalCount" resultType="java.lang.Long" parameterType="MatchDTO">
 		SELECT COUNT(REVIEWNUM) FROM REVIEWS WHERE MATCHNUM=#{matchNum}
