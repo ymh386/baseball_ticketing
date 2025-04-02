@@ -184,6 +184,12 @@ public class UserService {
         }
     }
     
+    // 티켓 환불 (티켓삭제) 
+    public int ticketDelete(TicketDTO ticketDTO) throws Exception{
+    	return userDAO.ticketDelete(ticketDTO);
+    	
+    }
+    
     
 
     
