@@ -145,8 +145,11 @@ public class MatchController {
 		System.out.println("add getMatchNum : " + reviewDTO.getMatchNum());
 		System.out.println("add getReviewNum : " + reviewDTO.getReviewNum());
 		System.out.println("add getBoardContent : " + reviewDTO.getBoardContent());
+		
+		int result = matchService.updateReview(reviewDTO);
+		model.addAttribute("result", result);
 				
-		return null;
+		return "redirect:./getReviewList?matchNum=" + reviewDTO.getMatchNum();
 	}
 	
 	@RequestMapping(value = "tempImage", method = RequestMethod.POST)

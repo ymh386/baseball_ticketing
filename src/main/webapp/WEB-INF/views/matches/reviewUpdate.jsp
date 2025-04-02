@@ -17,9 +17,7 @@
 		<h1>리뷰 수정</h1>
 		
 		<div id="EditorWrapper">
-			<div id="idImageEditor" contenteditable="true" style="border: solid 1px; height: 300px;">
-				${dto.boardContent}
-			</div>			
+			<div id="idImageEditor" contenteditable="true" style="border: solid 1px; height: 300px;">${dto.boardContent}</div>			
 		</div>
 		<div class="mb-2">
 			<!-- <p id="idImageInput" contenteditable="true" style="border: solid 1px; height: 50px;"></p> -->
@@ -28,7 +26,7 @@
 			
 		</div>
 		
-		<form id="idFormToUpdate" action="./updateReview" method="POST" enctype="multipart/form-data">
+		<form id="idForm" action="./updateReview" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="matchNum" value="${dto.matchNum}">
 			<input type="hidden" name="reviewNum" value="${dto.reviewNum}">
 			<input id="idBoardContent" type="hidden" name="boardContent">
@@ -44,7 +42,7 @@
 </div>
 
 
-<script src="/resources/js/matches/review.js"></script>
+<script src="/resources/js/matches/reviewEditor.js"></script>
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
 </body>

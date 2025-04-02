@@ -62,7 +62,7 @@ public class Pager {
 	public Long getPerPage() {
 		// 페이지당 가져오는 리스트 수 3개로 초기화
 		if(this.perPage == null) {
-			this.perPage=3L;
+			this.perPage=5L;
 		}
 		return perPage;
 	}
@@ -109,7 +109,7 @@ public class Pager {
 		}
 
 		//1. TotalPage 총 페이지 갯수 구하기
-		Long totalPage = totalCount/3;
+		Long totalPage = totalCount/5;
 		if(totalCount%3 != 0) { // 나머지가 있으면 +1
 			totalPage++;
 		}
