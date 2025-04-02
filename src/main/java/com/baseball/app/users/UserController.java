@@ -49,8 +49,24 @@ public class UserController {
     }
 
     // 로그인 처리
-    @RequestMapping(value ="login", method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(UserDTO userDTO, HttpSession session, Model model) {
+        boolean hasError = false;
+
+        if (userDTO.getUserId() == null || userDTO.getUserId().trim().isEmpty()) {
+            model.addAttribute("userIdError", "아이디를 입력해주세요.");
+            hasError = true;
+        }
+
+        if (userDTO.getPassword() == null || userDTO.getPassword().trim().isEmpty()) {
+            model.addAttribute("passwordError", "비밀번호를 입력해주세요.");
+            hasError = true;
+        }
+
+        if (hasError) {
+            return "users/login"; // 에러가 있으면 다시 로그인 페이지로 이동
+        }
+
         try {
             userDTO = userService.login(userDTO);
         } catch (Exception e) {
@@ -63,11 +79,11 @@ public class UserController {
             return "redirect:../";
         }
 
-        model.addAttribute("result", "로그인을 다시 시도해주세요");
-        model.addAttribute("path", "./login");
-
+        model.addAttribute("result", "로그인을 다시 시도해주세요.");
         return "commons/result";
     }
+
+
 	
 	
 	@RequestMapping(value ="logout", method = RequestMethod.GET)
@@ -95,22 +111,36 @@ public class UserController {
 		
 		}
 	
-	@RequestMapping(value="findId", method = RequestMethod.POST)
+	@RequestMapping(value = "findId", method = RequestMethod.POST)
 	public String findId(UserDTO userDTO, Model model) throws Exception{
-		
-		UserDTO user = userService.findId(userDTO);
-		
-		if(user == null) {
-			model.addAttribute("check", 1);	
-		}else {
-			model.addAttribute("check", 0);
-			model.addAttribute("id", user.getUserId());
-		}
-		
-		return "users/findId";
-		
-		
+	    boolean hasError = false;
+
+	    if (userDTO.getName() == null || userDTO.getName().trim().isEmpty()) {
+	        model.addAttribute("nameError", "이름을 입력해주세요.");
+	        hasError = true;
+	    }
+
+	    if (userDTO.getEmail() == null || userDTO.getEmail().trim().isEmpty()) {
+	        model.addAttribute("emailError", "이메일을 입력해주세요.");
+	        hasError = true;
+	    }
+
+	    if (hasError) {
+	        return "users/findId"; // 에러가 있으면 다시 아이디 찾기 페이지로 이동
+	    }
+
+	    UserDTO id = userService.findId(userDTO);
+	    
+	    if (id == null) {
+	        model.addAttribute("check", 1); // 일치하는 정보 없음
+	    } else {
+	        model.addAttribute("check", 0);
+	        model.addAttribute("id", id);
+	    }
+
+	    return "users/findId";
 	}
+
 	
 	@RequestMapping(value="findPassword", method = RequestMethod.GET)
 	public String findPassword() throws Exception{
@@ -122,12 +152,15 @@ public class UserController {
 	
 	@RequestMapping(value = "/findPassword", method = RequestMethod.POST)
 	public String findPassword(UserDTO userDTO, Model model) throws Exception {
-	    // 이메일이 존재하는지 확인
-	    if (!userService.isEmailExists(userDTO)) {
-	        model.addAttribute("message", "등록되지 않은 이메일입니다.");
-	        model.addAttribute("check", 1); // 이메일이 존재하지 않는 경우
-	        return "users/findPassword"; // 포워드 방식으로 비밀번호 찾기 페이지로 리턴
-	    }
+	    
+		// 아이디 이메일 이름이 일치하는지 확인
+		UserDTO user = userService.findPassword(userDTO);
+
+		if (user == null) { // 일치하는 계정 정보가 없을 경우
+		    model.addAttribute("message", "입력한 정보와 일치하는 계정이 없습니다.");
+		    model.addAttribute("check", 1); // 실패 상태
+		    return "users/findPassword"; // 비밀번호 찾기 페이지로 이동
+		}
 
 	    // 임시 비밀번호 생성 및 이메일 전송
 	    String tempPassword = userService.generateTempPassword();
@@ -165,24 +198,8 @@ public class UserController {
 		return "users/mypage";
 		
 	}
-	
-	private String getTeamName(int teamNum) {
-	    switch(teamNum) {
-	        case 1: return "기아 타이거즈";
-	        case 2: return "SSG 랜더스";
-	        case 3: return "한화 이글스";
-	        case 4: return "키움 히어로즈";
-	        case 5: return "삼성 라이온즈";
-	        case 6: return "롯데 자이언츠";
-	        case 7: return "케이티 위즈";
-	        case 8: return "엘지 트윈스";
-	        case 9: return "엔씨 다이노스";
-	        case 10: return "두산 베어스";
-	        default: return "미지정";
-	    }
-	    
-	}
-	
+
+	    	
 	
 	
 	
@@ -225,7 +242,7 @@ public class UserController {
 
 	    // 서비스에서 비밀번호 변경 처리
 	    String result = userService.pwUpdate(userDTO, currentPassword, newPassword, confirmPassword);
-
+	    
 	    // 비밀번호 변경 결과 처리
 	    if (result.equals("success")) {
 	        return "redirect:./mypage"; // 비밀번호 변경 성공 후 프로필 페이지로 리다이렉트

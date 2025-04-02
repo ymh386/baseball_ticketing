@@ -16,22 +16,29 @@
 		<!-- contents 내용 작성 -->
 		
 		<h1>로그인</h1>
-		<h3>${result}</h3>
+		
+		
 		<form id="login_form" action="./login" method="post">
 		  <div class="mb-3">
-		    <label for="userID" class="form-label">아이디</label>
-		    <input type="text" value="wlsdnjs888" name="userId" placeholder="ID" class="form-control" id="userId">
-		  </div>
+		   <label for="userId" class="form-label">아이디</label>
+        <input type="text" name="userId" value="wlsdnjs888" placeholder="ID" class="form-control" id="userId">
+        <c:if test="${not empty userIdError}">
+            <p style="color: red; font-size: 0.9rem;">${userIdError}</p>
+        </c:if>
+    </div>
 
 		  <div class="mb-3">
-		    <label for="password" class="form-label">비밀번호</label>
-		    <input type="password" value="wlsdnjs888@" name="password" placeholder="PW" class="form-control" id="password">
+		   <label for="password" class="form-label">비밀번호</label>
+        <input type="password" name="password" value="wlsdnjs888@" placeholder="PW" class="form-control" id="password">
+        <c:if test="${not empty passwordError}">
+            <p style="color: red; font-size: 0.9rem;">${passwordError}</p>
+        </c:if>
 		  </div>	
 			
 			
 			<a href="./findId">id찾기</a>	
 			<a href="./findPassword">PW찾기</a>	
-		  <button type="submit" class="btn btn-primary" id="login_button">로그인</button>
+		  <button type="submit" class="btn btn-primary" id="loginButton">로그인</button>
 	
 		</form>	
 		
@@ -46,6 +53,5 @@
 
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
-<script src="/resources/js/uesrs/login.js"></script>
 </body>
 </html>

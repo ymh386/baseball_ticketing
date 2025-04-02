@@ -78,9 +78,9 @@
 	</select>
 	
 	
-	<select id="getReviewList" resultType="ReviewDTO" parameterType="MatchDTO">
+<!-- 	<select id="getReviewList" resultType="ReviewDTO" parameterType="MatchDTO">
 		SELECT * FROM REVIEWS WHERE MATCHNUM = #{matchNum} ORDER BY REVIEWNUM DESC
-		
+		</select> -->
 		
 	<select id="getTotalCount" resultType="java.lang.Long" parameterType="MatchDTO">
 		SELECT COUNT(REVIEWNUM) FROM REVIEWS WHERE MATCHNUM=#{matchNum}
@@ -117,11 +117,6 @@
 	</update>
 	
 
-	
-	
-	
-	
-	
 	
 	
 </mapper>

@@ -112,11 +112,15 @@
 		UPDATE TICKETS SET TICKETSTATUS = #{ticketStatus} WHERE TICKETNUM = #{ticketNum}
 	</update>
 
-	<delete id="ticketDelete" parameterType="TicketDTO">
-		DELETE FROM TICKETS WHERE MATCHNUM =#{matchNum} AND SEATNUM= #{seatNum}
-	
-	</delete>
-	
+
+	<!-- 티켓 환불 (삭제) -->
+		<delete id="ticketDelete" parameterType="TicketDTO">
+		    DELETE FROM TICKETS 
+		    WHERE MATCHNUM = #{matchNum} 
+		      AND SEATNUM = #{seatNum}
+		      AND STATUS = '예매완료'  <!-- 예매 완료된 티켓만 삭제 가능 -->
+		</delete>
+		
 
 
 

@@ -14,6 +14,9 @@
 			        <li class="nav-item">
 			          <a class="nav-link active" aria-current="page" href="/">Home</a>
 			        </li>
+			       <li class="nav-item">
+			          <a class="nav-link" href="/teams/list">구단소개</a>
+			        </li>
 			        <li class="nav-item">
 			          <a class="nav-link" href="/matches/list">경기예매</a>
 			        </li>
