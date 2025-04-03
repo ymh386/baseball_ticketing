@@ -22,6 +22,7 @@
 	 		<typeAlias type="com.baseball.app.stadiums.StadiumDTO" alias="StadiumDTO"/>
 	 		<typeAlias type="com.baseball.app.seats.SeatDTO" alias="SeatDTO"/>
 	 		<typeAlias type="com.baseball.app.tickets.TicketDTO" alias="TicketDTO"/>
+	 		<typeAlias type="com.baseball.app.tickets.PaymentDTO" alias="PaymentDTO"/>
 	
 		<typeAlias type="com.baseball.app.qna.QnaDTO" alias="QnaDTO"/>
 		<typeAlias type="com.baseball.app.qna.QnaDAO" alias="QnaDAO"/>
