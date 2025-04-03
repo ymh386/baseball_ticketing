@@ -1,5 +1,6 @@
 package com.baseball.app.matches;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,12 +59,20 @@ public class MatchController {
 		return "matches/seatList";
 	}
 	
-	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public String getMatchList(Model model) throws Exception {
+	@RequestMapping(value = "matchList", method = RequestMethod.GET)
+	public String getMatchList(Model model, Integer month) throws Exception {
 		
-		List<MatchDTO> list = matchService.getMatchList();
+		System.out.println("month : " + month);
+		if(month == null) {
+			LocalDate now = LocalDate.now();
+			month = now.getMonthValue();
+			
+		}
 		
-		model.addAttribute("list", list);
+		List<MatchDTO> list = matchService.getMatchListMonthly(month);
+		
+		model.addAttribute("list", list);		
+		model.addAttribute("changedMonth", month);
 		
 		return "matches/matchList";
 	}

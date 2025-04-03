@@ -43,6 +43,12 @@ public class MatchDAO {
 		return sqlSession.selectList(NAMESPACE + "getMatchList");
 	}
 	
+	//getMatchListMonthly
+	public List<MatchDTO> getMatchListMonthly(Integer month) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + "getMatchListMonthly", month);
+	}
+	
 	//getTotalCount
 	public Long getTotalCount(MatchDTO matchDTO) throws Exception {
 		
@@ -54,7 +60,7 @@ public class MatchDAO {
 		
 		return sqlSession.selectList(NAMESPACE + "getReviewList", map);
 	}
-	
+			
 	//getReviewDetail
 	public ReviewDTO getReviewDetail(ReviewDTO reviewDTO) throws Exception {
 		

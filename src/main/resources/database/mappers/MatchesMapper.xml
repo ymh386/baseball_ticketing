@@ -76,6 +76,11 @@
 	<select id="getMatchList" resultType="MatchDTO">
 		SELECT * FROM MATCHES ORDER BY MATCHNUM ASC
 	</select>
+	
+	<select id="getMatchListMonthly" resultType="MatchDTO" parameterType="java.lang.Integer">
+		SELECT * FROM MATCHES WHERE MATCHDATE BETWEEN TRUNC(TO_DATE(#{month}, 'MM')) AND LAST_DAY(TRUNC(TO_DATE(#{month}, 'MM')))+0.99999 
+		ORDER BY MATCHDATE ASC
+	</select>
 		
 	<select id="getTotalCount" resultType="java.lang.Long" parameterType="MatchDTO">
 		SELECT COUNT(REVIEWNUM) FROM REVIEWS WHERE MATCHNUM=#{matchNum}

@@ -50,6 +50,13 @@ public class MatchService {
 	}
 	
 	
+	//getMatchListMonthly
+	public List<MatchDTO> getMatchListMonthly(Integer month) throws Exception {
+		
+		return matchDAO.getMatchListMonthly(month);
+	}
+	
+	
 	//
 	public List<ReviewDTO> getReviewList(MatchDTO matchDTO, Pager pager) throws Exception {
 		
