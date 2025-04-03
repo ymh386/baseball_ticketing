@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.baseball.app.tickets.TicketDTO;
 
@@ -210,7 +211,7 @@ public class UserController {
 
 	    if (user == null) {
 	        // 로그인되지 않았다면 로그인 페이지로 리다이렉트
-	        return "redirect:/login";
+	        return "redirect:./login";
 	    }
 
 	    // 사용자의 티켓 정보 가져오기 (Map 형태로 반환)
@@ -268,7 +269,7 @@ public class UserController {
 	    
 	    if (user == null) {
 	        // 세션에 사용자 정보가 없으면 로그인 페이지로 리다이렉트
-	        return "redirect:/login";
+	        return "redirect:./login";
 	    }
 	    
 	    // 탈퇴 서비스 호출 (세션에서 가져온 user 정보 사용)
@@ -285,34 +286,24 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/refund", method = RequestMethod.POST)
-	public String refundTicket(@RequestParam("ticketNum") Long ticketNum, HttpSession session) {
-	    try {
-	        // 세션에서 UserDTO 객체를 가져오기
-	        UserDTO user = (UserDTO) session.getAttribute("user");
-	        if (user == null) {
-	            return "redirect:./login";  // 로그인 페이지로 리다이렉트
-	        }
+    public String refundTicket(@ModelAttribute TicketDTO ticketDTO, RedirectAttributes redirectAttributes) throws Exception{
+        try {
+            userService.refundTickets(ticketDTO);
+            redirectAttributes.addFlashAttribute("message", "환불이 완료되었습니다.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "환불 처리 중 오류가 발생했습니다.");
+        }
+        return "redirect:./getTicket"; // 티켓 구매 내역 페이지로 이동
+    }
 
-	        // 티켓 상태를 '환불완료'로 변경
-	        int result = userService.updateState(ticketNum, "환불완료");
-
-	        if (result == 1) {
-	            return "redirect:./getTicket";  // 티켓 조회 페이지로 리다이렉트
-	        } else {
-	            return "redirect:./getTicket?error=true";  // 티켓 조회 페이지로 오류 메시지와 함께 리다이렉트
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return "redirect:./getTicket?error=true";  // 오류가 발생하면 티켓 조회 페이지로 리다이렉트
-	    }
-	}
+}
 	
 
 
 	    
 	    
 	    
-	}
+	
 	  
 	  
 	  

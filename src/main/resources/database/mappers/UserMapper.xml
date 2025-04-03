@@ -109,17 +109,20 @@
 
 	<!-- 티켓상태 환불완료로 변경 -->
 	<update id="updateState" parameterType="TicketDTO">
-		UPDATE TICKETS SET TICKETSTATUS = #{ticketStatus} WHERE TICKETNUM = #{ticketNum}
+		UPDATE TICKETS SET TICKETSTATUS = '환불완료' WHERE TICKETNUM = #{ticketNum}
 	</update>
+	
+	<!-- 결제상태 환불완료로 변경 -->
+	
+	<update id="updatePaymentState" parameterType="TicketDTO">
+			UPDATE PAYMENTS 
+			SET PAYMENTSTATUS ='환불완료' 
+			WHERE PAYMENTID = #{paymentId}	
+	</update>
+	
 
 
-	<!-- 티켓 환불 (삭제) -->
-		<delete id="ticketDelete" parameterType="TicketDTO">
-		    DELETE FROM TICKETS 
-		    WHERE MATCHNUM = #{matchNum} 
-		      AND SEATNUM = #{seatNum}
-		      AND STATUS = '예매완료'  <!-- 예매 완료된 티켓만 삭제 가능 -->
-		</delete>
+
 		
 
 

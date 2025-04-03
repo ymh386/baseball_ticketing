@@ -163,26 +163,18 @@ public class UserService {
     }
     
 
-    // 티켓 상태 변경 메서드
-    public int updateState(Long ticketNum, String ticketStatus) throws Exception {
-        Map<String, Object> params = new HashMap();
-        params.put("ticketNum", ticketNum);
-        params.put("ticketStatus", ticketStatus);
+    
 
-        return userDAO.updateState(params); // DAO 호출
-    }
 
     // 환불 처리 메서드
-    public boolean refundTickets(String userId, Long ticketNum) {
-        try {
-            // 티켓 상태를 '환불완료'로 변경
-            int result = updateState(ticketNum, "환불완료");
-            return result == 1; // 성공적으로 업데이트되면 true 반환
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    public void refundTickets(TicketDTO ticketDTO) throws Exception{
+    	System.out.println("💰 PaymentId: " + ticketDTO.getPaymentId());
+        // 1. 티켓 상태를 '환불완료'로 변경
+        userDAO.updateState(ticketDTO);
+        // 2. 결제 상태를 '환불완료'로 변경
+        userDAO.updatePaymentState(ticketDTO);
     }
+    
     
     // 티켓 환불 (티켓삭제) 
     public int ticketDelete(TicketDTO ticketDTO) throws Exception{
