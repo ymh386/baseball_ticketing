@@ -8,7 +8,59 @@
 	<select id="getDetail" parameterType="TicketDTO" resultType="TicketDTO">
 		SELECT * FROM TICKETS WHERE MATCHNUM=#{matchNum} AND SEATNUM=#{seatNum}
 	</select>
-
+	
+	<select id="getSeatPrice" parameterType="SeatDTO" resultType="SeatDTO">
+		SELECT DISTINCT SEATPRICE FROM SEATS WHERE SEATLEVEL=#{seatLevel}
+	</select>
+	
+	<select id="getPaymentList" parameterType="UserDTO" resultType="PaymentDTO">
+		SELECT *
+		FROM PAYMENTS
+		WHERE USERID=#{userId}
+		ORDER BY PAYMENTID DESC
+	</select>
+	
+	<select id="getPaymentDetail" parameterType="TicketDTO" resultMap="paymentDetailResult">
+		SELECT *
+		FROM PAYMENTS P
+			LEFT OUTER JOIN
+			TICKETS T
+			ON (P.PAYMENTID = T.PAYMENTID)
+			RIGHT OUTER JOIN
+			USERS U
+			ON (U.USERID = T.USERID)
+		WHERE P.PAYMENTID = #{paymentId} AND U.USERID = #{userId}
+	</select>
+	
+	<resultMap type="TicketDTO" id="paymentDetailResult">
+		<id column="MATCHNUM" property="matchNum"/>
+		<id column="SEATNUM" property="seatNum"/>
+		<result column="TICKETNUM" property="ticketNum"/>
+		<result column="USERID" property="userId"/>
+		<result column="TICKETSTATUS" property="ticketStatus"/>
+		<result column="PAYMENTID" property="paymentId"/>
+		
+		<association property="paymentDTO" javaType="PaymentDTO">
+			<id column="PAYMENTID" property="paymentId"/>
+			<result column="PAYMENTSTATUS" property="paymentStatus"/>
+			<result column="PRODUCTNAME" property="productName"/>
+			<result column="TOTALAMOUNT" property="totalAmount"/>
+			<result column="MERCHANTPAYKEY" property="merchantPayKey"/>
+			<result column="PAYMENTDATE" property="paymentDate"/>
+			<result column="USERID" property="userId"/>
+		</association>
+		
+		<association property="userDTO" javaType="UserDTO">
+			<id column="USERID" property="userId"/>
+			<result column="PASSWORD" property="password"/>
+			<result column="NAME" property="name"/>
+			<result column="PHONE" property="phone"/>
+			<result column="EMAIL" property="email"/>
+			<result column="TEAMNUM" property="teamNum"/>
+			<result column="ADDRESS" property="address"/>
+		</association>
+	</resultMap>
+	
 	<insert id="add" parameterType="TicketDTO">
 		INSERT INTO TICKETS
 		(MATCHNUM, SEATNUM, TICKETNUM, USERID, TICKETSTATUS)
@@ -21,6 +73,23 @@
 			'결제중'
 		)
 	</insert>
+	
+	<insert id="paymentAdd" parameterType="PaymentDTO">
+		INSERT INTO PAYMENTS VALUES
+		(
+			#{paymentId},
+			'승인',
+			#{productName},
+			#{totalAmount},
+			#{merchantPayKey},
+			SYSDATE,
+			#{userId}
+		)
+	</insert>
+	
+	<update id="ticketStatusComplete" parameterType="TicketDTO">
+		UPDATE TICKETS SET TICKETSTATUS = '예매완료', PAYMENTID = #{paymentId} WHERE MATCHNUM=#{matchNum} AND SEATNUM=#{seatNum}
+	</update>
 	
 	<delete id="delete" parameterType="TicketDTO">
 		DELETE TICKETS WHERE MATCHNUM=#{matchNum} AND SEATNUM=#{seatNum}

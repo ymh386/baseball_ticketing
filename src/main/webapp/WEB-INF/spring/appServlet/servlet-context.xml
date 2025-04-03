@@ -17,7 +17,10 @@
 		<interceptor>
 			<mapping path="/"/>
 			<mapping path="/*/*"/>
-			<exclude-mapping path="/tickets/*"/>
+			<exclude-mapping path="/tickets/payment"/>
+			<exclude-mapping path="/tickets/paymentAdd"/>
+			<exclude-mapping path="/tickets/add"/>
+			<exclude-mapping path="/tickets/delete"/>
 			<beans:ref bean="ticketingDeleteInterceptor"/>
 		</interceptor>
 	</interceptors>

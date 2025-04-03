@@ -33,7 +33,9 @@
         <c:if test="${not empty passwordError}">
             <p style="color: red; font-size: 0.9rem;">${passwordError}</p>
         </c:if>
-		  </div>	
+		  </div>
+
+		  	
 			
 			
 			<a href="./findId">id찾기</a>	

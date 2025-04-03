@@ -43,6 +43,7 @@
                     <div class="d-grid gap-2 mt-3">
                         <button class="btn btn-outline-primary" onclick="location.href='./pwUpdate'">비밀번호 변경</button>
                         <button class="btn btn-outline-success" onclick="location.href='./getTicket'">티켓 확인</button>
+                        <button class="btn btn-outline-info" onclick="location.href='../tickets/paymentList'">결제 내역</button>
                         <button class="btn btn-outline-danger" onclick="location.href='./userDelete'">회원탈퇴</button>
                     </div>
                 </div>
@@ -91,7 +92,12 @@
         </div>
     </div>
 
-    <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
-    <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
+    
+   
+</div>
+
+<c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
+<c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
+<script src="/resources/js/uesrs/login.js"></script>
 </body>
 </html>
