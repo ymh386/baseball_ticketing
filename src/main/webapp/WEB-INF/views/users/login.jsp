@@ -20,12 +20,12 @@
 		<form id="login_form" action="./login" method="post">
 		  <div class="mb-3">
 		    <label for="userID" class="form-label">아이디</label>
-		    <input type="text" value="wlsdnjs888" name="userId" placeholder="ID" class="form-control" id="userId">
+		    <input type="text" value="ymh386" name="userId" placeholder="ID" class="form-control" id="userId">
 		  </div>
 
 		  <div class="mb-3">
 		    <label for="password" class="form-label">비밀번호</label>
-		    <input type="password" value="wlsdnjs888@" name="password" placeholder="PW" class="form-control" id="password">
+		    <input type="password" value="010602ymh!" name="password" placeholder="PW" class="form-control" id="password">
 		  </div>	
 			
 			

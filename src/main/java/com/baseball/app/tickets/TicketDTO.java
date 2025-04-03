@@ -1,5 +1,7 @@
 package com.baseball.app.tickets;
 
+import com.baseball.app.users.UserDTO;
+
 public class TicketDTO {
 
 	
@@ -8,8 +10,29 @@ public class TicketDTO {
 	private Long ticketNum;
 	private String userId;
 	private String ticketStatus;
+	private String paymentId;
+	private PaymentDTO paymentDTO;
+	private UserDTO userDTO;
 	
 	
+	public UserDTO getUserDTO() {
+		return userDTO;
+	}
+	public void setUserDTO(UserDTO userDTO) {
+		this.userDTO = userDTO;
+	}
+	public String getPaymentId() {
+		return paymentId;
+	}
+	public void setPaymentId(String paymentId) {
+		this.paymentId = paymentId;
+	}
+	public PaymentDTO getPaymentDTO() {
+		return paymentDTO;
+	}
+	public void setPaymentDTO(PaymentDTO paymentDTO) {
+		this.paymentDTO = paymentDTO;
+	}
 	public String getTicketStatus() {
 		return ticketStatus;
 	}

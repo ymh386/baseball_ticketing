@@ -28,6 +28,8 @@ public class TicketingDeleteInterceptor extends HandlerInterceptorAdapter {
 			TicketDTO ticketDTO = (TicketDTO)dto;
 			if(ticketDTO.getTicketStatus().equals("결제중")) {
 				ticketDAO.delete(ticketDTO);
+			}else {
+				return true;
 			}
 			request.setAttribute("result", "결제 취소");
 			request.setAttribute("path", "/matches/seatList?matchNum=" + ticketDTO.getMatchNum());

@@ -62,6 +62,7 @@
 		
 		<button type="button" onclick="location.href='./pwUpdate'">비밀번호 변경</button>
 		<button type="button" onclick="location.href='./getTicket'">티켓확인</button>
+		<button type="button" onclick="location.href='../tickets/paymentList'">결제내역</button>
 		<button type="button" onclick="location.href='./userDelete'">회원탈퇴</button>
 		
 		
