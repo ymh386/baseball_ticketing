@@ -66,18 +66,6 @@ public class TicketDTO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getTicketStatus() {
-		return ticketStatus;
-	}
-	public void setTicketStatus(String ticketStatus) {
-		this.ticketStatus = ticketStatus;
-	}
-	public String getPaymentId() {
-		return paymentId;
-	}
-	public void setPaymentId(String paymentId) {
-		this.paymentId = paymentId;
-	}
 	
 	
 	
