@@ -8,14 +8,10 @@ public class TicketDTO {
 	private Long ticketNum;
 	private String userId;
 	private String ticketStatus;
+	private String paymentId;
 	
 	
-	public String getTicketStatus() {
-		return ticketStatus;
-	}
-	public void setTicketStatus(String ticketStatus) {
-		this.ticketStatus = ticketStatus;
-	}
+	
 	public Long getMatchNum() {
 		return matchNum;
 	}
@@ -39,6 +35,18 @@ public class TicketDTO {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getTicketStatus() {
+		return ticketStatus;
+	}
+	public void setTicketStatus(String ticketStatus) {
+		this.ticketStatus = ticketStatus;
+	}
+	public String getPaymentId() {
+		return paymentId;
+	}
+	public void setPaymentId(String paymentId) {
+		this.paymentId = paymentId;
 	}
 	
 	

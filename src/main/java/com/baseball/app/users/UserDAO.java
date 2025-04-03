@@ -88,9 +88,14 @@ public class UserDAO {
 
 
     // 티켓 상태 업데이트 메서드 (티켓환불 할때 티켓을 지울거면 필요없음)
-    public int updateState(Map<String, Object> params) throws Exception {
-        return sqlSession.update(NAMESPACE + "updateState", params); // update 쿼리 실행
+    public int updateState(TicketDTO ticketDTO) throws Exception {
+        return sqlSession.update(NAMESPACE + "updateState", ticketDTO); // update 쿼리 실행
     }
+    
+    public void updatePaymentState(TicketDTO ticketDTO) {
+        sqlSession.update(NAMESPACE + "updatePaymentState", ticketDTO);
+    }
+    
     
     
     // 티켓 환불 (티켓 삭제)
