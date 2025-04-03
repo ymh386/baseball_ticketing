@@ -33,14 +33,9 @@
         <c:if test="${not empty passwordError}">
             <p style="color: red; font-size: 0.9rem;">${passwordError}</p>
         </c:if>
-		    <label for="userID" class="form-label">아이디</label>
-		    <input type="text" value="ymh386" name="userId" placeholder="ID" class="form-control" id="userId">
 		  </div>
 
-		  <div class="mb-3">
-		    <label for="password" class="form-label">비밀번호</label>
-		    <input type="password" value="010602ymh!" name="password" placeholder="PW" class="form-control" id="password">
-		  </div>	
+		  	
 			
 			
 			<a href="./findId">id찾기</a>	

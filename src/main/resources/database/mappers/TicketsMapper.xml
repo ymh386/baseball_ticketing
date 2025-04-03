@@ -88,7 +88,7 @@
 	</insert>
 	
 	<update id="ticketStatusComplete" parameterType="TicketDTO">
-		UPDATE TICKETS SET TICKETSTATUS = '결제완료', PAYMENTID = #{paymentId} WHERE MATCHNUM=#{matchNum} AND SEATNUM=#{seatNum}
+		UPDATE TICKETS SET TICKETSTATUS = '예매완료', PAYMENTID = #{paymentId} WHERE MATCHNUM=#{matchNum} AND SEATNUM=#{seatNum}
 	</update>
 	
 	<delete id="delete" parameterType="TicketDTO">

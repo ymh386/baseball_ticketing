@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.baseball.app.files.FileManager;
 import com.baseball.app.matches.MatchDTO;
+import com.baseball.app.tickets.TicketDAO;
 import com.baseball.app.tickets.TicketDTO;
 
 @Service
@@ -170,7 +171,9 @@ public class UserService {
     public void refundTickets(TicketDTO ticketDTO) throws Exception{
     	System.out.println("💰 PaymentId: " + ticketDTO.getPaymentId());
         // 1. 티켓 상태를 '환불완료'로 변경
-        userDAO.updateState(ticketDTO);
+//        userDAO.updateState(ticketDTO);
+    	// 1-1. 티켓을 삭제
+    	userDAO.ticketDelete(ticketDTO);
         // 2. 결제 상태를 '환불완료'로 변경
         userDAO.updatePaymentState(ticketDTO);
     }

@@ -120,7 +120,9 @@
 			WHERE PAYMENTID = #{paymentId}	
 	</update>
 	
-
+	<delete id="ticketDelete" parameterType="TicketDTO">
+		DELETE TICKETS WHERE TICKETNUM = #{ticketNum}
+	</delete>
 
 
 		
