@@ -28,8 +28,7 @@ public class UserService {
     
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // BCrypt 인코더
     
-    @Autowired
-    private FileManager fileManager;
+
     
     @Autowired
     private JavaMailSender mailSender;
@@ -169,7 +168,7 @@ public class UserService {
 
     // 환불 처리 메서드
     public void refundTickets(TicketDTO ticketDTO) throws Exception{
-    	System.out.println("💰 PaymentId: " + ticketDTO.getPaymentId());
+    	System.out.println("PaymentId: " + ticketDTO.getPaymentId());
         // 1. 티켓 상태를 '환불완료'로 변경
 //        userDAO.updateState(ticketDTO);
     	// 1-1. 티켓을 삭제
@@ -179,11 +178,17 @@ public class UserService {
     }
     
     
-    // 티켓 환불 (티켓삭제) 
-    public int ticketDelete(TicketDTO ticketDTO) throws Exception{
-    	return userDAO.ticketDelete(ticketDTO);
-    	
+    public MatchDTO getUpcomingMatchByTeam(Long teamNum) throws Exception {
+        return userDAO.getUpcomingMatchByTeam(teamNum);
     }
+    
+    
+    
+    
+
+    
+}
+    
     
     
 
@@ -192,4 +197,4 @@ public class UserService {
     
     
     
-}
+

@@ -104,10 +104,19 @@ public class UserDAO {
     }
     
     
+    public MatchDTO getUpcomingMatchByTeam(Long teamNum) throws Exception {
+    	return sqlSession.selectOne(NAMESPACE + "getUpcomingMatchByTeam", teamNum);
+    }
+    
     
 
     
+    
 }
+    
+
+    
+
 
 	
 
