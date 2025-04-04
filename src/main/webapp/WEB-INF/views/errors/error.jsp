@@ -15,20 +15,21 @@
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
 
-			<div class="result-box">
-				<c:choose>
-					<c:when test="${empty findId}">
-						<p class="inquiry">조회결과가 없습니다.</p>
-					</c:when>
-					<c:otherwise>
-						<p>${findId.id}</p>
-					</c:otherwise>
-				</c:choose>
-			</div>
+	
+					<h3>관리자에게 문의해주세요</h3>
+					<h3>abcd@gmail.com</h3>
+					
+					<c:if test="${not empty result}">
+					    <p>에러 내용: ${result}</p>
+					</c:if>
 
 
 		</div>
 	</div>
+
+
+
+
 
 	<c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>

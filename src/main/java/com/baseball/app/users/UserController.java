@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.baseball.app.matches.MatchDTO;
 import com.baseball.app.tickets.TicketDTO;
 
 @Controller
@@ -185,19 +186,26 @@ public class UserController {
 
 
 
-	
-	@RequestMapping(value ="mypage",method = RequestMethod.GET)
-	public String mypage(HttpSession session) throws Exception{
+	@RequestMapping(value = "mypage", method = RequestMethod.GET)
+	public String mypage(HttpSession session, Model model) throws Exception {
 		
-		 UserDTO user = (UserDTO) session.getAttribute("user");
 		
+	    UserDTO user = (UserDTO) session.getAttribute("user");
+
 	    if (user == null) {
-	        // 로그인되지 않았다면 로그인 페이지로 리다이렉트
+	        // 로그인 안 되어있으면 로그인 페이지로 리다이렉트
 	        return "redirect:./login";
 	    }
 
-		return "users/mypage";
-		
+	    // 선호 팀 번호가 있는 경우, 다가오는 경기 1개 가져오기
+	    if (user.getTeamNum() != 0) {
+	        MatchDTO upcomingMatch = userService.getUpcomingMatchByTeam(user.getTeamNum());
+	        model.addAttribute("upcomingMatch", upcomingMatch);
+	        
+	    }
+
+	    model.addAttribute("user", user); // 사용자 정보도 같이 넘겨줌
+	    return "users/mypage";
 	}
 
 	    	
