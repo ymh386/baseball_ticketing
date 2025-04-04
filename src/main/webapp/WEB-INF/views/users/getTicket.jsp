@@ -102,6 +102,19 @@
 					</tbody>
 				</table>
 			</c:if>
+                                    <form action="./refund" method="POST" onsubmit="return confirm('정말로 환불하시겠습니까?')">
+                                    	  <input type="hidden" name="paymentId" value="${ticket['PAYMENTID']}"> 
+									    <input type="hidden" name="ticketNum" value="${ticket['TICKETNUM']}">
+                                        <input type="hidden" name="seatNum" value="${ticket['SEATNUM']}">
+									    <button type="submit" class="btn btn-danger">환불 신청</button>
+									</form>
+                                </c:if>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
 
 			<c:if test="${empty ticketList}">
 				<p>조회된 티켓이 없습니다.</p>

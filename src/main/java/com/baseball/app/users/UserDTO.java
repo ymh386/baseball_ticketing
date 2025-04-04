@@ -10,10 +10,17 @@ public class UserDTO {
 	private String email;
 	private String address;
 	private Long teamNum;
+	private Long point;
 	
 	
 	
 	
+	public Long getPoint() {
+		return point;
+	}
+	public void setPoint(Long point) {
+		this.point = point;
+	}
 	public String getUserId() {
 		return userId;
 	}

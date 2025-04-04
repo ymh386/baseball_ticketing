@@ -2,6 +2,7 @@ package com.baseball.app.users;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,8 @@ public class UserService {
     
     @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private TicketDAO ticketDAO;
     
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // BCrypt 인코더
     
@@ -169,12 +172,28 @@ public class UserService {
     // 환불 처리 메서드
     public void refundTickets(TicketDTO ticketDTO) throws Exception{
     	System.out.println("PaymentId: " + ticketDTO.getPaymentId());
+    public String refundTickets(TicketDTO ticketDTO, HttpSession session) throws Exception{
+    	System.out.println("💰 PaymentId: " + ticketDTO.getPaymentId());
         // 1. 티켓 상태를 '환불완료'로 변경
 //        userDAO.updateState(ticketDTO);
     	// 1-1. 티켓을 삭제
     	userDAO.ticketDelete(ticketDTO);
         // 2. 결제 상태를 '환불완료'로 변경
         userDAO.updatePaymentState(ticketDTO);
+        // 3. 환불 시 포인트 다시 반환
+        UserDTO userDTO = (UserDTO)session.getAttribute("user");
+        String level = ticketDTO.getSeatNum().substring(0, 1);
+        		
+        if(level.equals("C")) {
+			userDTO.setPoint(userDTO.getPoint() - 1000);
+		}else if(level.equals("B")) {
+			userDTO.setPoint(userDTO.getPoint() - 2000);
+		}else {
+			userDTO.setPoint(userDTO.getPoint() - 3000);
+		}
+        
+        ticketDAO.updatePoint(userDTO);
+        return level;
     }
     
     

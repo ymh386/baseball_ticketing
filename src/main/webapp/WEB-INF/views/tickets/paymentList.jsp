@@ -32,6 +32,63 @@
 						</select>
 					</form>
 		
+		<table class="table table-striped">
+			<thead class="table-primary">
+				<tr>
+					<th>결제번호</th>
+					<th>결제상태</th>					
+					<th>결제일시</th>
+					<th>총 결제금액</th>
+					<th>상품명</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${list}" var="v">
+				<tr>
+					<c:choose>
+						<c:when test="${v.paymentStatus eq '승인'}"><td><a href="./paymentDetail?paymentId=${v.paymentId}">${v.paymentId}</a></td></c:when>
+						<c:otherwise><td>${v.paymentId}</td></c:otherwise>
+					</c:choose>
+					<td>${v.paymentStatus}</td>
+					<td>${v.paymentDate}</td>
+					<td>${v.totalAmount}</td>
+					<td>${v.productName}</td>							
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+
+		<!-- 페이징 버튼 -->
+		<form id="pageForm">
+			<input type="hidden" id="page" name="page">
+		</form>
+		
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination">
+		  
+		    <li class="page-item">
+		      <button class="page-link pages" onclick="location.href='./paymentList?page=${pager.startBtn-1}'" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+			  </button>
+		    </li>
+		    
+		    <c:forEach begin="${pager.startBtn}" end="${pager.endBtn}" var="i">
+		   		<li class="page-item">
+					<button class="page-link pages" onclick="location.href='./paymentList?page=${i}'">${i}</button>
+				</li>
+		    </c:forEach>
+		    
+		    <li class="page-item ${pager.endCheck?'disabled':''}">
+		      <button class="page-link pages" onclick="location.href='./paymentList?page=${pager.endBtn+1}'" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+			  </button>
+		    </li>
+		    
+		  </ul>
+		</nav>
+		
+	</div>
+</div>
 								<table class="table table-striped">
 						    <thead class="table-primary">
 						        <tr>

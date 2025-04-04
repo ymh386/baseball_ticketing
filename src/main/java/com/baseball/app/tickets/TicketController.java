@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.baseball.app.pages.Pager;
 import com.baseball.app.seats.SeatDTO;
 import com.baseball.app.users.UserDTO;
 
@@ -52,8 +53,10 @@ public class TicketController {
 	}
 	
 	@RequestMapping(value="paymentList", method=RequestMethod.GET)
-	public String getPaymentList(Model model, HttpSession session) throws Exception {
-		List<PaymentDTO> ar = ticketService.getPaymentList(session);
+	public String getPaymentList(Model model, HttpSession session, Pager pager) throws Exception {
+		List<PaymentDTO> ar = ticketService.getPaymentList(session, pager);
+		
+		model.addAttribute("pager", pager);
 		model.addAttribute("list", ar);
 		
 		return "tickets/paymentList";
@@ -75,7 +78,7 @@ public class TicketController {
 		ticketDTO.setSeatNum(productName[1]);
 		ticketDTO.setPaymentId(paymentDTO.getPaymentId());
 		
-		int result = ticketService.paymentAdd(paymentDTO, session);
+		int result = ticketService.paymentAdd(paymentDTO, session, productName);
 		int result2 = ticketService.ticketStatusComplete(ticketDTO);
 		
 		if(result > 0 && result2 > 0) {

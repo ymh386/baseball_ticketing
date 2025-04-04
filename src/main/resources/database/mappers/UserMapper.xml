@@ -64,6 +64,8 @@
 		INSERT INTO USERS (USERID, PASSWORD, NAME, PHONE, EMAIL, ADDRESS, TEAMNUM)
 		VALUES (#{userId}, #{password}, #{name}, #{phone}, #{email},
 		#{address}, #{teamNum, jdbcType=NUMERIC})
+	    INSERT INTO USERS (USERID, PASSWORD, NAME, PHONE, EMAIL, ADDRESS, TEAMNUM, POINT)
+	    VALUES (#{userId}, #{password}, #{name}, #{phone}, #{email}, #{address}, #{teamNum, jdbcType=NUMERIC}, 0)
 	</insert>
 
 

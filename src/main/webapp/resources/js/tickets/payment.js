@@ -33,10 +33,22 @@ let oPay = Naver.Pay.create({ //SDK Parameters를 참고 바랍니다.
             .then(r=>r.text())
             .then(r=>{
                 if(r.trim()*1>0){
-                    if(confirm("결제를 완료. 결제내역을 확인하시시겠습니까?")){
+                    console.log(cancel.getAttribute('data-seatnum').substring(0, 1))
+                    function addPoint() {
+                        if(cancel.getAttribute('data-seatnum').substring(0, 1) == 'C'){
+                            alert('1000포인트 적립!')
+                        }else if(cancel.getAttribute('data-seatnum').substring(0, 1) == 'B'){
+                            alert('2000포인트 적립!')
+                        }else {
+                            alert('3000포인트 적립!')
+                        }
+                    }
+                    if(confirm("결제 완료. 결제내역을 확인하시시겠습니까?")){
+                        addPoint();
                         location.href="./paymentList"
                     }else{
-                        location.href="../matches/list"
+                        addPoint();
+                        location.href="../matches/matchList"
                     }
                 }else{
                     alert("결제 실패")
@@ -107,8 +119,8 @@ elNaverPayBtn.addEventListener("click", function() {
     "merchantPayKey": cancel.getAttribute('data-seatnum') + '_0001',
     "productName": cancel.getAttribute('data-matchnum')+'_'+cancel.getAttribute('data-seatnum'),
     "productCount": 1,
-    "totalPayAmount": 10,
-    "taxScopeAmount": 10,
+    "totalPayAmount": 10, //elNaverPayBtn.getAttribute('data-seatprice'),
+    "taxScopeAmount": 10, //elNaverPayBtn.getAttribute('data-seatprice'),
     "taxExScopeAmount": 0,
     "returnUrl": "https://developers.pay.naver.com/user/sand-box/payment"
     })

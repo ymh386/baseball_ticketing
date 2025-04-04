@@ -38,6 +38,22 @@
 					<div class="alert alert-primary">
 						<strong>이메일:</strong> ${user.email}
 					</div>
+                    <!-- 포인트 -->
+                    <div class="alert alert-primary">
+                        <strong>포인트:</strong> ${user.point}
+                    </div>
+
+             
+                    
+                    <!-- 버튼 목록 -->
+                    <div class="d-grid gap-2 mt-3">
+                        <button class="btn btn-outline-primary" onclick="location.href='./pwUpdate'">비밀번호 변경</button>
+                        <button class="btn btn-outline-success" onclick="location.href='./getTicket'">티켓 확인</button>
+                        <button class="btn btn-outline-info" onclick="location.href='../tickets/paymentList'">결제 내역</button>
+                        <button class="btn btn-outline-danger" onclick="location.href='./userDelete'">회원탈퇴</button>
+                    </div>
+                </div>
+            </div>
 
 
 

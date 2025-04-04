@@ -18,9 +18,8 @@
 		<form action="./add" method="post">
 		  <div class="mb-3">
 		    <select name="stadiumNum" class="form-select" aria-label="Default select example">
-			  <option selected>경기장선택</option>
 			  <option value="1">test1 홈</option>
-			  <option value="3">잠실야구장(LG, 두산)</option>
+			  <option selected value="3">잠실야구장(LG, 두산)</option>
 			  <option value="4">고척스카이둠(키움)</option>
 			  <option value="5">SSG랜더스필드(SSG)</option>
 			  <option value="6">수원KT위즈파크(KT)</option>
@@ -32,16 +31,15 @@
 			</select>
 		  </div>
 		  <div class="mb-3">
-		    <select name="seatLevel" class="form-select" aria-label="Default select example">
-			  <option selected>등급선택</option>
-			  <option value="C">C</option>
+		    <select id="level" name="seatLevel" class="form-select" aria-label="Default select example">
+			  <option selected value="C">C</option>
 			  <option value="B">B</option>
 			  <option value="A">A</option>
 			</select>
 		  </div>
 		  <div class="mb-3">
 		    <label for="price" class="form-label">좌석가격</label>
-		    <input type="text" name="seatPrice" class="form-control" id="price">
+		    <input type="text" name="seatPrice" value="15000" class="form-control" id="price" readonly>
 		  </div>
 		  <div class="mb-3">
 		    <label for="count" class="form-label">좌석갯수</label>
@@ -55,6 +53,7 @@
 	</div>
 </div>
 
+<script src="/resources/js/seats/add.js"></script>
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
 </body>

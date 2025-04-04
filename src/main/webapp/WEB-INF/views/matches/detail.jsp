@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,7 +97,10 @@
 				<a class="btn btn-info" href="../stadiums/detail?stadiumNum=${dto.stadiumNum}">경기장 정보 보러가기</a>
 			  </div>
 			  <div class="col align-self-end">
+				<fmt:formatDate var="today" value="<%= new java.util.Date() %>" pattern="yyyy-MM-dd"/>
+				<c:if test="${dto.matchDate >= today}">
 					<a class="btn btn-success" href="./seatList?matchNum=${dto.matchNum}">예매하기</a>
+				</c:if>
 					<a class="btn btn-danger" href="./getReviewList?matchNum=${dto.matchNum}">경기 리뷰</a>
 			  </div>
 			</div>
