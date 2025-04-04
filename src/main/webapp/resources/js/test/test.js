@@ -7,6 +7,7 @@ const idTestDiv = document.getElementById("idTestDiv");
 
 const classImg = document.getElementsByClassName("classImg");
 
+const caretClass = document.getElementsByClassName("caretClass");
 
 //
 idTestDiv.addEventListener('click', function(e){
@@ -21,6 +22,7 @@ let ccF = function(){
     var caretID = 'idCaret';
     var cc = document.createElement("span");
     cc.id = caretID;
+    cc.setAttribute("class", "caretClass");
 
     window.getSelection().getRangeAt(0).insertNode(cc);
 }
@@ -28,6 +30,12 @@ let ccF = function(){
 
 //
 idTestDiv.addEventListener("blur", function() {
+    
+    for(let caret of caretClass){
+        if(caret.innerHTML == ""){
+            caret.remove();
+        }
+    }
     
     ccF();
 

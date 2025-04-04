@@ -10,6 +10,9 @@ const idDivTable = document.getElementById("idDivTable");
 let maxScrollHeight = idDivTable.scrollHeight - idDivTable.clientHeight; // 지금은 367이다.
 
 
+
+
+//
 idDivTable.addEventListener("click", function() {
     
     console.log(maxScrollHeight);
@@ -25,6 +28,8 @@ idDivTable.addEventListener("scroll", function() {
         f1();
     }
 })
+
+
 
 
 //
@@ -93,7 +98,7 @@ let f1 = function(){
 }
 
 
-//
+// 버튼으로 가져오기(테스트용), 나중에 없앨 것
 idNextPage.addEventListener("click", function(){
 
     page += 1;
