@@ -13,36 +13,121 @@ const idImageInput = document.getElementById("idImageInput");
 
 const imgWrapper = document.getElementsByClassName("imgWrapper");
 
+const caretClass = document.getElementsByClassName("caretClass");
+
+const idTestLogin = document.getElementById("idTestLogin");
+const idCutSession = document.getElementById("idCutSession");
 
 
+
+//
+idTestLogin.addEventListener("click", function(){
+    let matchNum = idTestLogin.getAttribute("data-matchNum");
+    location.href=`./testLogin?matchNum=${matchNum}`;
+})
+
+
+//
+idCutSession.addEventListener("click", function(){
+    let matchNum = idTestLogin.getAttribute("data-matchNum");
+    location.href=`./testLogout?matchNum=${matchNum}`;
+})
+
+
+//
+let ccF = function(){
+    var caretID = 'idCaret';
+    var cc = document.createElement("span");
+    cc.id = caretID;
+    cc.setAttribute("class", "caretClass");
+    
+    window.getSelection().getRangeAt(0).insertNode(cc);    
+}
+
+
+//
+idImageEditor.addEventListener("focus", function(){
+    const savedImgs = document.getElementsByClassName("savedImgs");
+    let list = new Array();
+    
+    for(let savedImg of savedImgs){
+        list.push(savedImg.getAttribute("src"));
+    }
+
+    let formData = new FormData();
+    formData.append("list", list);
+
+    fetch("./deleteTempImage", {
+        method: 'POST',
+        cache: 'no-cache',
+        body: formData
+    })
+
+})
+
+
+//
+idImageEditor.addEventListener("blur", function() {
+    
+    for(let caret of caretClass){
+        if(caret.innerHTML == ""){
+            caret.remove();
+        }
+    }
+
+    ccF();
+
+    const selectedText = window.getSelection().toString();
+    const { anchorNode, focusNode, anchorOffset, focusOffset, isCollapsed } = window.getSelection();
+    
+    console.log(selectedText);
+    console.log(anchorOffset);
+    console.log(focusOffset);
+    console.log(isCollapsed);
+    
+})
+
+
+//
 idImageEditor.addEventListener('click', function(e){
+
+    let user = e.target.getAttribute("data-user");
+    if(user == ""){
+        alert("로그인 후 작성 가능합니다");
+        e.target.setAttribute("contenteditable", false);
+    }
+
     if(e.target.classList.contains('imgs')){
        
         console.log(e.target.getAttribute("id"))
         console.log(e.target.getAttribute("src"))
         let check = confirm("선택한 이미지를 삭제합니다");
 
-        if(check) {
-            let formData = new FormData();
-            formData.append("src", e.target.getAttribute("src"));
+        e.target.parentElement.remove();
 
-            fetch("./deleteTempImage", {
-                method: 'POST',
-                cache: 'no-cache',
-                body: formData
-            })
-            .then(function(response) {
-                return response.json(); // 응답을 JSON 형식으로 변환
-            })
-            .then(function(data) {
-                console.log(data); // JSON 데이터를 출력
-                e.target.remove();
 
-            })
-            .catch(function(error) {
-                console.error(error); // 에러를 출력
-            });
-        }
+        // 이미지 삭제 요청
+        // if(check) {
+        //     let formData = new FormData();
+        //     formData.append("src", e.target.getAttribute("src"));
+
+        //     fetch("./deleteTempImage", {
+        //         method: 'POST',
+        //         cache: 'no-cache',
+        //         body: formData
+        //     })
+        //     .then(function(response) {
+        //         return response.json(); // 응답을 JSON 형식으로 변환
+        //     })
+        //     .then(function(data) {
+        //         console.log(data); // JSON 데이터를 출력
+        //         e.target.remove();
+
+        //     })
+        //     .catch(function(error) {
+        //         console.error(error); // 에러를 출력
+        //     });
+        // }
     }
 })
 
@@ -50,6 +135,14 @@ idImageEditor.addEventListener('click', function(e){
 
 //
 idSubmit.addEventListener("click", function(){
+    const idCaret = document.getElementById("idCaret");
+    idCaret.id = "";
+
+    const imgs = document.getElementsByClassName("imgs");
+    for(let img of imgs){
+        img.setAttribute("class", "savedImgs");
+    }
+
     idBoardContent.setAttribute("value", idImageEditor.innerHTML)
     idForm.submit();
 
@@ -57,7 +150,6 @@ idSubmit.addEventListener("click", function(){
 
 
 //
-let idCount = 0;
 idAddImage.addEventListener("click", function(){
     let formData = new FormData();
 
@@ -75,8 +167,7 @@ idAddImage.addEventListener("click", function(){
         })
         .then(function(data) {
             console.log(data); // JSON 데이터를 출력
-            idCount += 1;
-            let strHead = "<img class='imgs' id='idImg"+ idCount +"' src='";
+            let strHead = "<img class='imgs' src='";
             let strFoot = "' style='width:80px; height:80px;'>";
 
             // let strHead = "<div class='imgWrapper'><img class='imgs' id='idImg"+ idCount +"' src='";            
@@ -85,8 +176,12 @@ idAddImage.addEventListener("click", function(){
             let strBody = data.tempImage;
             let strSum = strHead + strBody + strFoot;
             
-            idImageEditor.innerHTML += strSum;
+            const idCaret = document.getElementById("idCaret");
+            idCaret.innerHTML = strSum;
+            idCaret.id = "";
 
+            idImageEditor.focus();
+            
 
         })
         .catch(function(error) {
@@ -95,17 +190,12 @@ idAddImage.addEventListener("click", function(){
     }
     
 
-
-
-
-    
             // let str = '<img src="/resources/images/qna/d338deb8-c682-4eaa-8ecc-9ee1f95f5aff_img1.jpg"></img>';
 
             // idImageEditor.innerHTML += str;
 		
-                   
-                
-
-    
+               
 
 })
+
+

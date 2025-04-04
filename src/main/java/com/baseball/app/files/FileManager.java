@@ -42,6 +42,7 @@ public class FileManager {
 		file = new File(file, newName);		
 		FileCopyUtils.copy(newFile.getBytes(), file);
 		
+		
 		return newName;
 	}
 	
