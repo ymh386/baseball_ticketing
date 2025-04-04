@@ -2,45 +2,53 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="com.baseball.app.users.UserDAO">
-		
-		
-		
-		
-		
-<!-- 유저아이디 조회  -->
-	<select id="getDetail" parameterType="UserDTO" resultMap="getDetailResult">
-	
-					SELECT *
-						FROM USERS 
-						WHERE USERID = #{userId}
+
+<mapper namespace="com.baseball.app.users.UserDAO">
+
+
+
+
+
+	<!-- 유저아이디 조회 -->
+	<select id="getDetail" parameterType="UserDTO"
+		resultMap="getDetailResult">
+
+		SELECT *
+		FROM USERS
+		WHERE USERID = #{userId}
 
 	</select>
-	
 
-  	<resultMap type="UserDTO" id="getDetailResult">
-  		<!-- PK  column: 컬럼명, property: setter의 이름 -->
-  		<id column="USERID" property="userId"/>
-  		<!-- 그외 나머지 column: 컬럼명, property: setter의 이름 -->
-  		<result column="PASSWORD" property="password"/>
-  		<result column="NAME" property="name"/>
-  		<result column="PHONE" property="phone"/>
-  		<result column="EMAIL" property="email"/>
-  		<result column="ADDRESS" property="address"/>
-  		<!-- 1:1 property="setter의 이름" javaType="데이터타입"-->
-  		
-  	</resultMap>
-		
-		
-	<select id="getTickets" parameterType="UserDTO" resultType="java.util.Map">
-	    SELECT t.*, m.HOMETEAM, m.AWAYTEAM, m.MATCHDATE
-	    FROM USERS u
-	    JOIN TICKETS t ON u.USERID = t.USERID
-	    JOIN MATCHES m ON t.MATCHNUM = m.MATCHNUM
-	    WHERE u.USERID = #{userId}
+
+	<resultMap type="UserDTO" id="getDetailResult">
+		<!-- PK column: 컬럼명, property: setter의 이름 -->
+		<id column="USERID" property="userId" />
+		<!-- 그외 나머지 column: 컬럼명, property: setter의 이름 -->
+		<result column="PASSWORD" property="password" />
+		<result column="NAME" property="name" />
+		<result column="PHONE" property="phone" />
+		<result column="EMAIL" property="email" />
+		<result column="ADDRESS" property="address" />
+		<!-- 1:1 property="setter의 이름" javaType="데이터타입" -->
+
+	</resultMap>
+
+
+	<select id="getTickets" parameterType="UserDTO"
+		resultType="java.util.Map">
+		SELECT
+		t.*,
+		m.HOMETEAM,
+		m.AWAYTEAM,
+		m.STADIUMNUM,
+		m.MATCHDATE,
+		s.STADIUMNAME
+		FROM USERS u
+		JOIN TICKETS t ON u.USERID = t.USERID
+		JOIN MATCHES m ON t.MATCHNUM = m.MATCHNUM
+		JOIN STADIUMS s ON m.STADIUMNUM = s.STADIUMNUM
+		WHERE u.USERID = #{userId}
 	</select>
-	
 
 
 
@@ -48,86 +56,110 @@
 
 
 
-	
+
+
 
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="UserDTO">
+		INSERT INTO USERS (USERID, PASSWORD, NAME, PHONE, EMAIL, ADDRESS, TEAMNUM)
+		VALUES (#{userId}, #{password}, #{name}, #{phone}, #{email},
+		#{address}, #{teamNum, jdbcType=NUMERIC})
 	    INSERT INTO USERS (USERID, PASSWORD, NAME, PHONE, EMAIL, ADDRESS, TEAMNUM, POINT)
 	    VALUES (#{userId}, #{password}, #{name}, #{phone}, #{email}, #{address}, #{teamNum, jdbcType=NUMERIC}, 0)
 	</insert>
-	
-	
+
+
 	<!-- id 찾기 -->
 	<select id="findId" resultType="UserDTO">
-		SELECT * FROM USERS WHERE NAME=#{name} AND EMAIL=#{email}
+		SELECT * FROM USERS WHERE
+		NAME=#{name} AND EMAIL=#{email}
 
 	</select>
-	
-	
+
+
 	<!-- 비밀번호 찾기 -->
-	
+
 	<select id="findPassword" resultType="UserDTO">
-		SELECT * FROM USERS WHERE USERID=#{userId} AND NAME=#{name} AND EMAIL=#{email}
+		SELECT * FROM USERS WHERE
+		USERID=#{userId} AND NAME=#{name} AND EMAIL=#{email}
 	</select>
-	
-	
-	
-	
+
+
+
+
 	<!--비밀번호 변경 -->
-	
+
 	<update id="pwUpdate" parameterType="UserDTO">
-	
-	UPDATE USERS SET 
+
+		UPDATE USERS SET
 		PASSWORD =#{password}
-			WHERE USERID =#{userId}
+		WHERE USERID =#{userId}
 	</update>
-	
-	
+
+
 	<!-- 회원 삭제 -->
-	
+
 	<delete id="userDelete" parameterType="UserDTO">
-	
+
 		DELETE FROM USERS WHERE USERID =#{userId}
-	
-	</delete>	
 
-	
+	</delete>
+
+
 	<!-- 비밀번호 찾기 임시 비밀번호 변경 -->
-	
-	  <update id="findPwUpdate" parameterType="UserDTO">
-        UPDATE users SET password = #{password} WHERE email = #{email}
-    </update>
 
-	
+	<update id="findPwUpdate" parameterType="UserDTO">
+		UPDATE users SET password = #{password} WHERE email = #{email}
+	</update>
+
+
 
 	<!-- 이메일로 사용자 찾기 -->
-	  <select id="findByEmail" parameterType="UserDTO" resultType="UserDTO">
-        SELECT * FROM users WHERE email = #{email}
-    </select>
+	<select id="findByEmail" parameterType="UserDTO"
+		resultType="UserDTO">
+		SELECT * FROM users WHERE email = #{email}
+	</select>
 
 
 
 	<!-- 티켓상태 환불완료로 변경 -->
 	<update id="updateState" parameterType="TicketDTO">
-		UPDATE TICKETS SET TICKETSTATUS = '환불완료' WHERE TICKETNUM = #{ticketNum}
+		UPDATE TICKETS SET
+		TICKETSTATUS = '환불완료' WHERE TICKETNUM = #{ticketNum}
 	</update>
-	
+
 	<!-- 결제상태 환불완료로 변경 -->
-	
+
 	<update id="updatePaymentState" parameterType="TicketDTO">
-			UPDATE PAYMENTS 
-			SET PAYMENTSTATUS ='환불완료' 
-			WHERE PAYMENTID = #{paymentId}	
+		UPDATE PAYMENTS
+		SET PAYMENTSTATUS ='환불완료'
+		WHERE PAYMENTID = #{paymentId}
 	</update>
-	
+
 	<delete id="ticketDelete" parameterType="TicketDTO">
-		DELETE TICKETS WHERE TICKETNUM = #{ticketNum}
+		DELETE TICKETS WHERE
+		TICKETNUM = #{ticketNum}
 	</delete>
 
-
-		
-
-
-
 	
-  </mapper>
+<select id="getUpcomingMatchByTeam" parameterType="Long" resultType="MatchDTO">
+		    SELECT * FROM (
+		        SELECT 
+		            MATCHNUM,
+		            MATCHDATE,
+		            STADIUMNUM,
+		            HOMETEAM,
+		            AWAYTEAM
+		        FROM MATCHES
+		        WHERE (HOMETEAM = #{teamNum} OR AWAYTEAM = #{teamNum})
+		          AND MATCHDATE >= SYSDATE
+		        ORDER BY MATCHDATE ASC
+		    )
+		    WHERE ROWNUM = 1
+</select>
+
+
+
+
+
+</mapper>

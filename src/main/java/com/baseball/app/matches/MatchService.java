@@ -121,6 +121,14 @@ public class MatchService {
 			String fileName = fileManager.fileSave(path, attach);
 			String miniPath = "/resources/images/temp/";
 			result = miniPath + fileName;
+			
+			// session의 tempFileList에 경로와 파일명 저장
+			List<String> list = (List<String>) session.getAttribute("tempFileList");
+			if(list != null) {
+				list.add(result);				
+			} else {
+				System.out.println("list가 null입니다");
+			}
 		}
 		
 		return result;
@@ -132,6 +140,7 @@ public class MatchService {
 		
 		System.out.println("imageSrc : " + imageSrc);
 		
+		// 가져온 이미지의 경로 전체를 경로와 파일명으로 파싱한다.
 		String miniPath = imageSrc.substring(0, imageSrc.lastIndexOf("/")+1);
 		System.out.println("miniPath : " + miniPath);
 		
