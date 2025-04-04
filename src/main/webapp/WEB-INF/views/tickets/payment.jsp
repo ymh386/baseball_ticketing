@@ -18,7 +18,7 @@
 <div class="continer-fluid my-5">
 	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
 		<!-- contents 내용 작성 -->
-		<h1>결제창(미완성)</h1>
+		<h1>결제창</h1>
 		  <div class="container text-center">
 			<div class="row align-items-end">
 			  <div class="col">
@@ -37,6 +37,10 @@
 						<label class="form-label">좌석</label>
 						<input type="text" class="form-control" value="${dto.seatNum}" readonly>
 					</div>
+					<div class="mb-3">
+						<label class="form-label">가격</label>
+						<input type="text" class="form-control" value="${price}" readonly>
+					</div>
 				  </form>
 			  </div>
 			  <div class="col">
@@ -49,7 +53,7 @@
 			  </div>
 			  <div id="pay" class="col">
 				<!-- 결제하기 버튼 생성 -->
-				<input data-seatprice="${price}" data-userid="${dto.userId}" type="button" id="naverPayBtn" class="btn btn-success" value="네이버페이 결제 버튼">
+				<input data-seatprice="${price}" data-userid="${dto.userId}" type="button" id="naverPayBtn" class="btn btn-success" value="네이버페이 결제">
 				<!-- <button data-userid="${dto.userId}" type="button" id="payBtn" class="btn btn-success">결제하기</button> -->
 				</div>
 			  <div class="col">

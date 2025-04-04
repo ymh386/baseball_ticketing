@@ -37,6 +37,11 @@
                         <strong>이메일:</strong> ${user.email}
                     </div>
 
+                    <!-- 포인트 -->
+                    <div class="alert alert-primary">
+                        <strong>포인트:</strong> ${user.point}
+                    </div>
+
              
                     
                     <!-- 버튼 목록 -->

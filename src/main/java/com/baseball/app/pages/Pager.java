@@ -110,7 +110,7 @@ public class Pager {
 
 		//1. TotalPage 총 페이지 갯수 구하기
 		Long totalPage = totalCount/5;
-		if(totalCount%3 != 0) { // 나머지가 있으면 +1
+		if(totalCount%5 != 0) { // 나머지가 있으면 +1
 			totalPage++;
 		}
 		this.lastPage = totalPage;

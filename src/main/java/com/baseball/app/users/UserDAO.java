@@ -60,6 +60,7 @@ public class UserDAO {
 		return sqlSession.selectList(NAMESPACE+"getTickets", userDTO);
 	}
 	
+	
 	// PW 수정 
 	
 	public int pwUpdate(UserDTO userDTO) throws Exception{

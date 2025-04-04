@@ -18,6 +18,10 @@ public class TicketDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.baseball.app.tickets.TicketDAO.";
 	
+	public Long getTotalCount(UserDTO userDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getTotalCount", userDTO);
+	}
+	
 	public TicketDTO getDetail(TicketDTO ticketDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getDetail", ticketDTO);
 	}
@@ -26,8 +30,8 @@ public class TicketDAO {
 		return sqlSession.selectOne(NAMESPACE + "getSeatPrice", seatDTO);
 	}
 	
-	public List<PaymentDTO> getPaymentList(UserDTO userDTO) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "getPaymentList", userDTO);
+	public List<PaymentDTO> getPaymentList(Map<String, Object> map) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getPaymentList", map);
 	}
 	
 	public TicketDTO getPaymentDetail(TicketDTO ticketDTO) throws Exception {
@@ -44,6 +48,10 @@ public class TicketDAO {
 	
 	public int ticketStatusComplete(TicketDTO ticketDTO) throws Exception {
 		return sqlSession.update(NAMESPACE + "ticketStatusComplete", ticketDTO);
+	}
+	
+	public int updatePoint(UserDTO userDTO) throws Exception {
+		return sqlSession.update(NAMESPACE + "updatePoint", userDTO);
 	}
 	
 	public int delete(TicketDTO ticketDTO) throws Exception {

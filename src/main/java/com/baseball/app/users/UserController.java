@@ -286,14 +286,22 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/refund", method = RequestMethod.POST)
-    public String refundTicket(@ModelAttribute TicketDTO ticketDTO, RedirectAttributes redirectAttributes) throws Exception{
+    public String refundTicket(@ModelAttribute TicketDTO ticketDTO,Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception{
         try {
-            userService.refundTickets(ticketDTO);
-            redirectAttributes.addFlashAttribute("message", "환불이 완료되었습니다.");
+            String result = userService.refundTickets(ticketDTO, session);
+            if(result.equals("C")) {
+            	model.addAttribute("result", "환불이 완료되었습니다. 1000포인트 반환");
+            } else if(result.equals("B")){
+            	model.addAttribute("result", "환불이 완료되었습니다. 2000포인트 반환");
+            }else {
+            	model.addAttribute("result", "환불이 완료되었습니다. 3000포인트 반환");
+            }
+            model.addAttribute("path", "./getTicket"); // 티켓 구매 내역 페이지로 이동
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "환불 처리 중 오류가 발생했습니다.");
         }
-        return "redirect:./getTicket"; // 티켓 구매 내역 페이지로 이동
+        
+        return "commons/result"; 
     }
 
 }

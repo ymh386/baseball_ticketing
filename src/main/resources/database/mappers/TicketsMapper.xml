@@ -5,6 +5,11 @@
   
 <mapper namespace="com.baseball.app.tickets.TicketDAO">
 
+
+	<select id="getTotalCount" resultType="java.lang.Long">
+  		SELECT COUNT(PAYMENTID) FROM PAYMENTS WHERE USERID=#{userId}
+  	</select>
+
 	<select id="getDetail" parameterType="TicketDTO" resultType="TicketDTO">
 		SELECT * FROM TICKETS WHERE MATCHNUM=#{matchNum} AND SEATNUM=#{seatNum}
 	</select>
@@ -13,11 +18,20 @@
 		SELECT DISTINCT SEATPRICE FROM SEATS WHERE SEATLEVEL=#{seatLevel}
 	</select>
 	
-	<select id="getPaymentList" parameterType="UserDTO" resultType="PaymentDTO">
-		SELECT *
-		FROM PAYMENTS
-		WHERE USERID=#{userId}
-		ORDER BY PAYMENTID DESC
+	<select id="getPaymentList" parameterType="Map" resultType="PaymentDTO">
+			
+		SELECT * FROM
+		(
+			SELECT ROWNUM R, M.* FROM
+			(
+				SELECT *
+				FROM PAYMENTS
+				WHERE USERID=#{user.userId}
+				ORDER BY PAYMENTID DESC
+			) M
+		)
+		WHERE R BETWEEN #{pager.startNum} AND #{pager.endNum}
+		
 	</select>
 	
 	<select id="getPaymentDetail" parameterType="TicketDTO" resultMap="paymentDetailResult">
@@ -89,6 +103,10 @@
 	
 	<update id="ticketStatusComplete" parameterType="TicketDTO">
 		UPDATE TICKETS SET TICKETSTATUS = '예매완료', PAYMENTID = #{paymentId} WHERE MATCHNUM=#{matchNum} AND SEATNUM=#{seatNum}
+	</update>
+	
+	<update id="updatePoint" parameterType="UserDTO">
+		UPDATE USERS SET POINT = #{point} WHERE USERID = #{userId}
 	</update>
 	
 	<delete id="delete" parameterType="TicketDTO">
