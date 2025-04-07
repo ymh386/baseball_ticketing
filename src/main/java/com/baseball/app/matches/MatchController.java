@@ -93,9 +93,10 @@ public class MatchController {
 		return "matches/reviewList";
 	}
 	
+	
 	@RequestMapping(value = "getReviewList", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Map<String, String>> getReviewListP(MatchDTO matchDTO, Pager pager, Model model) throws Exception {
+	public List<Map<String, String>> getReviewListP(MatchDTO matchDTO, Pager pager) throws Exception {
 		System.out.println("getReview post");
 		
 		List<ReviewDTO> list = matchService.getReviewList(matchDTO, pager);

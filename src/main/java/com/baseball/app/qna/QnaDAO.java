@@ -108,9 +108,23 @@ public class QnaDAO implements BoardDAO {
 	
 	
 	//
+	public int addSubComment(BoardDTO boardDTO) throws Exception {
+		
+		return sqlSession.insert(NAMESPACE+"addSubComment", boardDTO);
+	}
+	
+	
+	//
 	public List<CommentDTO> getSubCommentList(BoardDTO boardDTO) throws Exception {
 		
 		return sqlSession.selectList(NAMESPACE+"getSubCommentList", boardDTO);
+	}
+	
+	
+	//
+	public List<CommentDTO> getSubCommentCount() throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE+"getSubCommentCount");
 	}
 	
 	

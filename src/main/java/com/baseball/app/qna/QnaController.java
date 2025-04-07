@@ -59,6 +59,10 @@ public class QnaController {
 		qnaDTO = (QnaDTO)qnaService.getDetail(qnaDTO);
 		model.addAttribute("dto", qnaDTO);
 		
+		// 대댓글 있는 댓글의 list 가져오기
+		List<CommentDTO> list = qnaService.getSubCommentCount();
+		model.addAttribute("list", list);
+		
 		return "board/boardDetail";
 	}
 	
@@ -139,6 +143,7 @@ public class QnaController {
 		System.out.println("controller reply : " + commentDTO.getBoardContent() + commentDTO.getBoardNum());
 
 		commentDTO.setUserId("a3"); // 테스트용 유저 아이디 값
+		
 		int result = qnaService.addComment(commentDTO);
 		
 		return "redirect:./detail?boardNum="+commentDTO.getBoardNum();
@@ -154,14 +159,16 @@ public class QnaController {
 	}
 	
 	
-	@RequestMapping(value = "getSubCommentList", method = RequestMethod.POST)	
-	public String getSubCommentList(CommentDTO commentDTO, Model model) throws Exception {
+	
+	
+	
+	@RequestMapping(value = "getSubCommentList", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Map<String, String>> getSubCommentList(CommentDTO commentDTO) throws Exception {
 		
-		Map<String, Object> result = qnaService.getSubCommentList(commentDTO);
-		
-		model.addAttribute("result", result);
-		System.out.println(result);
-		return "commons/ajaxResult";
+		List<Map<String, String>> result = qnaService.getSubCommentList(commentDTO);
+				
+		return result;
 		
 	}
 	
