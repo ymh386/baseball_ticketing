@@ -90,14 +90,11 @@
 		    
 		  </ul>
 		</nav>
-		
-		
-		
+		<button type="button" onclick="location.href='/users/mypage'">뒤로 가기</button>
 	</div>
-							   <button type="button" onclick="location.href='/users/mypage'">뒤로 가기</button>
 </div>
-					
-				
+ 
+						
 			
 			<script>
 			function filterTickets() {

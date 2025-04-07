@@ -3,7 +3,47 @@
 const cancel = document.getElementById('cancel');
 // const payBtn = document.getElementById('payBtn');
 const elNaverPayBtn = document.getElementById("naverPayBtn");
+const point = document.getElementById("point");
+const payPrice = document.getElementById("payPrice");
+const usePointInfo = document.getElementById("usePointInfo");
+
+const price = payPrice.value
+let usePoint = 0;
+
+point.addEventListener('click', ()=>{
+    if(point.checked) {
+        if(payPrice.value - point.value > 0){
+            payPrice.value = payPrice.value-point.value
+            usePoint = point.value
+        }else {
+            payPrice.value = 0;
+            usePoint = price;
+        }
+        let upl = document.createElement('label')
+        upl.id = 'upl'
+        upl.innerHTML='사용할 포인트'
+        let upv = document.createElement('input')
+        upv.id = 'upv'
+        upv.type = 'text'
+        let upvr = document.createAttribute('readonly')
+        upv.setAttributeNode(upvr)
+        upv.value=usePoint
+        usePointInfo.append(upl)
+        usePointInfo.append(upv)
+    }else{
+        payPrice.value = price
+        usePoint = 0;
+        let upl = document.getElementById('upl')
+        let upv = document.getElementById('upv')
+        upl.remove()
+        upv.remove()
+    }
+})
+
+
 let userId = elNaverPayBtn.getAttribute('data-userid');
+
+
 
 let oPay = Naver.Pay.create({ //SDK Parameters를 참고 바랍니다.
     "mode" : "development",
@@ -23,8 +63,9 @@ let oPay = Naver.Pay.create({ //SDK Parameters를 참고 바랍니다.
             let p = new FormData();
             p.append('paymentId', oData.paymentId)
             p.append('productName', cancel.getAttribute('data-matchnum')+'_'+cancel.getAttribute('data-seatnum')) 
-            p.append('totalAmount', elNaverPayBtn.getAttribute('data-seatprice'))
+            p.append('totalAmount', payPrice.value)
             p.append('merchantPayKey', cancel.getAttribute('data-seatnum') + '_0001')
+            p.append('point', usePoint)
             
             fetch('./paymentAdd', {
                 method:'POST',
@@ -33,7 +74,6 @@ let oPay = Naver.Pay.create({ //SDK Parameters를 참고 바랍니다.
             .then(r=>r.text())
             .then(r=>{
                 if(r.trim()*1>0){
-                    console.log(cancel.getAttribute('data-seatnum').substring(0, 1))
                     function addPoint() {
                         if(cancel.getAttribute('data-seatnum').substring(0, 1) == 'C'){
                             alert('1000포인트 적립!')
@@ -119,8 +159,8 @@ elNaverPayBtn.addEventListener("click", function() {
     "merchantPayKey": cancel.getAttribute('data-seatnum') + '_0001',
     "productName": cancel.getAttribute('data-matchnum')+'_'+cancel.getAttribute('data-seatnum'),
     "productCount": 1,
-    "totalPayAmount": 10, //elNaverPayBtn.getAttribute('data-seatprice'),
-    "taxScopeAmount": 10, //elNaverPayBtn.getAttribute('data-seatprice'),
+    "totalPayAmount": payPrice.value, //elNaverPayBtn.getAttribute('data-seatprice'),
+    "taxScopeAmount": payPrice.value, //elNaverPayBtn.getAttribute('data-seatprice'),
     "taxExScopeAmount": 0,
     "returnUrl": "https://developers.pay.naver.com/user/sand-box/payment"
     })

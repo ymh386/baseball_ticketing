@@ -21,7 +21,10 @@
 		<h1>결제창</h1>
 		  <div class="container text-center">
 			<div class="row align-items-end">
-			  <div class="col">
+			  <div id="usePointInfo" class="col">
+				<label>사용 가능 포인트</label>
+						
+				<input type="text" value="${user.point}" readonly>
 			  </div>
 			  <div class="col">
 				<form>
@@ -39,8 +42,16 @@
 					</div>
 					<div class="mb-3">
 						<label class="form-label">가격</label>
-						<input type="text" class="form-control" value="${price}" readonly>
+						
+						<input id="payPrice" type="text" class="form-control" value="${price}" readonly>
 					</div>
+					<div class="form-check">
+						<label class="form-check-label" for="point">
+							포인트 사용
+						</label>
+						<input class="form-check-input" type="checkbox" value="${user.point}" id="point">
+					</div>
+					
 				  </form>
 			  </div>
 			  <div class="col">
@@ -53,7 +64,7 @@
 			  </div>
 			  <div id="pay" class="col">
 				<!-- 결제하기 버튼 생성 -->
-				<input data-seatprice="${price}" data-userid="${dto.userId}" type="button" id="naverPayBtn" class="btn btn-success" value="네이버페이 결제">
+				<input data-userid="${dto.userId}" type="button" id="naverPayBtn" class="btn btn-success" value="네이버페이 결제">
 				<!-- <button data-userid="${dto.userId}" type="button" id="payBtn" class="btn btn-success">결제하기</button> -->
 				</div>
 			  <div class="col">

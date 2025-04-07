@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.baseball.app.files.FileManager;
 import com.baseball.app.matches.MatchDTO;
+import com.baseball.app.tickets.PaymentDTO;
 import com.baseball.app.tickets.TicketDAO;
 import com.baseball.app.tickets.TicketDTO;
 
@@ -175,9 +176,9 @@ public class UserService {
     
 
 
-
-    public String refundTickets(TicketDTO ticketDTO, HttpSession session) throws Exception{
-    	System.out.println("PaymentId: " + ticketDTO.getPaymentId());
+    // 환불 처리 메서드
+    public Map<String, Object> refundTickets(TicketDTO ticketDTO, HttpSession session) throws Exception{
+    	System.out.println("💰 PaymentId: " + ticketDTO.getPaymentId());
         // 1. 티켓 상태를 '환불완료'로 변경
 //        userDAO.updateState(ticketDTO);
     	// 1-1. 티켓을 삭제
@@ -187,17 +188,31 @@ public class UserService {
         // 3. 환불 시 포인트 다시 반환
         UserDTO userDTO = (UserDTO)session.getAttribute("user");
         String level = ticketDTO.getSeatNum().substring(0, 1);
+        
+        //3-1. 사용했던 포인트 다시 돌려받기
+        PaymentDTO paymentDTO = userDAO.getTotalAmount(ticketDTO);
+        Long usePoint = 0L;
+        
         		
         if(level.equals("C")) {
-			userDTO.setPoint(userDTO.getPoint() - 1000);
+        	usePoint = 15000 - paymentDTO.getTotalAmount();
+			userDTO.setPoint(userDTO.getPoint() - 1000 + usePoint);
 		}else if(level.equals("B")) {
-			userDTO.setPoint(userDTO.getPoint() - 2000);
+			usePoint = 20000 - paymentDTO.getTotalAmount();
+			userDTO.setPoint(userDTO.getPoint() - 2000 + usePoint);
 		}else {
-			userDTO.setPoint(userDTO.getPoint() - 3000);
+			usePoint = 30000 - paymentDTO.getTotalAmount();
+			userDTO.setPoint(userDTO.getPoint() - 3000 + usePoint);
 		}
         
         ticketDAO.updatePoint(userDTO);
-        return level;
+        
+        //alert창에 띄울 정보들
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("level", level);
+        map.put("usePoint", usePoint);
+        map.put("totalAmount", paymentDTO.getTotalAmount());
+        return map;
     }
     
     

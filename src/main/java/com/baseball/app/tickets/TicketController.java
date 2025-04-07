@@ -67,18 +67,21 @@ public class TicketController {
 		ticketDTO = ticketService.getPaymentDetail(ticketDTO, session);
 		model.addAttribute("dto", ticketDTO);
 		
+		String level = ticketDTO.getSeatNum().substring(0, 1);
+		model.addAttribute("level", level);
+		
 		return "tickets/paymentDetail";
 	}
 	
 	@RequestMapping(value="paymentAdd", method=RequestMethod.POST)
-	public String paymentAdd(PaymentDTO paymentDTO, HttpSession session, Model model) throws Exception {
+	public String paymentAdd(PaymentDTO paymentDTO, UserDTO usePoint, HttpSession session, Model model) throws Exception {
 		TicketDTO ticketDTO = new TicketDTO();
 		String productName [] = paymentDTO.getProductName().split("_");
 		ticketDTO.setMatchNum(Long.parseLong(productName[0]));
 		ticketDTO.setSeatNum(productName[1]);
 		ticketDTO.setPaymentId(paymentDTO.getPaymentId());
 		
-		int result = ticketService.paymentAdd(paymentDTO, session, productName);
+		int result = ticketService.paymentAdd(paymentDTO, usePoint, session, productName);
 		int result2 = ticketService.ticketStatusComplete(ticketDTO);
 		
 		if(result > 0 && result2 > 0) {
