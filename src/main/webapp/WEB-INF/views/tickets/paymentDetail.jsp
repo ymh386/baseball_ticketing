@@ -98,12 +98,20 @@
 									<h5 class="card-semititle">주문금액 총 ${dto.paymentDTO.totalAmount}</h5>
 								</div>
 								<div class="alert alert-primary">
-	  
-									<p class="card-text"> 상품금액 ${dto.paymentDTO.totalAmount}</p>
+	  								<c:choose>
+	  									<c:when test="${level eq 'C'}"><p class="card-text"> 상품금액 15000</p></c:when>
+	  									<c:when test="${level eq 'B'}"><p class="card-text"> 상품금액 20000</p></c:when>
+	  									<c:otherwise><p class="card-text"> 상품금액 30000</p></c:otherwise>
+	  								</c:choose>
+									
 								</div>
 								<div class="alert alert-primary">
-	  
-									<p class="card-text"> 쿠폰할인 0</p>
+	  								<c:choose>
+	  									<c:when test="${level eq 'C'}"><p class="card-text"> 할인 ${15000-dto.paymentDTO.totalAmount}</p></c:when>
+	  									<c:when test="${level eq 'B'}"><p class="card-text"> 할인 ${20000-dto.paymentDTO.totalAmount}</p></c:when>
+	  									<c:otherwise><p class="card-text"> 할인 ${30000-dto.paymentDTO.totalAmount}</p></c:otherwise>
+	  								</c:choose>
+									
 								</div>
 								<div class="alert alert-primary">
 	  
