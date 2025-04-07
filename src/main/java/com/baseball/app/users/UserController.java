@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -50,9 +51,14 @@ public class UserController {
     	
     }
 
-    // 로그인 처리
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(UserDTO userDTO, HttpSession session, Model model) {
+    public String login(UserDTO userDTO,
+                        HttpSession session,
+                        HttpServletResponse response,
+                        @RequestParam(value = "saveId", required = false) String saveId,
+                        @RequestParam(value = "autoLogin", required = false) String autoLogin,
+                        Model model) {
+
         boolean hasError = false;
 
         if (userDTO.getUserId() == null || userDTO.getUserId().trim().isEmpty()) {
@@ -66,7 +72,7 @@ public class UserController {
         }
 
         if (hasError) {
-            return "users/login"; // 에러가 있으면 다시 로그인 페이지로 이동
+            return "users/login";
         }
 
         try {
@@ -78,6 +84,28 @@ public class UserController {
 
         if (userDTO != null) {
             session.setAttribute("user", userDTO);
+
+            // 아이디 저장
+            if (saveId != null) {
+                Cookie idCookie = new Cookie("userId", userDTO.getUserId());
+                idCookie.setMaxAge(60 * 60 * 24 * 7); // 7일
+                idCookie.setPath("/");
+                response.addCookie(idCookie);
+            } else {
+                Cookie idCookie = new Cookie("userId", null);
+                idCookie.setMaxAge(0); // 삭제
+                idCookie.setPath("/");
+                response.addCookie(idCookie);
+            }
+
+            // 자동 로그인 처리 
+            if (autoLogin != null) {
+                Cookie autoLoginCookie = new Cookie("autoLogin", userDTO.getUserId());
+                autoLoginCookie.setMaxAge(60 * 60 * 24 * 7);
+                autoLoginCookie.setPath("/");
+                response.addCookie(autoLoginCookie);
+            }
+
             return "redirect:../";
         }
 
@@ -88,22 +116,28 @@ public class UserController {
 
 	
 	
-	@RequestMapping(value ="logout", method = RequestMethod.GET)
-	public String logout(HttpSession session) throws Exception{
-		
-		// user속성에 null 값 대입 
-		session.setAttribute("user", null);
-		
-		// user 속성 삭제 
-		session.removeAttribute("user");
-		
-		// session을 삭제시킨다. 유지시간을 0으로 세팅
-		session.invalidate();
-		
-		return "redirect:../";
-		
-		
-	}
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        // 세션에서 사용자 정보 제거
+        session.removeAttribute("user");
+        session.invalidate();
+
+        // 쿠키 삭제 (autoLogin, rememberId)
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("autoLogin".equals(cookie.getName()) || "rememberId".equals(cookie.getName())) {
+                    cookie.setMaxAge(0); // 쿠키 삭제
+                    cookie.setPath("/"); // 경로 지정
+                    response.addCookie(cookie); // 삭제된 쿠키 응답에 추가
+                }
+            }
+        }
+
+        return "redirect:../";
+    }
+
 	
 	@RequestMapping(value="findId", method = RequestMethod.GET)
 	public String findId() throws Exception{
@@ -263,9 +297,13 @@ public class UserController {
 	
 	
 	@RequestMapping(value="userDelete", method= RequestMethod.GET)
-	public String userDelete() throws Exception{
+	public String userDelete(HttpSession session) throws Exception{
+		 UserDTO user = (UserDTO) session.getAttribute("user");
 		
-		
+	    if (user == null) {
+	        // 세션에 사용자 정보가 없으면 로그인 페이지로 리다이렉트
+	        return "redirect:./login";
+	    }
 		
 		return "users/userDelete";
 	}

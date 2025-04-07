@@ -23,6 +23,12 @@
 			<exclude-mapping path="/tickets/delete"/>
 			<beans:ref bean="ticketingDeleteInterceptor"/>
 		</interceptor>
+		
+	<!-- 자동 로그인 인터셉터 -->
+	<interceptor>
+		<mapping path="/**"/>
+		<beans:ref bean="autoLoginInterceptor"/>
+	</interceptor>
 	</interceptors>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
@@ -43,4 +49,9 @@
 	
 	
 	
+	
+	
 </beans:beans>
+
+
+

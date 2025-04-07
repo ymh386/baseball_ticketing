@@ -15,7 +15,7 @@
 	function execDaumPostcode() {
 		new daum.Postcode({
 			oncomplete : function(data) {
-				var fullAddress = data.zonecode + " " + data.address;
+				let fullAddress = data.zonecode + " " + data.address;
 				document.getElementById("address").value = fullAddress;
 				document.getElementById("detailAddress").focus();
 			}
@@ -23,8 +23,8 @@
 	}
 
 	function mergeAddress() {
-		var baseAddress = document.getElementById("address").value;
-		var detailAddress = document.getElementById("detailAddress").value;
+		let baseAddress = document.getElementById("address").value;
+		let detailAddress = document.getElementById("detailAddress").value;
 		document.getElementById("address").value = baseAddress + " "
 				+ detailAddress;
 	}
