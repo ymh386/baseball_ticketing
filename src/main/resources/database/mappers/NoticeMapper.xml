@@ -44,7 +44,7 @@
   		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
   			<id column="FILENUM" property="fileNum"/>
   			<result column="FILENAME" property="fileName"/>
-  			<result column="oldName" property="oldName"/>
+  			<result column="ORIGINALNAME" property="originalName"/>
   		</collection>
   	
   	</resultMap>
