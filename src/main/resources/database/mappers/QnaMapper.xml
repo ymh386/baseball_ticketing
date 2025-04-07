@@ -26,6 +26,12 @@
   			SELECT * FROM COMMENTS WHERE COMMENTREF=#{commentRef} AND COMMENTSTEP > 0 ORDER BY COMMENTSTEP ASC
   		</select>
   		
+  		<select id="getSubCommentCount" resultType="CommentDTO">
+  			SELECT COMMENTREF FROM
+			(SELECT COMMENTREF, COUNT(COMMENTREF) C FROM COMMENTS GROUP BY COMMENTREF) T
+			WHERE C > 1
+  		</select>
+  		
   		<select id="getFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
   			SELECT * FROM QNAFILES WHERE FILENUM = #{fileNum}
   		</select>
@@ -60,8 +66,8 @@
 	  		<collection property="commentDTOs" javaType="List" ofType="CommentDTO">
 	  			<id column="COMMENTNUM" property="commentNum"/>
 	  			<result column="BOARDNUM" property="boardNum"/>
-	  			<result column="COMMENTDATE" property="boardDate"/>
-	  			<result column="COMMENTCONTENT" property="boardContent"/>
+	  			<result column="BOARDDATE" property="boardDate"/>
+	  			<result column="BOARDCONTENT" property="boardContent"/>
 	  			<result column="USERID" property="userId"/>
 	  			<result column="COMMENTREF" property="commentRef"/>
 	  			<result column="COMMENTSTEP" property="commentStep"/>
@@ -87,13 +93,22 @@
 		</insert>
 		
 		<insert id="addComment" parameterType="CommentDTO">
-			INSERT INTO COMMENTS (COMMENTNUM, BOARDNUM, COMMENTDATE, COMMENTCONTENT, USERID, 
+			INSERT INTO COMMENTS (COMMENTNUM, BOARDNUM, BOARDDATE, BOARDCONTENT, USERID, 
 			COMMENTREF, COMMENTSTEP, COMMENTDEPTH)
 			
 			VALUES (COMMENTS_SEQ.NEXTVAL, #{boardNum}, SYSDATE, #{boardContent}, #{userId}, 
 			COMMENTS_SEQ.CURRVAL, 0, 0)
 		</insert>
 		
+		<insert id="addSubComment" parameterType="CommentDTO">
+			INSERT INTO COMMENTS (COMMENTNUM, BOARDNUM, BOARDDATE, BOARDCONTENT, USERID, 
+			COMMENTREF, COMMENTSTEP, COMMENTDEPTH)
+			
+			VALUES (COMMENTS_SEQ.NEXTVAL, #{boardNum}, SYSDATE, #{boardContent}, #{userId}, 
+			#{commentRef}, 
+			(SELECT MAX(COMMENTSTEP) FROM (SELECT COMMENTSTEP FROM COMMENTS WHERE COMMENTREF = #{commentRef}) M)+1,
+			0)	
+		</insert>
 		
 		<update id="update" parameterType="QnaDTO">
 			UPDATE QNA SET

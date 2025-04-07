@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.window-comments {
+	border: 1px solid black
+	height: 900px;
+}
+
+.wrapper-comments {
+	border: 1px solid black
+}
+
+.comments {
+	border: 1px solid black
+	height: 50px;
+	
+}
+
+.wrapper-subComments {
+	border: 1px solid black
+	display: none;
+}
+
+.subComments {
+	border: 1px solid black
+}

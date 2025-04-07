@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
+<link rel="stylesheet" href="/resources/css/comments.css" />
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
@@ -84,47 +85,56 @@
 	
 	<c:if test="${kind ne 'notice'}">
 	
+	
 		<div class="container-fluid my-5">
 			<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
-		<!-- contents 내용 작성 -->
-		<h1>댓글 리스트</h1>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>부모글</th>
-					<th>답글번호</th>					
-					<th>작성자</th>
-					<th>내용</th>
-					<th>작성일</th>
-					<th>삭제</th>	
-					<th>답글</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${dto.commentDTOs}" var="v">
-				<tr>
-					<td>${v.boardNum}</td>
-					<td>${v.commentNum}</td>
-					<td>${v.userId}</td>
-					<td>${v.boardContent}</td>
-					<td>${v.boardDate}</td>
-					<td><button onclick="location.href='./deleteComment?commentNum=${v.commentNum}
-					&boardNum=${v.boardNum}'">X</button></td>
-					<td><button class="ctcs" id="ctc${v.commentNum}" data-num="${v.commentNum}" data-check="1">답글</button></td>					
-				</tr>
-				<tr class="subComments" id="subComment${v.commentNum}" data-num="${v.commentNum}" >
-					
-				</tr>				
-				</c:forEach>
-			</tbody>
-		</table>
-		
+			
 		<form action="./addComment?boardNum=${dto.boardNum}" method="post" enctype="multipart/form-data">
 			<label for="commentLabel" class="comment-label">내용</label>
-			<textarea class="row col-md-12 mb-3" id="boardContent" name="boardContent"></textarea>
-			<button type="submit" id="commentSubmit" name="commentSubmit">댓글 등록</button>
+			<span><textarea class="row col-md-12" id="boardContent" name="boardContent"></textarea></span>
+			<span><button class="row col-md-12 mb-3" type="submit" id="commentSubmit" name="commentSubmit">댓글 등록</button></span>
 		</form>
+			
+		<button id="testButton">테스트</button>	
+		<!-- contents 내용 작성 -->
 		
+		<div class="댓글창 window-comments">
+			<h1>댓글 리스트</h1>
+		
+			<c:forEach items="${dto.commentDTOs}" var="v">
+			<!-- 댓글 반복문 -->
+			<div class="댓글래퍼 wrapper-comments">
+			
+				<div class="댓글 comments" data-ref="${v.commentRef}">
+					<span>${v.boardNum}</span>
+					<span>${v.commentNum}</span>
+					<span>${v.userId}</span>
+					<span>${v.boardContent}</span>
+					<span>${v.boardDate}</span>
+					<span><button onclick="location.href='./deleteComment?commentNum=${v.commentNum}&boardNum=${v.boardNum}'">
+						X</button></span>
+					<span><button class="답글 addSubComments" data-rnum="${v.commentRef}" data-cnum="${v.commentNum}" data-bnum="${v.boardNum}">					
+						답글</button></span>
+					<span>
+						<c:forEach items="${list}" var="l">
+							<c:if test="${l.commentRef eq v.commentRef}">
+								<button class='ctcs' id='ctc${v.commentNum}' data-num='${v.commentNum}' data-check='1'>답글 보기</button>	
+							</c:if>
+						</c:forEach>
+					</span>
+				</div>
+				
+				<div class="답글래퍼 wrapper-subComments" id="idSubComment${v.commentNum}" data-num="${v.commentNum}">
+					<!-- 답글 반복문 -->
+					
+					
+				</div>
+			</div>
+			</c:forEach>
+		</div>
+		
+		
+			
 	</div>
 </div>
 
