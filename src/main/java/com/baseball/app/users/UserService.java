@@ -170,8 +170,6 @@ public class UserService {
 
 
     // 환불 처리 메서드
-    public void refundTickets(TicketDTO ticketDTO) throws Exception{
-    	System.out.println("PaymentId: " + ticketDTO.getPaymentId());
     public String refundTickets(TicketDTO ticketDTO, HttpSession session) throws Exception{
     	System.out.println("💰 PaymentId: " + ticketDTO.getPaymentId());
         // 1. 티켓 상태를 '환불완료'로 변경
