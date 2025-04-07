@@ -158,6 +158,10 @@
 		    WHERE ROWNUM = 1
 </select>
 
+<select id="getTotalAmount" parameterType="TicketDTO" resultType="paymentDTO">
+	SELECT TOTALAMOUNT FROM PAYMENTS WHERE PAYMENTID = #{paymentId}
+</select>
+
 
 
 

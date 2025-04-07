@@ -56,21 +56,6 @@
             </div>
 
 
-
-					<!-- 버튼 목록 -->
-					<div class="d-grid gap-2 mt-3">
-						<button class="btn btn-outline-primary"
-							onclick="location.href='./pwUpdate'">비밀번호 변경</button>
-						<button class="btn btn-outline-success"
-							onclick="location.href='./getTicket'">티켓 확인</button>
-						<button class="btn btn-outline-info"
-							onclick="location.href='../tickets/paymentList'">결제 내역</button>
-						<button class="btn btn-outline-danger"
-							onclick="location.href='./userDelete'">회원탈퇴</button>
-					</div>
-				</div>
-			</div>
-
 			<!-- 오른쪽: 응원팀 정보 및 최근 경기 -->
 			<div class="col-md-8">
 				<div class="card p-3">

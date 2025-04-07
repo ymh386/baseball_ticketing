@@ -86,42 +86,11 @@
 		    
 		  </ul>
 		</nav>
-		
+		<button type="button" onclick="location.href='/users/mypage'">뒤로 가기</button>
 	</div>
 </div>
-								<table class="table table-striped">
-						    <thead class="table-primary">
-						        <tr>
-						            <th>결제번호</th>
-						            <th>결제상태</th>
-						            <th>결제일시</th>
-						            <th>총 결제금액</th>
-						            <th>상품명</th>
-						        </tr>
-						    </thead>
-						    <tbody>
-						        <c:forEach items="${list}" var="v">
-						        <tr class="payment-row" data-status="${v.paymentStatus}">
-						            <c:choose>
-						                <c:when test="${v.paymentStatus eq '승인'}">
-						                    <td><a href="./paymentDetail?paymentId=${v.paymentId}">${v.paymentId}</a></td>
-						                </c:when>
-						                <c:otherwise>
-						                    <td>${v.paymentId}</td>
-						                </c:otherwise>
-						            </c:choose>
-						            <td>${v.paymentStatus}</td>
-						            <td>${v.paymentDate}</td>
-						            <td>${v.totalAmount}</td>
-						            <td>${v.productName}</td>
-						        </tr>
-						        </c:forEach>
-						    </tbody>
-						</table>
-
-							   <button type="button" onclick="location.href='/users/mypage'">뒤로 가기</button>
-						</div>
-					</div>
+ 
+						
 			
 			<script>
 			function filterTickets() {

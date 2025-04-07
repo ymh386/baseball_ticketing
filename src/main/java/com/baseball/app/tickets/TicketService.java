@@ -53,7 +53,7 @@ public class TicketService {
 		return ticketDAO.add(ticketDTO);
 	}
 	
-	public int paymentAdd(PaymentDTO paymentDTO, HttpSession session, String[] productName) throws Exception {
+	public int paymentAdd(PaymentDTO paymentDTO, UserDTO usePoint, HttpSession session, String[] productName) throws Exception {
 		
 		UserDTO userDTO = (UserDTO)session.getAttribute("user");
 		paymentDTO.setUserId(userDTO.getUserId());
@@ -61,6 +61,8 @@ public class TicketService {
 		
 		String level = productName[1].substring(0, 1);
 
+		userDTO.setPoint(userDTO.getPoint() - usePoint.getPoint());
+		
 		if(level.equals("C")) {
 			userDTO.setPoint(userDTO.getPoint() + 1000);
 		}else if(level.equals("B")) {

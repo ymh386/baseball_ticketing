@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.baseball.app.matches.MatchDTO;
+import com.baseball.app.tickets.PaymentDTO;
 import com.baseball.app.tickets.TicketDTO;
 
 @Repository
@@ -107,6 +108,11 @@ public class UserDAO {
     
     public MatchDTO getUpcomingMatchByTeam(Long teamNum) throws Exception {
     	return sqlSession.selectOne(NAMESPACE + "getUpcomingMatchByTeam", teamNum);
+    }
+    
+    // 총 결제금액 가져오기
+    public PaymentDTO getTotalAmount(TicketDTO ticketDTO) throws Exception {
+    	return sqlSession.selectOne(NAMESPACE + "getTotalAmount", ticketDTO);
     }
     
     
