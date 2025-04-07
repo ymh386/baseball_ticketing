@@ -10,6 +10,7 @@ public class NoticeDTO extends BoardDTO{
 	
 	
 	private List<BoardFileDTO> boardFileDTOs;
+	
 
 	public List<BoardFileDTO> getBoardFileDTOs() {
 		return boardFileDTOs;
@@ -18,7 +19,8 @@ public class NoticeDTO extends BoardDTO{
 	public void setBoardFileDTOs(List<BoardFileDTO> boardFileDTOs) {
 		this.boardFileDTOs = boardFileDTOs;
 	}
-	
+
+
 	
 	
 }

@@ -175,7 +175,16 @@ public class QnaService implements BoardService {
 	// 댓글 작성
 	public int addComment(CommentDTO commentDTO) throws Exception {
 		
-		int result = qnaDAO.addComment(commentDTO);
+		int result = 0;
+		
+		if(commentDTO.getCommentNum() != null) {
+			result = qnaDAO.addSubComment(commentDTO);
+			
+		} else {
+			result = qnaDAO.addComment(commentDTO);
+			
+		}
+		
 		
 		return result;
 	}
@@ -190,35 +199,40 @@ public class QnaService implements BoardService {
 	}
 	
 	
+	// 대댓글이 여러개인 댓글 조회
+	public List<CommentDTO> getSubCommentCount() throws Exception {
+		
+		List<CommentDTO> list = qnaDAO.getSubCommentCount();
+		
+		
+		return list;
+	}
+	
+	
 	// 대댓글 조회
-	public Map<String, Object> getSubCommentList(CommentDTO commentDTO) throws Exception {
+	public List<Map<String, String>> getSubCommentList(CommentDTO commentDTO) throws Exception {
 		
-		List<CommentDTO> getList = qnaDAO.getSubCommentList(commentDTO);
+		List<CommentDTO> list = qnaDAO.getSubCommentList(commentDTO);
 		
-		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
-		Map<String, String> data = null;
+		List<Map<String, String>> result = new ArrayList<Map<String,String>>();		
 		
 		// DB에서 정보를 가져와서 반복 처리
-		for (CommentDTO dto : getList) {
-			data = new HashMap<String, String>();
+		for (CommentDTO dto : list) {
+			Map<String, String> map = new HashMap<String, String>();
 			
-			data.put("commentRef", String.valueOf(dto.getCommentRef()));
-			data.put("commentStep", String.valueOf(dto.getCommentStep()));
-			data.put("userId", dto.getUserId());
+			map.put("commentRef", String.valueOf(dto.getCommentRef())); //부모글 자리 들어갈 것
+			map.put("commentStep", String.valueOf(dto.getCommentStep())); //답글 번호 자리 들어갈 것
+			map.put("userId", dto.getUserId());
 			
-			data.put("commentContent", dto.getBoardContent());
-			System.out.println("content :" + dto.getBoardContent());
+			map.put("boardContent", dto.getBoardContent());
+						
+			map.put("boardDate", String.valueOf(dto.getBoardDate()));
 			
-			data.put("commentDate", String.valueOf(dto.getBoardDate()));
-			System.out.println("date :" + dto.getBoardDate());
+			map.put("commentNum", String.valueOf(dto.getCommentNum()));
+			map.put("boardNum", String.valueOf(dto.getBoardNum()));
 			
-			list.add(data);
+			result.add(map);
 		}
-		
-		// 결과를 담을 Map을 생성
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("list", list);
-		
 		
 		return result; 
 	}

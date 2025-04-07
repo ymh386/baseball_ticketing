@@ -51,6 +51,12 @@ public class UserService {
 
         return null;
     }
+    
+    public UserDTO getUserById(String userId)throws Exception {
+        return userDAO.getDetail(userId); // 아이디로 유저 조회
+    }
+    
+    
 
     // 이메일 존재 여부 확인
     public boolean isEmailExists(UserDTO userDTO) throws Exception {
@@ -169,9 +175,9 @@ public class UserService {
     
 
 
-    // 환불 처리 메서드
+
     public String refundTickets(TicketDTO ticketDTO, HttpSession session) throws Exception{
-    	System.out.println("💰 PaymentId: " + ticketDTO.getPaymentId());
+    	System.out.println("PaymentId: " + ticketDTO.getPaymentId());
         // 1. 티켓 상태를 '환불완료'로 변경
 //        userDAO.updateState(ticketDTO);
     	// 1-1. 티켓을 삭제

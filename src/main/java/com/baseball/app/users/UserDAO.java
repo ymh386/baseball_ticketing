@@ -38,6 +38,12 @@ public class UserDAO {
 		
 	}
 	
+	public UserDTO getDetail(String userId) throws Exception{
+		
+		return sqlSession.selectOne(NAMESPACE+"getDetail",userId);
+		
+	}
+	
 	
 	//id 찾기
 	public UserDTO findId(UserDTO userDTO) throws Exception{
