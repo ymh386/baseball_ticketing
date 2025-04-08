@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
-
+<link rel="stylesheet" href="/resources/css/toTop.css" />
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
@@ -60,7 +60,7 @@
 	</div>
 </div>
 
-
+<script src="/resources/js/qna/toTop.js"></script>
 <script src="/resources/js/matches/matchList.js"></script>
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>

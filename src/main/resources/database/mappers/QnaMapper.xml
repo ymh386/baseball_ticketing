@@ -35,17 +35,14 @@
   		<select id="getFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
   			SELECT * FROM QNAFILES WHERE FILENUM = #{fileNum}
   		</select>
- 						
+ 		
+ 		<!-- 구분선 -->				
 		<select id="getDetail" parameterType="QnaDTO" resultMap="getDetailResult">
-  		SELECT * FROM COMMENTS C
-		RIGHT OUTER JOIN (
 			SELECT * FROM QNA N
 			LEFT OUTER JOIN QNAFILES QF
 			USING(BOARDNUM)
-			WHERE BOARDNUM = #{boardNum}
-		) QQF
-		USING(BOARDNUM)
-		WHERE BOARDNUM = #{boardNum} AND COMMENTSTEP = 0 ORDER BY COMMENTNUM DESC
+			WHERE BOARDNUM = #{boardNum}		
+  		
   		</select>
   	
 	  	 <resultMap type="QnaDTO" id="getDetailResult">
@@ -62,7 +59,22 @@
 	  			<result column="FILENAME" property="fileName"/>
 	  			<result column="ORIGINALNAME" property="originalName"/>
 	  		</collection>
-	  		
+	  			  	
+	  	</resultMap>		
+		
+		
+		<!-- 구분선 -->
+		<select id="getCommentDetail" parameterType="QnaDTO" resultMap="getCommentResult">
+			SELECT * FROM COMMENTS
+			WHERE BOARDNUM = #{boardNum} AND COMMENTSTEP = 0 ORDER BY COMMENTNUM DESC
+  		</select>
+  		
+  		<resultMap type="QnaDTO" id="getCommentResult">
+  			<id column="BOARDNUM" property="boardNum"/>
+	  		<result column="BOARDDATE" property="boardDate"/>
+	  		<result column="BOARDCONTENT" property="boardContent"/>
+  		
+	  		<!-- 1:N ofType="Generic type명" -->
 	  		<collection property="commentDTOs" javaType="List" ofType="CommentDTO">
 	  			<id column="COMMENTNUM" property="commentNum"/>
 	  			<result column="BOARDNUM" property="boardNum"/>
@@ -73,10 +85,11 @@
 	  			<result column="COMMENTSTEP" property="commentStep"/>
 	  			<result column="COMMENTDEPTH" property="commentDepth"/>
 	  		</collection>
-	  	
-	  	</resultMap>		
+	  			  	
+	  	</resultMap>
 		
 		
+		<!-- 구분선 -->		
 		<insert id="add" parameterType="QnaDTO">
 			<!-- 메인쿼리 실행전(Beafore)에 SELECTKEY의 결과물인 Long타입의 값을 NoticeDTO의 boardNum에 대입 -->
 	  		<selectKey order="BEFORE" keyProperty="boardNum" resultType="Long">
@@ -131,9 +144,12 @@
 		</delete>
 		
 		<delete id="deleteComment" parameterType="CommentDTO">
-			DELETE COMMENTS WHERE COMMENTNUM = #{commentNum}
+			DELETE COMMENTS WHERE COMMENTREF = #{commentRef}
 		</delete>
 		
+		<delete id="deleteSubComment" parameterType="CommentDTO">
+			DELETE COMMENTS WHERE COMMENTNUM = #{commentNum} AND COMMENTSTEP = #{commentStep}
+		</delete>
 		
 		
 		

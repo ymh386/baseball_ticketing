@@ -89,22 +89,22 @@
 
 	
 	<!-- 404 Not Found -->
-	<error-page>
+	<!-- <error-page>
 	    <error-code>404</error-code>
 	    <location>/WEB-INF/views/errors/error.jsp</location>
 	</error-page>
 	
-	<!-- 500 Internal Server Error -->
+	500 Internal Server Error
 	<error-page>
 	    <error-code>500</error-code>
 	    <location>/WEB-INF/views/errors/error.jsp</location>
 	</error-page>
 	
-	<!-- 모든 예외 (Exception.class) -->
+	모든 예외 (Exception.class)
 	<error-page>
 	    <exception-type>java.lang.Exception</exception-type>
 	    <location>/WEB-INF/views/errors/error.jsp</location>
-	</error-page>	
+	</error-page> -->	
 	
 
 

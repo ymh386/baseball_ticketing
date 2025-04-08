@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/comments.css" />
+<link rel="stylesheet" href="/resources/css/toTop.css" />
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
@@ -51,7 +52,7 @@
 					</c:if>
 
 		  ${dto.boardContent}
-		  <img src="/resources/images/qna/dffaa971-caff-4e64-aeed-dac7b9f566da_img3.jpg">
+		  
 		</div>
 		
 					
@@ -90,30 +91,30 @@
 			<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
 			
 		<form action="./addComment?boardNum=${dto.boardNum}" method="post" enctype="multipart/form-data">
-			<label for="commentLabel" class="comment-label">내용</label>
+			
 			<span><textarea class="row col-md-12" id="boardContent" name="boardContent"></textarea></span>
 			<span><button class="row col-md-12 mb-3" type="submit" id="commentSubmit" name="commentSubmit">댓글 등록</button></span>
 		</form>
 			
-		<button id="testButton">테스트</button>	
+			
 		<!-- contents 내용 작성 -->
 		
-		<div class="댓글창 window-comments">
-			<h1>댓글 리스트</h1>
-		
+		<div class="댓글창 window-comments" id="id-window-comment">
+		<h1>댓글 리스트</h1>
+		<c:if test="${dto.commentDTOs.size() ne 0}" >
 			<c:forEach items="${dto.commentDTOs}" var="v">
 			<!-- 댓글 반복문 -->
 			<div class="댓글래퍼 wrapper-comments">
 			
-				<div class="댓글 comments" data-ref="${v.commentRef}">
+				<div class="댓글 comments" data-ref="${v.commentRef}" data-cnum="${v.commentNum}" data-bnum="${v.boardNum}">
 					<span>${v.boardNum}</span>
 					<span>${v.commentNum}</span>
 					<span>${v.userId}</span>
 					<span>${v.boardContent}</span>
 					<span>${v.boardDate}</span>
-					<span><button onclick="location.href='./deleteComment?commentNum=${v.commentNum}&boardNum=${v.boardNum}'">
+					<span><button onclick="location.href='./deleteComment?commentRef=${v.commentRef}&boardNum=${v.boardNum}'">
 						X</button></span>
-					<span><button class="답글 addSubComments" data-rnum="${v.commentRef}" data-cnum="${v.commentNum}" data-bnum="${v.boardNum}">					
+					<span><button class="답글 subWindowMakers" data-check="0" data-rnum="${v.commentRef}">					
 						답글</button></span>
 					<span>
 						<c:forEach items="${list}" var="l">
@@ -131,7 +132,9 @@
 				</div>
 			</div>
 			</c:forEach>
-		</div>
+		
+		</c:if>
+	</div>
 		
 		
 			
@@ -140,7 +143,10 @@
 
 </c:if>
 
+
+
 <script src="/resources/js/qna/comment.js"></script>
+<script src="/resources/js/qna/toTop.js"></script>
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
 </body>

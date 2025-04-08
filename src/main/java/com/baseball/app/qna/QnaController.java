@@ -57,11 +57,12 @@ public class QnaController {
 	public String getDetail(QnaDTO qnaDTO, Model model) throws Exception {
 		
 		qnaDTO = (QnaDTO)qnaService.getDetail(qnaDTO);
-		model.addAttribute("dto", qnaDTO);
+		model.addAttribute("dto", qnaDTO);		
 		
 		// 대댓글 있는 댓글의 list 가져오기
 		List<CommentDTO> list = qnaService.getSubCommentCount();
 		model.addAttribute("list", list);
+		
 		
 		return "board/boardDetail";
 	}
@@ -153,6 +154,7 @@ public class QnaController {
 	@RequestMapping(value = "deleteComment", method = RequestMethod.GET)
 	public String deleteComment(CommentDTO commentDTO) throws Exception {
 		
+		// subComment까지 다 지워야 하기 때문에 commentNum이 아닌 commentRef를 파라미터로 받는다.
 		int result = qnaService.deleteComment(commentDTO);
 		
 		return "redirect:./detail?boardNum="+commentDTO.getBoardNum();

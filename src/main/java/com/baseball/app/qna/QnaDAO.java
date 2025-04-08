@@ -48,6 +48,14 @@ public class QnaDAO implements BoardDAO {
 
 		return sqlSession.selectOne(NAMESPACE+"getDetail", boardDTO);
 	}
+	
+	//보드 디테일에 뿌릴 comment들 따로 조회
+	public BoardDTO getCommentDetail(BoardDTO boardDTO) throws Exception {
+
+		BoardDTO result = sqlSession.selectOne(NAMESPACE+"getCommentDetail", boardDTO); 
+		System.out.println("qnaDAO result : " + result);
+		return result;
+	}
 
 	@Override
 	public int add(BoardDTO boardDTO) throws Exception {
@@ -134,6 +142,15 @@ public class QnaDAO implements BoardDAO {
 		return sqlSession.delete(NAMESPACE+"deleteComment", boardDTO);
 	}
 	
+	
+	//
+	public int deleteSubComment(BoardDTO boardDTO) throws Exception {
+		
+		return sqlSession.delete(NAMESPACE+"deleteSubComment", boardDTO);
+	}
+	
+	
+
 	
 
 }

@@ -5,38 +5,88 @@
 const ctcs = document.getElementsByClassName("ctcs");
 const wrapper_subComments = document.getElementsByClassName("wrapper-subComments");
 
-const addSubComments = document.getElementsByClassName("addSubComments");
+const subWindowMakers = document.getElementsByClassName("subWindowMakers");
+
+const id_window_comment = document.getElementById("id-window-comment");
+
+//
+id_window_comment.addEventListener('click', function(e){
+  
+  if(e.target.classList.contains('subWindowBtns')){
+    //console.log(e.target.parentNode.firstChild);
+    let formData = new FormData();
+
+    textInput = e.target.parentNode.firstChild;
+    let boardContent = textInput.innerHTML;
+
+    let comment = e.target.parentNode.parentNode;
+    //console.log(comment);
+
+    formData.append("boardContent", boardContent);
+    formData.append("commentRef", comment.getAttribute("data-ref"));
+    formData.append("commentNum", comment.getAttribute("data-cnum"));
+    formData.append("boardNum", comment.getAttribute("data-bnum"));
+
+
+    fetch("./addComment", {
+      method: 'POST',
+      cache: 'no-cache',
+      body: formData
+    })
+    .then(r => r.text())
+    .then(text => {
+      console.log(text);
+      location.href=`./detail?boardNum=${comment.getAttribute("data-bnum")}`
+    })
+
+  }
+
+})
 
 
 //
-for(let addSubComment of addSubComments) {
-  addSubComment.addEventListener("click", function() {
+for(let subWindowMaker of subWindowMakers) {
+  subWindowMaker.addEventListener("click", function() {
+    let check = subWindowMaker.getAttribute("data-check");
 
-    let text = document.createElement("textarea");
-    let go = document.createElement("button");
-    go.innerText="작성";
-    let del = document.createElement("button");
-    del.innerText="X";
-    addSubComment.parentNode.append(text);
-    addSubComment.parentNode.append(go);
-    addSubComment.parentNode.append(del);
+    if(check == 0) {
+      let subWindow = document.createElement("div");
+      subWindow.setAttribute("class", "subWindows");
+      subWindow.setAttribute("data-rnum", subWindowMaker.getAttribute("data-rnum"));
+      
+      let text = document.createElement("div");
+      text.setAttribute("class", "subWindowTexts")
+      text.setAttribute("contenteditable", "true")
+  
+      let goBtn = document.createElement("button");
+      goBtn.setAttribute("class", "subWindowBtns btn btn-success")
+      goBtn.innerText="작성";
+      
+      subWindow.append(text);
+      subWindow.append(goBtn);
+      
+      const comments = document.getElementsByClassName("comments");
+      for(let comment of comments){
+        if(comment.getAttribute("data-ref") == subWindowMaker.getAttribute("data-rnum")){
+          comment.append(subWindow);
+        }
+      }
 
-  //   let formData = new FormData();
-  //   formData.append("commentRef", addSubComment.getAttribute("data-rnum"));
-  //   formData.append("commentNum", addSubComment.getAttribute("data-cnum"));
-  //   formData.append("boardNum", addSubComment.getAttribute("data-bnum"));
-  //   formData.append("boardContent", "내용1");
+      subWindowMaker.setAttribute("data-check", "1");
 
-  //   fetch("./addComment", {
-  //     method: 'POST',
-  //     cache: 'no-cache',
-  //     body: formData
-  //   })
-  //   .then(r => r.text())
-  //   .then(text => {
-  //     console.log(text);
-  //     location.href=`./detail?boardNum=${addSubComment.getAttribute("data-bnum")}`
-  //   })
+    } else if(check == 1) {
+      let subWindows = document.getElementsByClassName("subWindows");
+      for(let subWindow of subWindows){
+        if(subWindow.getAttribute("data-rnum") == subWindowMaker.getAttribute("data-rnum")){
+          subWindow.remove();
+          break;
+        }
+      }
+      subWindowMaker.setAttribute("data-check", "0");
+      
+    }
+
+  
    })
 }
 
@@ -104,7 +154,7 @@ for(let ctc of ctcs ) {
 
                       let btn7 = document.createElement("button");
                       btn7.addEventListener("click", function(){
-                          location.href=`./deleteComment?commentNum=${dto.commentNum}&boardNum=${dto.boardNum}`;
+                          location.href=`./deleteComment?commentNum=${dto.commentNum}&commentStep=${dto.commentStep}&boardNum=${dto.boardNum}`;
                       })
                       
                       btn7.innerHTML = "X";
