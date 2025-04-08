@@ -48,13 +48,11 @@ public class AutoLoginInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
-        // 생략 가능 - 아무 작업 안 해도 OK
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
                                 Exception ex) throws Exception {
-        // 생략 가능 - 아무 작업 안 해도 OK
     }
 }
 

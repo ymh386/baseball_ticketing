@@ -2,6 +2,7 @@ package com.baseball.app.users;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -268,7 +270,14 @@ public class UserController {
 	
 	
 	@RequestMapping(value ="pwUpdate", method = RequestMethod.GET)
-	public String pwUpdate() throws Exception{
+	public String pwUpdate(HttpSession session) throws Exception{
+		
+		UserDTO user = (UserDTO)session.getAttribute("user");
+		
+		if(user == null) {
+			return "redirect:./login";
+			
+		}
 		
 		return "users/pwUpdate";
 			
@@ -357,7 +366,27 @@ public class UserController {
         
         return "commons/result"; 
     }
+	
+	// UserController.java
+	@RequestMapping(value = "checkId", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Boolean> checkId(@RequestBody UserDTO userDTO) {
+	    boolean exists = userService.checkIdExists(userDTO);
+	    Map<String, Boolean> result = new HashMap();
+	    result.put("exists", exists);
+	    return result;
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 	
 

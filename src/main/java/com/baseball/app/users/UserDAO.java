@@ -121,6 +121,10 @@ public class UserDAO {
     	return sqlSession.selectOne(NAMESPACE + "getTotalAmount", ticketDTO);
     }
     
+    //아이디 중복
+    public Long countByUserId(UserDTO userDTO) {
+        return sqlSession.selectOne(NAMESPACE+ "countByUserId", userDTO);
+    }
     
 
     

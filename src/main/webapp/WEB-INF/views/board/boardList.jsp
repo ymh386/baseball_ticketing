@@ -75,9 +75,31 @@
 		  </ul>
 		</nav>
 		
-		<div>
-		<a href="./add" class="btn btn-outline-success">글 작성</a>
-		</div>
+		
+		
+		
+					<c:choose>
+			    <c:when test="${kind eq 'notice' and sessionScope.user != null and sessionScope.user.userId eq 'wlsdnjs888'}">
+			        <div>
+			            <a href="./add" class="btn btn-outline-success">글 작성</a>
+			        </div>
+			    </c:when>
+			
+			    <c:when test="${kind eq 'qna' and sessionScope.user != null}">
+			        <div>
+			            <a href="./add" class="btn btn-outline-success">글 작성</a>
+			        </div>
+			    </c:when>
+			
+			    <c:otherwise>
+			        <c:if test="${kind eq 'qna'}">
+			            <p class="text-danger">※ Q&A 작성은 로그인 후 이용 가능합니다.</p>
+			        </c:if>
+			    </c:otherwise>
+			</c:choose>
+
+		
+		
 	</div>
 </div>
 

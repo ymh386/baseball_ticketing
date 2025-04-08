@@ -48,3 +48,44 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
         this.submit();
     }
 });
+
+
+document.getElementById("checkIdBtn").addEventListener("click", function () {
+    const userIdInput = document.getElementById("userId");
+    const userId = userIdInput.value.trim();
+    const errorDiv = document.getElementById("userIdError");
+
+    if (!userId) {
+        errorDiv.textContent = "아이디를 입력해주세요.";
+        userIdInput.focus();
+        return;
+    }
+
+    fetch("./checkId", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ userId: userId })  // JSON으로 보냄
+    })
+        .then(response => response.json()) 
+        .then(data => {
+            if (data.exists) {
+                errorDiv.textContent = "이미 사용 중인 아이디입니다.";
+                errorDiv.classList.remove("text-success");
+                errorDiv.classList.add("text-danger");
+            } else {
+                errorDiv.textContent = "사용 가능한 아이디입니다.";
+                errorDiv.classList.remove("text-danger");
+                errorDiv.classList.add("text-success");
+            }
+        })
+        .catch(error => {
+            console.error("에러 발생:", error);
+            errorDiv.textContent = "중복 확인 중 오류가 발생했습니다.";
+            errorDiv.classList.add("text-danger");
+        });
+});
+
+
+
