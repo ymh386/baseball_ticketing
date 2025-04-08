@@ -37,16 +37,13 @@
   		</select>
  						
 		<select id="getDetail" parameterType="QnaDTO" resultMap="getDetailResult">
-  		SELECT * FROM COMMENTS C
-		RIGHT OUTER JOIN (
-			SELECT * FROM QNA N
+  		SELECT * FROM QNA N
 			LEFT OUTER JOIN QNAFILES QF
 			USING(BOARDNUM)
 			WHERE BOARDNUM = #{boardNum}
-		) QQF
-		USING(BOARDNUM)
-		WHERE BOARDNUM = #{boardNum} AND COMMENTSTEP = 0 ORDER BY COMMENTNUM DESC
   		</select>
+  		
+  		
   	
 	  	 <resultMap type="QnaDTO" id="getDetailResult">
 	  		<id column="BOARDNUM" property="boardNum"/>
@@ -61,17 +58,6 @@
 	  			<id column="FILENUM" property="fileNum"/>
 	  			<result column="FILENAME" property="fileName"/>
 	  			<result column="ORIGINALNAME" property="originalName"/>
-	  		</collection>
-	  		
-	  		<collection property="commentDTOs" javaType="List" ofType="CommentDTO">
-	  			<id column="COMMENTNUM" property="commentNum"/>
-	  			<result column="BOARDNUM" property="boardNum"/>
-	  			<result column="BOARDDATE" property="boardDate"/>
-	  			<result column="BOARDCONTENT" property="boardContent"/>
-	  			<result column="USERID" property="userId"/>
-	  			<result column="COMMENTREF" property="commentRef"/>
-	  			<result column="COMMENTSTEP" property="commentStep"/>
-	  			<result column="COMMENTDEPTH" property="commentDepth"/>
 	  		</collection>
 	  	
 	  	</resultMap>		

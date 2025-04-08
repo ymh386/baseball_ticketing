@@ -32,35 +32,40 @@
 						</select>
 					</form>
 		
-		<table class="table table-striped">
-						    <thead class="table-primary">
-						        <tr>
-						            <th>결제번호</th>
-						            <th>결제상태</th>
-						            <th>결제일시</th>
-						            <th>총 결제금액</th>
-						            <th>상품명</th>
-						        </tr>
-						    </thead>
-						    <tbody>
-						        <c:forEach items="${list}" var="v">
-						        <tr class="payment-row" data-status="${v.paymentStatus}">
-						            <c:choose>
-						                <c:when test="${v.paymentStatus eq '승인'}">
-						                    <td><a href="./paymentDetail?paymentId=${v.paymentId}">${v.paymentId}</a></td>
-						                </c:when>
-						                <c:otherwise>
-						                    <td>${v.paymentId}</td>
-						                </c:otherwise>
-						            </c:choose>
-						            <td>${v.paymentStatus}</td>
-						            <td>${v.paymentDate}</td>
-						            <td>${v.totalAmount}</td>
-						            <td>${v.productName}</td>
-						        </tr>
-						        </c:forEach>
-						    </tbody>
-						</table>
+		<c:if test="${not empty list}">
+			<table class="table table-striped">
+							    <thead class="table-primary">
+							        <tr>
+							            <th>결제번호</th>
+							            <th>결제상태</th>
+							            <th>결제일시</th>
+							            <th>총 결제금액</th>
+							            <th>상품명</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							        <c:forEach items="${list}" var="v">
+							        <tr class="payment-row" data-status="${v.paymentStatus}">
+							            <c:choose>
+							                <c:when test="${v.paymentStatus eq '승인'}">
+							                    <td><a href="./paymentDetail?paymentId=${v.paymentId}">${v.paymentId}</a></td>
+							                </c:when>
+							                <c:otherwise>
+							                    <td>${v.paymentId}</td>
+							                </c:otherwise>
+							            </c:choose>
+							            <td>${v.paymentStatus}</td>
+							            <td>${v.paymentDate}</td>
+							            <td>${v.totalAmount}</td>
+							            <td>${v.productName}</td>
+							        </tr>
+							        </c:forEach>
+							    </tbody>
+							</table>
+						</c:if>
+						<c:if test="${empty list}">
+							<p>결제내역이 없습니다.</p>
+						</c:if>
 
 		<!-- 페이징 버튼 -->
 		<form id="pageForm">
