@@ -16,8 +16,8 @@ point.addEventListener('click', ()=>{
             payPrice.value = payPrice.value-point.value
             usePoint = point.value
         }else {
-            payPrice.value = 0;
-            usePoint = price;
+            payPrice.value = 0
+            usePoint = price
         }
         let upl = document.createElement('label')
         upl.id = 'upl'
@@ -27,7 +27,7 @@ point.addEventListener('click', ()=>{
         upv.type = 'text'
         let upvr = document.createAttribute('readonly')
         upv.setAttributeNode(upvr)
-        upv.value=usePoint
+        upv.value=usePoint + 'P'
         usePointInfo.append(upl)
         usePointInfo.append(upv)
     }else{

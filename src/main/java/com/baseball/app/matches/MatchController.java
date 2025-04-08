@@ -126,10 +126,12 @@ public class MatchController {
 	}
 	
 	@RequestMapping(value = "addReview", method = RequestMethod.POST)
-	public String addReview(ReviewDTO reviewDTO, Model model) throws Exception {
+	public String addReview(ReviewDTO reviewDTO, Model model, HttpSession session) throws Exception {
 		System.out.println("add getMatchNum : " + reviewDTO.getMatchNum());
 		System.out.println("add getBoardContent : " + reviewDTO.getBoardContent());
-		reviewDTO.setUserId("a3");
+//		reviewDTO.setUserId("a3");
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		reviewDTO.setUserId(userDTO.getUserId());
 		
 		int result = matchService.addReview(reviewDTO);
 		model.addAttribute("result", result);

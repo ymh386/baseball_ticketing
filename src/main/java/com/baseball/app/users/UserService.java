@@ -192,18 +192,21 @@ public class UserService {
         //3-1. 사용했던 포인트 다시 돌려받기
         PaymentDTO paymentDTO = userDAO.getTotalAmount(ticketDTO);
         Long usePoint = 0L;
-        
+        Long refundPoint = 0L;
+        Long price = 0L;
         		
         if(level.equals("C")) {
-        	usePoint = 15000 - paymentDTO.getTotalAmount();
-			userDTO.setPoint(userDTO.getPoint() - 1000 + usePoint);
+        	price = 15000L;
+        	refundPoint = 1000L;
 		}else if(level.equals("B")) {
-			usePoint = 20000 - paymentDTO.getTotalAmount();
-			userDTO.setPoint(userDTO.getPoint() - 2000 + usePoint);
+			price = 20000L;
+        	refundPoint = 2000L;
 		}else {
-			usePoint = 30000 - paymentDTO.getTotalAmount();
-			userDTO.setPoint(userDTO.getPoint() - 3000 + usePoint);
+			price = 30000L;
+        	refundPoint = 3000L;
 		}
+        usePoint = price - paymentDTO.getTotalAmount();
+		userDTO.setPoint(userDTO.getPoint() - refundPoint + usePoint);
         
         ticketDAO.updatePoint(userDTO);
         
@@ -211,7 +214,6 @@ public class UserService {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("level", level);
         map.put("usePoint", usePoint);
-        map.put("totalAmount", paymentDTO.getTotalAmount());
         return map;
     }
     

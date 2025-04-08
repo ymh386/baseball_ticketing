@@ -67,15 +67,15 @@
 					<td>${v.field}</td>
 					<td>
 						<c:choose>
-							<c:when test="${v.stadiumNum == 3}">잠실야구장</c:when>
-							<c:when test="${v.stadiumNum == 4}">고척스카이돔</c:when>
-							<c:when test="${v.stadiumNum == 5}">SSG랜더스필드</c:when>
-							<c:when test="${v.stadiumNum == 6}">수원KT위즈파크</c:when>
-							<c:when test="${v.stadiumNum == 7}">대전한화생명볼파크</c:when>
-							<c:when test="${v.stadiumNum == 8}">광주챔피언스필드</c:when>
-							<c:when test="${v.stadiumNum == 9}">대구라이온즈파크</c:when>
-							<c:when test="${v.stadiumNum == 10}">사직야구장</c:when>
-							<c:when test="${v.stadiumNum == 11}">창원NC파크</c:when>
+							<c:when test="${v.stadiumNum == 3}"><a href="../stadiums/detail?stadiumNum=${v.stadiumNum}">잠실야구장</a></c:when>
+							<c:when test="${v.stadiumNum == 4}"><a href="../stadiums/detail?stadiumNum=${v.stadiumNum}">고척스카이돔</a></c:when>
+							<c:when test="${v.stadiumNum == 5}"><a href="../stadiums/detail?stadiumNum=${v.stadiumNum}">SSG랜더스필드</a></c:when>
+							<c:when test="${v.stadiumNum == 6}"><a href="../stadiums/detail?stadiumNum=${v.stadiumNum}">수원KT위즈파크</a></c:when>
+							<c:when test="${v.stadiumNum == 7}"><a href="../stadiums/detail?stadiumNum=${v.stadiumNum}">대전한화생명볼파크</a></c:when>
+							<c:when test="${v.stadiumNum == 8}"><a href="../stadiums/detail?stadiumNum=${v.stadiumNum}">광주챔피언스필드</a></c:when>
+							<c:when test="${v.stadiumNum == 9}"><a href="../stadiums/detail?stadiumNum=${v.stadiumNum}">대구라이온즈파크</a></c:when>
+							<c:when test="${v.stadiumNum == 10}"><a href="../stadiums/detail?stadiumNum=${v.stadiumNum}">사직야구장</a></c:when>
+							<c:when test="${v.stadiumNum == 11}"><a href="../stadiums/detail?stadiumNum=${v.stadiumNum}">창원NC파크</a></c:when>
 							<c:otherwise>알 수 없음</c:otherwise>
 						</c:choose>
 					</td>
