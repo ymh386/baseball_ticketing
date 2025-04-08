@@ -22,12 +22,16 @@
 	<div class="row col-md-8 offset-md-2">
 	
 	
-		<h4>구단 소개</h4>
-	
+		<h3><strong>구단 소개</strong></h3>
+		<br>
+		<br>
+		<br>
+		
 		<span>
 		각 구단의 로고를 클릭하시면 우승횟수(년도)를 확인 하실 수 있습니다.
 		</span>
-	
+		
+		<br>
 	
 		<table class="table table table-sm">
 			<thead>

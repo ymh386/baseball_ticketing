@@ -45,7 +45,7 @@
 				        <c:forEach items="${dto.boardFileDTOs}" var="f">
 				            <img src="/resources/images/notice/${f.fileName}" 
 				                 alt="${f.originalName}" 
-				               style="max-width: 800px; height: auto; display: block; margin: 0 auto 10px;">
+				               style="max-width: 1000px; height: auto; display: block; margin: 0 auto 10px;">
 				        </c:forEach>
 				    </div>
 					</c:if>
@@ -67,16 +67,34 @@
 				<a href="/resources/images/${kind}/${f.fileName}">${f.originalName}</a>
 			</c:forEach>
 		</div>
+		
+		
+		
+				<div>
+					<c:choose>
+			  <c:when test="${kind eq 'notice' and sessionScope.user != null and sessionScope.user.userId eq 'wlsdnjs888'}">
+			    <a href="./update?boardNum=${dto.boardNum}" class="btn btn-outline-success">수정</a>
+			    <a href="./delete?boardNum=${dto.boardNum}" class="btn btn-outline-danger">삭제</a>
+			  </c:when>
+			
+			  <c:when test="${kind eq 'qna' and sessionScope.user != null and sessionScope.user.userId eq dto.userId}">
+			    <a href="./update?boardNum=${dto.boardNum}" class="btn btn-outline-success">수정</a>
+			    <a href="./delete?boardNum=${dto.boardNum}" class="btn btn-outline-danger">삭제</a>
+			  </c:when>
+			</c:choose>
+		</div>
+		
+		
 	
 		
-		<div>			
+<%-- 		<div>			
 			<a href="./update?boardNum=${dto.boardNum}" class="btn btn-outline-success">수정</a>
 			<a href="./delete?boardNum=${dto.boardNum}" class="btn btn-outline-danger">삭제</a>
 			
-			<%-- <c:if test="${kind eq 'qna'}">
+			<c:if test="${kind eq 'qna'}">
 			<a href="./reply?boardNum=${dto.boardNum}" class="btn btn-outline-primary">답글</a>
-			</c:if> --%>
-		</div>	
+			</c:if>
+		</div>	 --%>
 				
 	</div>
 </div>

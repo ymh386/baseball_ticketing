@@ -20,6 +20,7 @@ import com.baseball.app.boards.BoardDTO;
 import com.baseball.app.boards.BoardFileDTO;
 import com.baseball.app.boards.CommentDTO;
 import com.baseball.app.pages.Pager;
+import com.baseball.app.users.UserDTO;
 
 
 @Controller
@@ -77,7 +78,11 @@ public class QnaController {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public String add(QnaDTO qnaDTO, Model model, HttpSession session, MultipartFile[] attaches) throws Exception {
 		
-		qnaDTO.setUserId("a3"); // 테스트용 유저 아이디 값
+//		qnaDTO.setUserId("a3"); // 테스트용 유저 아이디 값
+		
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		qnaDTO.setUserId(userDTO.getUserId());
+		
 		
 		System.out.println("userId "+qnaDTO.getUserId());
 		System.out.println("title "+qnaDTO.getBoardTitle());

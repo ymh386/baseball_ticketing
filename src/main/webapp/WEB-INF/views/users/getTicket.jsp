@@ -41,6 +41,7 @@
 				<table class="table table-striped" id="ticketTable">
 					<thead class="table-primary">
 						<tr>
+							<th>티켓번호</th>
 							<th>구매자</th>
 							<th>좌석 번호</th>
 							<th>홈팀</th>
@@ -57,6 +58,7 @@
 
 						<c:forEach var="ticket" items="${ticketList}">
 							<tr class="ticketRow" data-status="${ticket['TICKETSTATUS']}">
+								<td>${ticket['TICKETNUM']}</td>
 								<td>${ticket['USERID']}</td>
 								<td>${ticket['SEATNUM']}</td>
 								<td><c:set var="homeTeamName"
@@ -108,9 +110,9 @@
 				<p>조회된 티켓이 없습니다.</p>
 			</c:if>
 
+		<div><button type="button" onclick="location.href='./mypage'">뒤로가기</button> </div>
+				
 		</div>
-			<button type="button" onclick="location.href='./mypage'">뒤로
-				가기</button>
 	</div>
 
 	<!-- 상태 필터 기능 -->
