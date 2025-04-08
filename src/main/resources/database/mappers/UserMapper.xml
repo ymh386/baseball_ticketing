@@ -161,6 +161,14 @@
 </select>
 
 
+<select id="countByUserId" parameterType="UserDTO" resultType="Long">
+    SELECT COUNT(*) FROM USERS WHERE USERID = #{userId}
+</select>
+
+
+
+
+
 
 
 

@@ -81,7 +81,14 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="add", method=RequestMethod.GET)
-	public String add() throws Exception{
+	public String add(HttpSession session) throws Exception{
+		
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		
+		if(user == null || !"wlsdnjs888".equals(user.getUserId())) {
+			return "redirect:/";
+		}
+		
 		
 		return "board/boardForm";
 		
@@ -100,7 +107,15 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="update", method = RequestMethod.GET)
-	public String update(NoticeDTO boardDTO, Model model)throws Exception{
+	public String update(NoticeDTO boardDTO, Model model,HttpSession session)throws Exception{
+		
+		UserDTO user = (UserDTO)session.getAttribute("user");
+		
+		if(user == null || !"wlsdnjs888".equals(user.getUserId())) {
+			return "redirect:/";
+		}
+		
+		
 		
 		boardDTO = (NoticeDTO)noticeService.getDetail(boardDTO);
 		
@@ -119,6 +134,13 @@ public class NoticeController {
 	
 	@RequestMapping(value="delete", method = RequestMethod.GET)
 	public String delete(BoardDTO boardDTO, Model model, HttpSession session) throws Exception{
+		
+		UserDTO user = (UserDTO)session.getAttribute("user");
+		
+		if(user == null || !"wlsdnjs888".equals(user.getUserId())) {
+			return "redirect:/";
+		}
+		
 		int result = noticeService.delete(boardDTO, session);
 		String s = "삭제 실패";
 		if(result>0){
@@ -127,9 +149,7 @@ public class NoticeController {
 		model.addAttribute("result", s);
 		model.addAttribute("path", "./list");
 		
-		return "commons/result";
-		
-		
+		return "commons/result";	
 		
 	}
 	

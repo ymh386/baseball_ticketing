@@ -221,6 +221,12 @@ public class UserService {
     }
     
     
+    //id 중복 검사 
+    public boolean checkIdExists(UserDTO userDTO) {
+        return userDAO.countByUserId(userDTO) > 0;
+    }
+    
+    
     
     
 
