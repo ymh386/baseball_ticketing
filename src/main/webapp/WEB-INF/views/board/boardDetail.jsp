@@ -79,12 +79,12 @@
 			  </c:when>
 			
 			  <c:when test="${kind eq 'qna' and sessionScope.user != null and sessionScope.user.userId eq dto.userId}">
-			    
+			    <a href="./update?boardNum=${dto.boardNum}" class="btn btn-outline-success">수정</a>
+			    <a href="./delete?boardNum=${dto.boardNum}" class="btn btn-outline-danger">삭제</a>
 			  </c:when>
 			</c:choose>
 		</div>	
-			<a href="./update?boardNum=${dto.boardNum}" class="btn btn-outline-success">수정</a>
-			    <a href="./delete?boardNum=${dto.boardNum}" class="btn btn-outline-danger">삭제</a>
+			
 		</div>
 		
 		
