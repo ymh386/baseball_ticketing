@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.baseball.app.users.UserDTO;
+
 /**
  * Handles requests for the application home page.
  */
@@ -27,6 +29,12 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpSession session) {
+		
+		// 테스트용 자동 로그인
+//		UserDTO user = new UserDTO();
+//		//user.setUserId("admin");
+//		session.setAttribute("user", user);
+		
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();

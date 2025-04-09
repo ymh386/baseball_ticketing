@@ -60,7 +60,7 @@ public class MatchController {
 		return "matches/seatList";
 	}
 	
-	@RequestMapping(value = "matchList", method = RequestMethod.GET)
+	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String getMatchList(Model model, Integer month) throws Exception {
 		
 		System.out.println("month : " + month);
@@ -70,7 +70,8 @@ public class MatchController {
 			
 		}
 		
-		List<MatchDTO> list = matchService.getMatchListMonthly(month);
+		System.out.println("month : " + month);
+		List<MatchDTO> list = matchService.getMatchList(month);
 		
 		model.addAttribute("list", list);		
 		model.addAttribute("changedMonth", month);
@@ -197,41 +198,9 @@ public class MatchController {
 		return myModel;
 	}
 	
-	@RequestMapping(value = "testLogin", method = RequestMethod.GET)
-	public String testLogin(UserDTO userDTO, ReviewDTO reviewDTO, Model model, HttpSession session) throws Exception {
-		System.out.println("add getMatchNum : " + reviewDTO.getMatchNum());		
-		userDTO.setUserId("a3");
-		reviewDTO.setUserId("a3");
-		
-		if (userDTO != null) {
-            session.setAttribute("user", userDTO);
-            // 에디터창 임시 파일의 경로와 파일이름을 세션 안의 List에 저장
-            session.setAttribute("tempFileList", new ArrayList<String>());
-        }
-				
-		return "redirect:./getReviewList?matchNum=" + reviewDTO.getMatchNum();
-	}
 	
-	@RequestMapping(value = "testLogout", method = RequestMethod.GET)
-	public String testLogout(UserDTO userDTO, ReviewDTO reviewDTO, Model model, HttpSession session) throws Exception {
-		System.out.println("add getMatchNum : " + reviewDTO.getMatchNum());		
-				
-		if (userDTO != null) {
-			List<String> list = (List<String>) session.getAttribute("tempFileList");
-			
-			if(list != null) {
-				for(String src : list) {
-					matchService.deleteTempImage(src, session);
-				}
-			} else {
-				System.out.println("list가 null입니다");
-			}			
-			
-            session.invalidate();
-        }
-				
-		return "redirect:./getReviewList?matchNum=" + reviewDTO.getMatchNum();
-	}
+	
+	
 	
 	
 	

@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/comments.css" />
-<link rel="stylesheet" href="/resources/css/toTop.css" />
+
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
@@ -164,7 +164,7 @@
 
 
 <script src="/resources/js/qna/comment.js"></script>
-<script src="/resources/js/qna/toTop.js"></script>
+
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
 </body>

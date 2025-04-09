@@ -37,19 +37,34 @@
 		</select> 월
 		</div>
 		
+		
+		
+		
 		<table class="table table-striped">
-			<thead>
+			<thead>				
 				<tr>
 					<th>경기 번호</th>
 					<th>경기 일자</th>					
-					<th>경기 상세</th>
+					<th>경기장</th>
+					<th>상태</th>
+					<th>홈팀</th>
+					<th>홈팀 점수</th>
+					<th>원정팀</th>
+					<th>원정팀 점수</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${list}" var="v">
 				<tr>
-					<td>${v.matchNum}</td>					
-					<td>${v.matchDate}</td>					
+					<td>${v.matchNum}</td>
+					<td>${v.matchDate}</td>
+					<td>${v.stadiumDTO.stadiumName}</td>
+					<td>${v.matchStatus}</td>
+					<td>${v.homeTeamDTO.teamName}</td>
+					<td>${v.homeScore}</td>
+					<td>${v.awayTeamDTO.teamName}</td>
+					<td>${v.awayScore}</td>
+					
 					<td><button onclick="location.href='./detail?matchNum=${v.matchNum}'">
 					보기</button></td>
 				</tr>

@@ -73,6 +73,51 @@
 		SELECT * FROM TICKETS WHERE MATCHNUM=#{matchNum} AND TICKETSTATUS IN ('결제중', '예매완료')
 	</select>
 	
+	<select id="getMatchList2" resultMap="getDetailResult2" parameterType="java.lang.Integer">
+		SELECT M.*, S.*, TH.TEAMNAME AS THN, TH.FIELD AS THF, TA.TEAMNAME AS TAN, TA.FIELD AS TAF
+		FROM MATCHES M
+			LEFT OUTER JOIN
+			TEAMS TH
+			ON (M.HOMETEAM = TH.TEAMNUM)
+			LEFT OUTER JOIN
+			TEAMS TA
+			ON (M.AWAYTEAM = TA.TEAMNUM)
+			LEFT OUTER JOIN
+			STADIUMS S
+			ON (M.STADIUMNUM = S.STADIUMNUM)
+		WHERE MATCHDATE BETWEEN TRUNC(TO_DATE(#{month}, 'MM')) AND LAST_DAY(TRUNC(TO_DATE(#{month}, 'MM')))+0.99999 
+		ORDER BY MATCHDATE ASC
+	</select>
+	
+	<resultMap type="MatchDTO" id="getDetailResult2">
+  		<id column="MATCHNUM" property="matchNum"/>
+		<result column="STADIUMNUM" property="stadiumNum"/>
+		<result column="MATCHDATE" property="matchDate"/>
+		<result column="HOMETEAM" property="homeTeam"/>
+		<result column="AWAYTEAM" property="awayTeam"/>
+		<result column="MATCHSTATUS" property="matchStatus"/>
+		<result column="HOMESCORE" property="homeScore"/>
+		<result column="AWAYSCORE" property="awayScore"/>
+		
+		<association property="homeTeamDTO" javaType="TeamDTO">
+			<id column="TEAMNUM" property="teamNum"/>
+			<result column="THN" property="teamName"/>
+			<result column="THF" property="field"/>
+		</association>
+		<association property="awayTeamDTO" javaType="TeamDTO">
+			<id column="TEAMNUM" property="teamNum"/>
+			<result column="TAN" property="teamName"/>
+			<result column="TAF" property="field"/>
+		</association>
+		<association property="stadiumDTO" javaType="StadiumDTO">
+			<id column="STADIUMNUM" property="stadiumNum"/>
+			<result column="STADIUMNAME" property="stadiumName"/>
+			<result column="LATITUDE" property="latitude"/>
+			<result column="LONGITUDE" property="longitude"/>
+		</association>
+  			  	
+  	</resultMap>
+	
 	<select id="getMatchList" resultType="MatchDTO">
 		SELECT * FROM MATCHES ORDER BY MATCHNUM ASC
 	</select>

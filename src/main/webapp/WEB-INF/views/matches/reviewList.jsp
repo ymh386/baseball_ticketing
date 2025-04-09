@@ -33,8 +33,7 @@
 			<!-- <p id="idImageInput" contenteditable="true" style="border: solid 1px; height: 50px;"></p> -->
 			<button id="idAddImage" type="button" class="btn btn-outline-info">이미지 넣기</button>
 			<input type="file" name="tempFile" id="idImageInput">
-			<span><button type="button" id="idTestLogin" data-matchNum="${matchNum}">테스트 로그인</button></span>	
-			<span><button type="button" id="idCutSession" data-matchNum="${matchNum}">세션 끄기</button></span>
+			
 		</div>
 		
 		<form id="idForm" action="./addReview" method="POST" enctype="multipart/form-data">

@@ -65,29 +65,11 @@
 		
 		
 		<!-- 구분선 -->
-		<select id="getCommentDetail" parameterType="QnaDTO" resultMap="getCommentResult">
+		<select id="getComments" parameterType="QnaDTO" resultType="CommentDTO">
 			SELECT * FROM COMMENTS
 			WHERE BOARDNUM = #{boardNum} AND COMMENTSTEP = 0 ORDER BY COMMENTNUM DESC
   		</select>
-  		
-  		<resultMap type="QnaDTO" id="getCommentResult">
-  			<id column="BOARDNUM" property="boardNum"/>
-	  		<result column="BOARDDATE" property="boardDate"/>
-	  		<result column="BOARDCONTENT" property="boardContent"/>
-  		
-	  		<!-- 1:N ofType="Generic type명" -->
-	  		<collection property="commentDTOs" javaType="List" ofType="CommentDTO">
-	  			<id column="COMMENTNUM" property="commentNum"/>
-	  			<result column="BOARDNUM" property="boardNum"/>
-	  			<result column="BOARDDATE" property="boardDate"/>
-	  			<result column="BOARDCONTENT" property="boardContent"/>
-	  			<result column="USERID" property="userId"/>
-	  			<result column="COMMENTREF" property="commentRef"/>
-	  			<result column="COMMENTSTEP" property="commentStep"/>
-	  			<result column="COMMENTDEPTH" property="commentDepth"/>
-	  		</collection>
-	  			  	
-	  	</resultMap>
+  		  		
 		
 		
 		<!-- 구분선 -->		

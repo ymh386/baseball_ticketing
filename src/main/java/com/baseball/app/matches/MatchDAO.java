@@ -38,9 +38,9 @@ public class MatchDAO {
 	}
 	
 	//getMatchList
-	public List<MatchDTO> getMatchList() throws Exception {
+	public List<MatchDTO> getMatchList(Integer month) throws Exception {
 		
-		return sqlSession.selectList(NAMESPACE + "getMatchList");
+		return sqlSession.selectList(NAMESPACE + "getMatchList2", month);
 	}
 	
 	//getMatchListMonthly

@@ -49,14 +49,13 @@ public class QnaService implements BoardService {
 		BoardDTO resultDTO = qnaDAO.getDetail(boardDTO);
 		
     	//보드 디테일에 담을 comment들 따로 조회		
-	    QnaDTO resultDTO2 = (QnaDTO) qnaDAO.getCommentDetail(boardDTO);
-	    System.out.println("resultDTO2 : " + resultDTO2);
+		List<CommentDTO> commentList = qnaDAO.getComments(boardDTO);	    
 		  
 	    //한개의 DTO에 댓글 setting
-	    if(resultDTO2 != null) {	    	
-	    	((QnaDTO)resultDTO).setCommentDTOs(((QnaDTO)resultDTO2).getCommentDTOs());
+	    if(commentList != null) {
+	    	((QnaDTO)resultDTO).setCommentDTOs(commentList);
 	    } else {
-	    	System.out.println("resultDTO2가 null입니다");
+	    	System.out.println("commentList가 null입니다");
 	    }
 	    		 
 		return resultDTO;
