@@ -24,7 +24,7 @@
 			  <div id="usePointInfo" class="col">
 				<label>사용 가능 포인트</label>
 						
-				<input type="text" value="${user.point}" readonly>
+				<input type="text" value="${user.point}P" readonly>
 			  </div>
 			  <div class="col">
 				<form>

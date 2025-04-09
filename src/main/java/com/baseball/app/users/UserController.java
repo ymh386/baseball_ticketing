@@ -343,22 +343,19 @@ public class UserController {
 	@RequestMapping(value = "/refund", method = RequestMethod.POST)
     public String refundTicket(@ModelAttribute TicketDTO ticketDTO,Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception{
         try {
-        	Long repoint = 0L;
+        	Long refundPoint = 0L;
+        	Long returnPoint = 0L;
             Map<String, Object> result = userService.refundTickets(ticketDTO, session);
             if(result.get("level").equals("C")) {
-            	repoint = Long.parseLong(result.get("usePoint").toString()) - 1000;
-            	model.addAttribute("result", "환불이 완료되었습니다. 환불된 포인트 : " + repoint
-            			+ " (환불포인트=" + Long.parseLong(result.get("usePoint").toString()) + ", 반환포인트=1000)");
+            	returnPoint = 1000L;
             }else if(result.get("level").equals("B")){
-            	repoint = Long.parseLong(result.get("usePoint").toString()) - 2000;
-            	model.addAttribute("result", "환불이 완료되었습니다. 환불된 포인트 : " + repoint
-            			+ " (환불포인트=" + Long.parseLong(result.get("usePoint").toString()) + ", 반환포인트=2000)");
+            	returnPoint = 2000L;
             }else {
-            	repoint = Long.parseLong(result.get("usePoint").toString()) - 3000;
-            	model.addAttribute("result", "환불이 완료되었습니다. 환불된 포인트 : " + repoint
-            			+ " (환불포인트=" + Long.parseLong(result.get("usePoint").toString()) + ", 반환포인트=3000)");
+            	returnPoint = 3000L;
             }
-            
+            refundPoint = Long.parseLong(result.get("usePoint").toString()) - returnPoint;
+        	model.addAttribute("result", "환불이 완료되었습니다. 환불된 포인트 : " + refundPoint
+        			+ "P (환불포인트=" + Long.parseLong(result.get("usePoint").toString()) + "P, 반환포인트=" + returnPoint + "P)");
             model.addAttribute("path", "./getTicket"); // 티켓 구매 내역 페이지로 이동
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "환불 처리 중 오류가 발생했습니다.");

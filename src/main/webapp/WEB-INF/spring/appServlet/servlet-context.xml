@@ -13,6 +13,7 @@
 	<annotation-driven />
 	
 	<!-- Interceptors -->
+	<!-- 결제취소 시 우선권해제 인터셉터 -->
 	<interceptors>
 		<interceptor>
 			<mapping path="/"/>
@@ -24,11 +25,50 @@
 			<beans:ref bean="ticketingDeleteInterceptor"/>
 		</interceptor>
 		
-	<!-- 자동 로그인 인터셉터 -->
-	<interceptor>
-		<mapping path="/**"/>
-		<beans:ref bean="autoLoginInterceptor"/>
-	</interceptor>
+		<!-- 자동 로그인 인터셉터 -->
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:ref bean="autoLoginInterceptor"/>
+		</interceptor>
+		
+		<!-- 로그인확인 인터셉터 -->
+		<interceptor>
+			<mapping path="/qna/*"/>
+			<mapping path="/matches/*"/>
+			<mapping path="/tickets/*"/>
+			<mapping path="/users/*"/>
+			<exclude-mapping path="/qna/list"/>
+			<exclude-mapping path="/qna/getSubCommentList"/>
+			<exclude-mapping path="/matches/getReviewList"/>
+			<exclude-mapping path="/matches/matchList"/>
+			<exclude-mapping path="/matches/detail"/>
+			<exclude-mapping path="/users/join"/>
+			<exclude-mapping path="/users/login"/>
+			<exclude-mapping path="/users/findId"/>
+			<exclude-mapping path="/users/findPassword"/>
+			<beans:ref bean="loginCheckInterceptor"/>
+		</interceptor>
+		
+		<!-- 유저확인 인터셉터 -->
+		<interceptor>
+			<mapping path="/notice/update"/>
+			<mapping path="/notice/delete"/>
+			<mapping path="/qna/update"/>
+			<mapping path="/qna/delete"/>
+			<mapping path="/qna/deleteComment"/>
+			<mapping path="/matches/updateReview"/>
+			<mapping path="/matches/deleteReview"/>
+			<beans:ref bean="userIdCheckInterceptor"/>
+		</interceptor>
+		
+		<!-- 관리자확인 인터셉터 -->
+		<interceptor>
+			<mapping path="/seats/add"/>
+			<mapping path="/notice/add"/>
+			<mapping path="/notice/update"/>
+			<mapping path="/notice/delete"/>
+			<beans:ref bean="adminCheckInterceptor"/>
+		</interceptor>
 	</interceptors>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->

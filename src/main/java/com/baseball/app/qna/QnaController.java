@@ -56,7 +56,7 @@ public class QnaController {
 	
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
 	public String getDetail(QnaDTO qnaDTO, Model model) throws Exception {
-		
+		System.out.println("Controller Detail :" + qnaDTO.getBoardNum());
 		qnaDTO = (QnaDTO)qnaService.getDetail(qnaDTO);
 		model.addAttribute("dto", qnaDTO);		
 		
@@ -80,10 +80,8 @@ public class QnaController {
 	public String add(QnaDTO qnaDTO, Model model, HttpSession session, MultipartFile[] attaches) throws Exception {
 		
 //		qnaDTO.setUserId("a3"); // 테스트용 유저 아이디 값
-		
 		UserDTO userDTO = (UserDTO)session.getAttribute("user");
 		qnaDTO.setUserId(userDTO.getUserId());
-		
 		
 		System.out.println("userId "+qnaDTO.getUserId());
 		System.out.println("title "+qnaDTO.getBoardTitle());
@@ -145,10 +143,12 @@ public class QnaController {
 	
 	
 	@RequestMapping(value = "addComment", method = RequestMethod.POST)
-	public String addComment(CommentDTO commentDTO) throws Exception {
+	public String addComment(CommentDTO commentDTO, HttpSession session) throws Exception {
 		System.out.println("controller reply : " + commentDTO.getBoardContent() + commentDTO.getBoardNum());
 
-		commentDTO.setUserId("a3"); // 테스트용 유저 아이디 값
+//		commentDTO.setUserId("a3"); // 테스트용 유저 아이디 값
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		commentDTO.setUserId(userDTO.getUserId());
 		
 		int result = qnaService.addComment(commentDTO);
 		

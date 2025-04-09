@@ -38,12 +38,13 @@
  		
  		<!-- 구분선 -->				
 		<select id="getDetail" parameterType="QnaDTO" resultMap="getDetailResult">
-			SELECT * FROM QNA N
+  		SELECT * FROM QNA N
 			LEFT OUTER JOIN QNAFILES QF
 			USING(BOARDNUM)
-			WHERE BOARDNUM = #{boardNum}		
-  		
+			WHERE BOARDNUM = #{boardNum}
   		</select>
+  		
+  		
   	
 	  	 <resultMap type="QnaDTO" id="getDetailResult">
 	  		<id column="BOARDNUM" property="boardNum"/>
