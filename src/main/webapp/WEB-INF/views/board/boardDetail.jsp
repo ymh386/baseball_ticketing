@@ -83,7 +83,7 @@
 			    <a href="./delete?boardNum=${dto.boardNum}" class="btn btn-outline-danger">삭제</a>
 			  </c:when>
 			</c:choose>
-		</div>
+		</div>	
 		
 		
 	

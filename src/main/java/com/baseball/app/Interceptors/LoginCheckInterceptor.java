@@ -14,6 +14,14 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
+		
+	    String uri = request.getRequestURI();
+
+	    // 로그인 체크 예외 목록
+	    if (uri.contains("/checkId") || uri.contains("/users/join")) {
+	        return true;
+	    }
+		
 		Object user = request.getSession().getAttribute("user");
 		
 		if(user != null) {

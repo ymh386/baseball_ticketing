@@ -3,6 +3,7 @@ package com.baseball.app.tickets;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,6 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.baseball.app.pages.Pager;
 import com.baseball.app.seats.SeatDTO;
 import com.baseball.app.users.UserDTO;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 @CrossOrigin(origins = "https://dev-pub.apis.naver.com/naverpay-partner/naverpay/payments/v2.2/apply/payment")
 @Controller
@@ -107,6 +113,8 @@ public class TicketController {
 		
 		return "commons/ajaxResult";
 	}
+	
+	
 	
 	
 

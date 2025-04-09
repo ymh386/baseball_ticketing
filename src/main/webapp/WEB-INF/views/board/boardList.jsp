@@ -79,7 +79,7 @@
 		
 		
 					<c:choose>
-			    <c:when test="${kind eq 'notice' and sessionScope.user != null and sessionScope.user.userId eq 'wlsdnjs888'}">
+			    <c:when test="${kind eq 'notice' and sessionScope.user != null and sessionScope.user.userId eq 'admin'}">
 			        <div>
 			            <a href="./add" class="btn btn-outline-success">글 작성</a>
 			        </div>

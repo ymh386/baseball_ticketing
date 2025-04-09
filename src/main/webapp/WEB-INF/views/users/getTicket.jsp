@@ -58,6 +58,12 @@
 
 						<c:forEach var="ticket" items="${ticketList}">
 							<tr class="ticketRow" data-status="${ticket['TICKETSTATUS']}">
+				<%-- 				<td>
+							<a href="${pageContext.request.contextPath}/tickets/ticketDetail?ticketNum=${ticket['TICKETNUM']}" class="text-decoration-none">
+							  ${ticket['TICKETNUM']}
+							</a>
+								</td> --%>
+								
 								<td>${ticket['TICKETNUM']}</td>
 								<td>${ticket['USERID']}</td>
 								<td>${ticket['SEATNUM']}</td>

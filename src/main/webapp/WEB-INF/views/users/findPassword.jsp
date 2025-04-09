@@ -46,7 +46,7 @@
 			<!-- check 값에 따라 메시지 표시 -->
 			<c:if test="${check == 1}">
 				<script>
-					showMessage("일치하는 정보가 존재하지 않거나 비밀번호 변경에 실패했습니다.");
+					showMessage("일치하는 정보가 존재하지 않습니다.");
 				</script>
 			</c:if>
 

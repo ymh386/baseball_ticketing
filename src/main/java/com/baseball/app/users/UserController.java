@@ -173,10 +173,10 @@ public class UserController {
 	        model.addAttribute("check", 1); // 일치하는 정보 없음
 	    } else {
 	        model.addAttribute("check", 0);
-	        model.addAttribute("id", id);
+	        model.addAttribute("id", id.getUserId());
 	    }
 
-	    return "users/findId";
+	    return "users/findId";	
 	}
 
 	
@@ -233,13 +233,13 @@ public class UserController {
 	        return "redirect:./login";
 	    }
 
-	    // 선호 팀 번호가 있는 경우, 다가오는 경기 1개 가져오기
-	    if (user.getTeamNum() != 0) {
-	        MatchDTO upcomingMatch = userService.getUpcomingMatchByTeam(user.getTeamNum());
+	 
+	 // 2. teamNum이 null이면 경기정보 보여주지 않음
+	    Long teamNum = user.getTeamNum(); 
+	    if (teamNum != null && teamNum != 0) {
+	        MatchDTO upcomingMatch = userService.getUpcomingMatchByTeam(teamNum);
 	        model.addAttribute("upcomingMatch", upcomingMatch);
-	        
 	    }
-
 	    model.addAttribute("user", user); // 사용자 정보도 같이 넘겨줌
 	    return "users/mypage";
 	}
@@ -364,10 +364,12 @@ public class UserController {
         return "commons/result"; 
     }
 	
-	// UserController.java
+
+	
 	@RequestMapping(value = "checkId", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Boolean> checkId(@RequestBody UserDTO userDTO) {
+		System.out.println("gg");
 	    boolean exists = userService.checkIdExists(userDTO);
 	    Map<String, Boolean> result = new HashMap();
 	    result.put("exists", exists);
@@ -376,6 +378,8 @@ public class UserController {
 
 	
 	
+	
+
 	
 	
 	
