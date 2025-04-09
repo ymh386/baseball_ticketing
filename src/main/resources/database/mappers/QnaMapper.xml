@@ -32,6 +32,10 @@
 			WHERE C > 1
   		</select>
   		
+  		<select id="getCommentOne" parameterType="CommentDTO" resultType="CommentDTO">
+  			SELECT * FROM COMMENTS WHERE COMMENTNUM=#{commentNum}
+  		</select>
+  		
   		<select id="getFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
   			SELECT * FROM QNAFILES WHERE FILENUM = #{fileNum}
   		</select>
