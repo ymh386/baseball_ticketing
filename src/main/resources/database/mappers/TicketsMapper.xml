@@ -113,8 +113,7 @@
 		DELETE TICKETS WHERE MATCHNUM=#{matchNum} AND SEATNUM=#{seatNum}
 	</delete>
 
-
-
+	
 	
 	
 	
