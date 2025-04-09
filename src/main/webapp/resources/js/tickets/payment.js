@@ -88,7 +88,7 @@ let oPay = Naver.Pay.create({ //SDK Parameters를 참고 바랍니다.
                         location.href="./paymentList"
                     }else{
                         addPoint();
-                        location.href="../matches/matchList"
+                        location.href="../matches/list"
                     }
                 }else{
                     alert("결제 실패")

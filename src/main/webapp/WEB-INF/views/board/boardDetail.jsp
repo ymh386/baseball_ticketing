@@ -73,17 +73,19 @@
 		
 				<div>
 					<c:choose>
-			  <c:when test="${kind eq 'notice' and sessionScope.user != null and sessionScope.user.userId eq 'wlsdnjs888'}">
+			  <c:when test="${kind eq 'notice' and sessionScope.user != null and sessionScope.user.userId eq 'admin'}">
 			    <a href="./update?boardNum=${dto.boardNum}" class="btn btn-outline-success">수정</a>
 			    <a href="./delete?boardNum=${dto.boardNum}" class="btn btn-outline-danger">삭제</a>
 			  </c:when>
 			
 			  <c:when test="${kind eq 'qna' and sessionScope.user != null and sessionScope.user.userId eq dto.userId}">
-			    <a href="./update?boardNum=${dto.boardNum}" class="btn btn-outline-success">수정</a>
-			    <a href="./delete?boardNum=${dto.boardNum}" class="btn btn-outline-danger">삭제</a>
+			    
 			  </c:when>
 			</c:choose>
 		</div>	
+			<a href="./update?boardNum=${dto.boardNum}" class="btn btn-outline-success">수정</a>
+			    <a href="./delete?boardNum=${dto.boardNum}" class="btn btn-outline-danger">삭제</a>
+		</div>
 		
 		
 	
@@ -130,7 +132,7 @@
 					<span>${v.userId}</span>
 					<span>${v.boardContent}</span>
 					<span>${v.boardDate}</span>
-					<span><button onclick="location.href='./deleteComment?commentRef=${v.commentRef}&boardNum=${v.boardNum}'">
+					<span><button onclick="location.href='./deleteComment?commentRef=${v.commentRef}&boardNum=${v.boardNum}&commentNum=${v.commentNum}'">
 						X</button></span>
 					<span><button class="답글 subWindowMakers" data-check="0" data-rnum="${v.commentRef}">					
 						답글</button></span>

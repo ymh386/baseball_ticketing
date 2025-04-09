@@ -98,7 +98,7 @@
 			  </div>
 			  <div class="col align-self-end">
 				<fmt:formatDate var="today" value="<%= new java.util.Date() %>" pattern="yyyy-MM-dd"/>
-				<c:if test="${dto.matchDate >= today}">
+				<c:if test="${dto.matchDate >= today and dto.matchStatus eq '진행 전'}">
 					<a class="btn btn-success" href="./seatList?matchNum=${dto.matchNum}">예매하기</a>
 				</c:if>
 					<a class="btn btn-danger" href="./getReviewList?matchNum=${dto.matchNum}">경기 리뷰</a>
