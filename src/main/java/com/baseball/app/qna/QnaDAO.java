@@ -56,6 +56,11 @@ public class QnaDAO implements BoardDAO {
 		
 		return result;
 	}
+	
+	//원댓글, 대댓글 포함 하나만 가져오기(인터셉트용)
+	public BoardDTO getCommentOne(CommentDTO commentDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getCommentOne", commentDTO);
+	}
 
 	@Override
 	public int add(BoardDTO boardDTO) throws Exception {
