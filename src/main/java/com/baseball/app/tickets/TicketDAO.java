@@ -67,9 +67,7 @@ public class TicketDAO {
 	        return sqlSession.update("updateTicketStatus", paymentId);
 	    }
 	
-	
-	
-	
+
 	
 
 }
