@@ -14,5 +14,5 @@ function handleOnChange(e) {
     const month = e.value;
     console.log(month);
 
-    location.href=`./matchList?month=${month}`;
+    location.href=`./list?month=${month}`;
 }

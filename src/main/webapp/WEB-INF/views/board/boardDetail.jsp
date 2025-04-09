@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/comments.css" />
-<link rel="stylesheet" href="/resources/css/toTop.css" />
+
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
@@ -73,7 +73,7 @@
 		
 				<div>
 					<c:choose>
-			  <c:when test="${kind eq 'notice' and sessionScope.user != null and sessionScope.user.userId eq 'wlsdnjs888'}">
+			  <c:when test="${kind eq 'notice' and sessionScope.user != null and sessionScope.user.userId eq 'admin'}">
 			    <a href="./update?boardNum=${dto.boardNum}" class="btn btn-outline-success">수정</a>
 			    <a href="./delete?boardNum=${dto.boardNum}" class="btn btn-outline-danger">삭제</a>
 			  </c:when>
@@ -84,6 +84,8 @@
 			  </c:when>
 			</c:choose>
 		</div>	
+			
+		</div>
 		
 		
 	
@@ -130,7 +132,7 @@
 					<span>${v.userId}</span>
 					<span>${v.boardContent}</span>
 					<span>${v.boardDate}</span>
-					<span><button onclick="location.href='./deleteComment?commentRef=${v.commentRef}&boardNum=${v.boardNum}'">
+					<span><button onclick="location.href='./deleteComment?commentRef=${v.commentRef}&boardNum=${v.boardNum}&commentNum=${v.commentNum}'">
 						X</button></span>
 					<span><button class="답글 subWindowMakers" data-check="0" data-rnum="${v.commentRef}">					
 						답글</button></span>
@@ -164,7 +166,7 @@
 
 
 <script src="/resources/js/qna/comment.js"></script>
-<script src="/resources/js/qna/toTop.js"></script>
+
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
 </body>

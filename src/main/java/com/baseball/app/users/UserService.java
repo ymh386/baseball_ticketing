@@ -191,6 +191,7 @@ public class UserService {
         
         //3-1. 사용했던 포인트 다시 돌려받기
         PaymentDTO paymentDTO = userDAO.getTotalAmount(ticketDTO);
+        System.out.println("paymentDTO");
         Long usePoint = 0L;
         Long refundPoint = 0L;
         Long price = 0L;

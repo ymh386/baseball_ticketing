@@ -342,6 +342,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/refund", method = RequestMethod.POST)
     public String refundTicket(@ModelAttribute TicketDTO ticketDTO,Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception{
+		System.out.println("refundTicket 실행");
         try {
         	Long refundPoint = 0L;
         	Long returnPoint = 0L;

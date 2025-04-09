@@ -118,7 +118,10 @@ public class UserDAO {
     
     // 총 결제금액 가져오기
     public PaymentDTO getTotalAmount(TicketDTO ticketDTO) throws Exception {
-    	return sqlSession.selectOne(NAMESPACE + "getTotalAmount", ticketDTO);
+    	System.out.println("dao totalAmount 실행 전");
+    	PaymentDTO result = sqlSession.selectOne(NAMESPACE + "getTotalAmount", ticketDTO); 
+    	System.out.println("dao totalAmount 실행 후");
+    	return result;
     }
     
     //아이디 중복

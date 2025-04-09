@@ -15,23 +15,8 @@ const imgWrapper = document.getElementsByClassName("imgWrapper");
 
 const caretClass = document.getElementsByClassName("caretClass");
 
-const idTestLogin = document.getElementById("idTestLogin");
-const idCutSession = document.getElementById("idCutSession");
 
 
-
-//
-idTestLogin.addEventListener("click", function(){
-    let matchNum = idTestLogin.getAttribute("data-matchNum");
-    location.href=`./testLogin?matchNum=${matchNum}`;
-})
-
-
-//
-idCutSession.addEventListener("click", function(){
-    let matchNum = idTestLogin.getAttribute("data-matchNum");
-    location.href=`./testLogout?matchNum=${matchNum}`;
-})
 
 
 //
@@ -46,24 +31,24 @@ let ccF = function(){
 
 
 //
-idImageEditor.addEventListener("focus", function(){
-    const savedImgs = document.getElementsByClassName("savedImgs");
-    let list = new Array();
+// idImageEditor.addEventListener("focus", function(){
+//     const savedImgs = document.getElementsByClassName("savedImgs");
+//     let list = new Array();
     
-    for(let savedImg of savedImgs){
-        list.push(savedImg.getAttribute("src"));
-    }
+//     for(let savedImg of savedImgs){
+//         list.push(savedImg.getAttribute("src"));
+//     }
 
-    let formData = new FormData();
-    formData.append("list", list);
+//     let formData = new FormData();
+//     formData.append("list", list);
 
-    fetch("./deleteTempImage", {
-        method: 'POST',
-        cache: 'no-cache',
-        body: formData
-    })
+//     fetch("./deleteTempImage", {
+//         method: 'POST',
+//         cache: 'no-cache',
+//         body: formData
+//     })
 
-})
+// })
 
 
 //

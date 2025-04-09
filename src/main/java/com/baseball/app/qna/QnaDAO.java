@@ -50,11 +50,16 @@ public class QnaDAO implements BoardDAO {
 	}
 	
 	//보드 디테일에 뿌릴 comment들 따로 조회
-	public BoardDTO getCommentDetail(BoardDTO boardDTO) throws Exception {
+	public List<CommentDTO> getComments(BoardDTO boardDTO) throws Exception {
 
-		BoardDTO result = sqlSession.selectOne(NAMESPACE+"getCommentDetail", boardDTO); 
-		System.out.println("qnaDAO result : " + result);
+		List<CommentDTO> result = sqlSession.selectList(NAMESPACE+"getComments", boardDTO);
+		
 		return result;
+	}
+	
+	//원댓글, 대댓글 포함 하나만 가져오기(인터셉트용)
+	public BoardDTO getCommentOne(CommentDTO commentDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getCommentOne", commentDTO);
 	}
 
 	@Override

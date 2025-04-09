@@ -13,8 +13,8 @@
 	<annotation-driven />
 	
 	<!-- Interceptors -->
-	<!-- 결제취소 시 우선권해제 인터셉터 -->
 	<interceptors>
+		<!-- 결제취소 시 우선권해제 인터셉터 -->
 		<interceptor>
 			<mapping path="/"/>
 			<mapping path="/*/*"/>
@@ -51,8 +51,6 @@
 		
 		<!-- 유저확인 인터셉터 -->
 		<interceptor>
-			<mapping path="/notice/update"/>
-			<mapping path="/notice/delete"/>
 			<mapping path="/qna/update"/>
 			<mapping path="/qna/delete"/>
 			<mapping path="/qna/deleteComment"/>
@@ -69,6 +67,13 @@
 			<mapping path="/notice/delete"/>
 			<beans:ref bean="adminCheckInterceptor"/>
 		</interceptor>
+		
+		<!-- 중복로그인 인터셉터 -->
+		<interceptor>
+			<mapping path="/users/login"/>
+			<beans:ref bean="loginDuplicationInterceptor"/>
+		</interceptor>
+		
 	</interceptors>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
