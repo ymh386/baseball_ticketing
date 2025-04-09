@@ -58,7 +58,11 @@
 
 						<c:forEach var="ticket" items="${ticketList}">
 							<tr class="ticketRow" data-status="${ticket['TICKETSTATUS']}">
-								<td>${ticket['TICKETNUM']}</td>
+								<td>
+							  <a href="${pageContext.request.contextPath}/ticket/detailPage?ticketId=${ticket.TICKETNUM}">
+							    ${ticket.TICKETNUM}
+							  </a>
+							</td>
 								<td>${ticket['USERID']}</td>
 								<td>${ticket['SEATNUM']}</td>
 								<td><c:set var="homeTeamName"

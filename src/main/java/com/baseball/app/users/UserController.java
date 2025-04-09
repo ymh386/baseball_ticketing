@@ -367,7 +367,8 @@ public class UserController {
         return "commons/result"; 
     }
 	
-	// UserController.java
+
+	
 	@RequestMapping(value = "checkId", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Boolean> checkId(@RequestBody UserDTO userDTO) {
@@ -377,8 +378,7 @@ public class UserController {
 	    return result;
 	}
 
-	
-	
+
 	
 	
 	
