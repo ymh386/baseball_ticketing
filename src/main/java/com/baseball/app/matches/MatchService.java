@@ -1,15 +1,21 @@
 package com.baseball.app.matches;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.baseball.app.Excels.ExcelRead;
+import com.baseball.app.Excels.ExcelReadOption;
 import com.baseball.app.boards.BoardFileDTO;
 import com.baseball.app.boards.ReviewDTO;
 import com.baseball.app.files.FileManager;
@@ -19,12 +25,46 @@ import com.baseball.app.tickets.TicketDTO;
 
 @Service
 public class MatchService {
+	private static final Logger logger = LoggerFactory .getLogger(MatchService.class); 
 	
 	@Autowired
 	private MatchDAO matchDAO;
 	
 	@Autowired
 	private FileManager fileManager;
+
+	public void excelUpload(File destFile, String requestUrl) {
+        
+       ExcelReadOption excelReadOption = new ExcelReadOption();
+        
+        //파일경로 추가
+        excelReadOption.setFilePath(destFile.getAbsolutePath());
+        
+        //추출할 컬럼명 추가
+        excelReadOption.setOutputColumns("A", "B", "C", "D", "E", "F", "G", "H");
+        
+        //시작행 1로 하면 맨윗줄부터 시작
+        excelReadOption.setStartRow(2);
+        
+        List<Map<String, String>>excelContent  = ExcelRead.read(excelReadOption);
+        
+        logger.info("excelContent: "+excelContent);
+        
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("excelContent", excelContent);
+        
+        logger.info("paramMap: "+map);
+        System.out.println(requestUrl);
+        try {
+        	if(requestUrl.equals("/matches/add")) {
+        		matchDAO.add(map);		
+        	}else {
+        		matchDAO.delete(map);
+        	}
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 	
 	
 	//

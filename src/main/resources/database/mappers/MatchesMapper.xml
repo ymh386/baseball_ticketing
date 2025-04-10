@@ -4,6 +4,22 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.baseball.app.matches.MatchDAO">
+
+	<select id="getAll" resultMap="getAllResult">
+		SELECT * FROM MATCHES
+	</select>
+	
+	<resultMap type="MatchDTO" id="getAllResult">
+		<id column="MATCHNUM" property="matchNum"/>
+		<result column="STADIUMNUM" property="stadiumNum"/>
+		<result column="MATCHDATE" property="matchDate"/>
+		<result column="MATCHDATE" property="matchTime"/>
+		<result column="HOMETEAM" property="homeTeam"/>
+		<result column="AWAYTEAM" property="awayTeam"/>
+		<result column="MATCHSTATUS" property="matchStatus"/>
+		<result column="HOMESCORE" property="homeScore"/>
+		<result column="AWAYSCORE" property="awayScore"/>
+	</resultMap>
 	
 	<select id="getDetail" resultMap="getDetailResult" parameterType="MatchDTO">
 		SELECT M.*, S.*, TH.TEAMNAME AS THN, TH.FIELD AS THF, TA.TEAMNAME AS TAN, TA.FIELD AS TAF
@@ -24,6 +40,7 @@
 		<id column="MATCHNUM" property="matchNum"/>
 		<result column="STADIUMNUM" property="stadiumNum"/>
 		<result column="MATCHDATE" property="matchDate"/>
+		<result column="MATCHDATE" property="matchTime"/>
 		<result column="HOMETEAM" property="homeTeam"/>
 		<result column="AWAYTEAM" property="awayTeam"/>
 		<result column="MATCHSTATUS" property="matchStatus"/>
@@ -93,6 +110,7 @@
   		<id column="MATCHNUM" property="matchNum"/>
 		<result column="STADIUMNUM" property="stadiumNum"/>
 		<result column="MATCHDATE" property="matchDate"/>
+		<result column="MATCHDATE" property="matchTime"/>
 		<result column="HOMETEAM" property="homeTeam"/>
 		<result column="AWAYTEAM" property="awayTeam"/>
 		<result column="MATCHSTATUS" property="matchStatus"/>
@@ -149,6 +167,27 @@
 	</delete>
 	
 	
+	<insert id="add" parameterType="Map">    
+	    <foreach collection="excelContent" item="item" index="index" separator=" "
+	    open="INSERT ALL" close="SELECT * FROM DUAL">
+	        INTO MATCHES VALUES
+	        (
+	        	#{item.A}, #{item.B}, TO_DATE(#{item.C}, 'YYYY-MM-DD HH24:MI:SS'), #{item.D}, #{item.E}, #{item.F}, #{item.G}, #{item.H}
+	        )
+	    </foreach>
+	</insert>
+	
+	<delete id="delete" parameterType="Map">    
+        DELETE MATCHES WHERE MATCHNUM IN (
+        <foreach collection="excelContent" item="item" index="index" separator=",">
+        	#{item.A}
+	    </foreach>
+	    )
+	</delete>
+  
+	
+	
+	
 	<!-- Insert -->
 	<insert id="addReview" parameterType="ReviewDTO">
 		INSERT INTO REVIEWS (REVIEWNUM, MATCHNUM, USERID, BOARDDATE, BOARDCONTENT)
@@ -161,6 +200,9 @@
 		UPDATE REVIEWS SET BOARDCONTENT = #{boardContent} WHERE REVIEWNUM = #{reviewNum}
 	</update>
 	
+	<update id="updateMatchStatus" parameterType="MatchDTO">
+		UPDATE MATCHES SET MATCHSTATUS = 진행 중 WHERE MATCHNUM = #{matchNum}
+	</update>
 
 	
 	

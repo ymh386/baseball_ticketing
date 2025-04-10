@@ -11,6 +11,7 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+
 	
 	<!-- Interceptors -->
 	<interceptors>
@@ -40,7 +41,7 @@
 			<exclude-mapping path="/qna/list"/>
 			<exclude-mapping path="/qna/getSubCommentList"/>
 			<exclude-mapping path="/matches/getReviewList"/>
-			<exclude-mapping path="/matches/matchList"/>
+			<exclude-mapping path="/matches/list"/>
 			<exclude-mapping path="/matches/detail"/>
 			<exclude-mapping path="/users/join"/>
 			<exclude-mapping path="/users/login"/>
@@ -65,6 +66,8 @@
 			<mapping path="/notice/add"/>
 			<mapping path="/notice/update"/>
 			<mapping path="/notice/delete"/>
+			<mapping path="/matches/add"/>
+			<mapping path="/matches/delete"/>
 			<beans:ref bean="adminCheckInterceptor"/>
 		</interceptor>
 		

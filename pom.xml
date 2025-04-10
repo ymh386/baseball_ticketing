@@ -17,6 +17,17 @@
 	<dependencies>
 			<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 			
+			<!-- 엑셀파일 db에 업로드(poi) -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.2.0</version>
+		</dependency>
 			
 			
 			<!-- 비밀번호 해시화 -->
