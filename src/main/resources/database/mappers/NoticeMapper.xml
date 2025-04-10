@@ -5,9 +5,43 @@
   
   <mapper namespace="com.baseball.app.notice.NoticeDAO">
   
+  <sql id="search">
+  <where>
+  	BOARDNUM > 0 AND
+  	
+  	
+  	<choose>
+  		<when test="kind eq 'k1'">
+  			BOARDTITLE LIKE '%'||#{search}||'%'
+  		</when>
+  		
+  		<when test="kind eq 'k2'">
+  			BOARDCONTENT LIKE '%'||#{search}||'%'
+  		</when>
+  		<otherwise>
+  			BOARDTITLE LIKE '%'||#{search}||'%'
+  			OR
+  			BOARDCONTENT LIKE '%'||#{search}||'%'
+  		
+  		</otherwise>
+  	
+  	</choose>
+  
+  </where>
+  	
+  </sql>
+  
+  
+  
+  
+  
+  
+  
+  
   	<select id="getTotalCount" resultType="java.lang.Long">
   		SELECT COUNT(BOARDNUM) FROM NOTICE
   	</select>
+	
 	
 	<select id="getList" resultType="NoticeDTO">
 				SELECT * FROM
@@ -15,12 +49,12 @@
 				(
 					SELECT * 
 					FROM NOTICE
+					<include refid="search"/>
 
 					ORDER BY BOARDNUM DESC
 				) M
 			)
 			WHERE R BETWEEN #{startNum} AND #{endNum}
-	
 	</select>
 	
 	<select id="getDetail" parameterType="NoticeDTO" resultMap="getDetailResult">

@@ -376,18 +376,13 @@ public class UserController {
 	    result.put("exists", exists);
 	    return result;
 	}
-
-	
-	
 	
 
 	
 	
+
 	
-	
-	
-	
-	
+
 	
 }
 	
