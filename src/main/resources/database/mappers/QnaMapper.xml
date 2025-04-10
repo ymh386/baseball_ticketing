@@ -5,6 +5,38 @@
   
   <mapper namespace="com.baseball.app.qna.QnaDAO" >
 
+	 <sql id="search">
+  <where>
+  	BOARDNUM > 0 AND
+  	
+  	
+  	<choose>
+  		<when test="kind eq 'k1'">
+  			BOARDTITLE LIKE '%'||#{search}||'%'
+  		</when>
+  		
+  		<when test="kind eq 'k2'">
+  			BOARDCONTENT LIKE '%'||#{search}||'%'
+  		</when>
+  		<otherwise>
+  			BOARDTITLE LIKE '%'||#{search}||'%'
+  			OR
+  			BOARDCONTENT LIKE '%'||#{search}||'%'
+  		
+  		</otherwise>
+  	
+  	</choose>
+  
+  </where>
+  	
+  </sql>
+  
+  
+	
+
+
+
+
 		<select id="getTotalCount" resultType="java.lang.Long">
 			SELECT COUNT(BOARDNUM) FROM QNA
 		</select>
@@ -15,7 +47,7 @@
 				(
 					SELECT * 
 					FROM QNA
-
+					<include refid="search"/>
 					ORDER BY BOARDNUM DESC
 				) M
 			)

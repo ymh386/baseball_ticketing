@@ -16,37 +16,30 @@
 <div class="continer-fluid my-5">
 	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
 		<!-- contents 내용 작성 -->
-		<h1>${kind} Detail Page</h1>
+		<h1>${kind} Detail</h1>
 		
-		<table class="table table-dark ">
-			<thead>
-				<tr >
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<tr>
-					<td>${dto.boardTitle}</td>
-					<td>${dto.userId}</td>
-					<td>${dto.boardDate}</td>
-					<td>${dto.boardHit}</td>
-				</tr>
-		
-		</table>
+	<div style="background-color: white; padding: 15px; border-radius: 8px; font-size: 14px;">
+	    <div style="font-size: 22px; font-weight: bold; margin-bottom: 15px; margin-top:15px;">
+		  ${dto.boardTitle}
+	    </div>
+	    <div style="margin-bottom: 5px;">
+	        <strong style="font-size: 16px;">${dto.userId}님</strong>
+	    </div>
+	    <div style="color: #999; font-size: 13px;">
+	        ${dto.boardDate} &nbsp; 조회 ${dto.boardHit}
+	    </div>
+	</div>
+
 		
 		
-		<div class="alert alert-primary" role="alert" style="min-height: 60vh">
+		<div class="alert border" role="alert" style="min-height: 60vh">
 		  
 				<c:if test="${kind eq 'notice'}">
 				 	   <div>
 				        <c:forEach items="${dto.boardFileDTOs}" var="f">
 				            <img src="/resources/images/notice/${f.fileName}" 
 				                 alt="${f.originalName}" 
-				               style="max-width: 1000px; height: auto; display: block; margin: 0 auto 10px;">
+				               style="width: 100%; max-width: 1000px; height: auto; display: block; margin: 0 auto 10px;">
 				        </c:forEach>
 				    </div>
 					</c:if>

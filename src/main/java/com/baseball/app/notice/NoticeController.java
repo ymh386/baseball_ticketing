@@ -111,7 +111,7 @@ public class NoticeController {
 		
 		UserDTO user = (UserDTO)session.getAttribute("user");
 		
-		if(user == null || !"wlsdnjs888".equals(user.getUserId())) {
+		if(user == null || !"admin".equals(user.getUserId())) {
 			return "redirect:/";
 		}
 		
@@ -137,7 +137,7 @@ public class NoticeController {
 		
 		UserDTO user = (UserDTO)session.getAttribute("user");
 		
-		if(user == null || !"wlsdnjs888".equals(user.getUserId())) {
+		if(user == null || !"admin".equals(user.getUserId())) {
 			return "redirect:/";
 		}
 		
