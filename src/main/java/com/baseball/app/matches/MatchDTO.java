@@ -1,6 +1,7 @@
 package com.baseball.app.matches;
 
 import java.sql.Date;
+import java.sql.Time;
 
 import com.baseball.app.stadiums.StadiumDTO;
 import com.baseball.app.teams.TeamDTO;
@@ -11,6 +12,7 @@ public class MatchDTO {
 	private Long matchNum;
 	private Long stadiumNum;
 	private Date matchDate;
+	private Time matchTime;
 	private Long homeTeam;
 	private Long awayTeam;
 	private String matchStatus;
@@ -21,6 +23,12 @@ public class MatchDTO {
 	private StadiumDTO stadiumDTO;
 	
 	
+	public Time getMatchTime() {
+		return matchTime;
+	}
+	public void setMatchTime(Time matchTime) {
+		this.matchTime = matchTime;
+	}
 	
 	public TeamDTO getHomeTeamDTO() {
 		return homeTeamDTO;
