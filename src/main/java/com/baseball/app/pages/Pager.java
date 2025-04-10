@@ -33,6 +33,13 @@ public class Pager {
 	
 	// 마지막 페이지 번호
 	private Long lastPage;
+	
+	
+	//검색종류
+	private String kind;
+	
+	//검색어
+	private String search;
 
 //-------------------------------------------------	
 
@@ -165,29 +172,29 @@ public class Pager {
 
 //-------------------------------------------------
 
-	//
-//	public String getKind() {
-//		if(this.kind ==null) {
-//			this.kind="k1";
-//		}
-//		return kind;
-//	}
-//
-//	public void setKind(String kind) {
-//		this.kind = kind;
-//	}
-//
-//	public String getSearch() {
-//		if(this.search == null) {
-//			this.search="";//빈문자열
-//		}
-//		return search;
-//	}
-//
-//	public void setSearch(String search) {
-//		this.search = search;
-//	}
-//
+	
+	public String getKind() {
+		if(this.kind ==null) {
+			this.kind="k1";
+		}
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	public String getSearch() {
+		if(this.search == null) {
+			this.search="";//빈문자열
+		}
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
 
 	
 
