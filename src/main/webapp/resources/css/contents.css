@@ -1,0 +1,35 @@
+body {
+  width: 100%;	
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 1200px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+header, main, footer {
+  min-width: 1200px;
+  max-width: 1200px; /* 최대 너비 1200px */
+}
+
+#footerRow {
+  height: 150px;
+  background-color: bisque;
+}
+
+@media (max-width: 1200px) {
+  /* 화면 크기가 1200px 이하일 때 wrapper를 fixed로 고정 */
+  body {
+    justify-content: left;
+    
+  }
+
+  
+}

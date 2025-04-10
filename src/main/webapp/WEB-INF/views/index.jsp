@@ -5,20 +5,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
+<link rel="stylesheet" href="/resources/css/contents.css" />
+<link rel="stylesheet" href="/resources/css/index.css" />
+
 </head>
+
 <body>
+<div class="wrapper">
+
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
-<div class="continer-fluid my-5">
-	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
-		<!-- contents 내용 작성 -->
-		<h1>환영합니다</h1>
+<main id="mainContent">
+	<div id="wrapper-mainImg">		
+		<!-- <img id="mainImg1" src="/resources/images/design/lottelogo.jpg"> -->
 	</div>
-</div>
+	<div id="wrapper-mainContent">
+		<div class="mainContents"></div>
+		<div class="mainContents"></div>
+	</div>
+</main>
 
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
+</div>
 </body>
 </html>
