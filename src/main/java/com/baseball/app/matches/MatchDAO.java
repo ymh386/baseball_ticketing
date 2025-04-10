@@ -18,7 +18,12 @@ public class MatchDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE="com.baseball.app.matches.MatchDAO.";	
+	private final String NAMESPACE="com.baseball.app.matches.MatchDAO.";
+	
+	//getAll
+	public List<MatchDTO> getAll() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getAll");
+	}
 	
 	//detail
 	public MatchDTO getDetail(MatchDTO matchDTO) throws Exception {
@@ -47,6 +52,16 @@ public class MatchDAO {
 	public List<MatchDTO> getMatchListMonthly(Integer month) throws Exception {
 		
 		return sqlSession.selectList(NAMESPACE + "getMatchListMonthly", month);
+	}
+	
+	//add
+	public int add(Map<String, Object> map) throws Exception {
+		return sqlSession.insert(NAMESPACE + "add", map);
+	}
+	
+	//delete
+	public int delete(Map<String, Object> map) throws Exception {
+		return sqlSession.delete(NAMESPACE + "delete", map);
 	}
 	
 	//getTotalCount
@@ -83,6 +98,10 @@ public class MatchDAO {
 	public int updateReview(ReviewDTO reviewDTO) throws Exception {	
 		
 		return sqlSession.update(NAMESPACE + "updateReview", reviewDTO);
+	}
+	
+	public int updateMatchStatus(MatchDTO matchDTO) throws Exception {
+		return sqlSession.update(NAMESPACE + "updateMatchStatus", matchDTO);
 	}
 
 	
