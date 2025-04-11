@@ -82,8 +82,12 @@ public class MatchController {
 	public String getDetail(MatchDTO matchDTO, Model model) throws Exception {
 		
 		matchDTO = matchService.getDetail(matchDTO);
+		String matchDate = matchDTO.getMatchDate().toString().substring(5);
+		String matchTime = matchDTO.getMatchTime().toString().substring(0, 5);
 		
 		model.addAttribute("dto", matchDTO);
+		model.addAttribute("matchDate", matchDate);
+		model.addAttribute("matchTime", matchTime);
 		
 		return "matches/detail";
 		
@@ -113,8 +117,16 @@ public class MatchController {
 		
 		System.out.println("month : " + month);
 		List<MatchDTO> list = matchService.getMatchList(month);
+		List<String> matchTimeList = new ArrayList<String>();
+		List<String> matchDateList = new ArrayList<String>();
+		for(MatchDTO dto : list) {
+			matchTimeList.add(dto.getMatchTime().toString().substring(0, 5));
+			matchDateList.add(dto.getMatchDate().toString().substring(5));
+		}
 		
-		model.addAttribute("list", list);		
+		model.addAttribute("list", list);	
+		model.addAttribute("matchDateList", matchDateList);
+		model.addAttribute("matchTimeList", matchTimeList);
 		model.addAttribute("changedMonth", month);
 		
 		return "matches/matchList";

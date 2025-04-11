@@ -103,7 +103,7 @@
 			STADIUMS S
 			ON (M.STADIUMNUM = S.STADIUMNUM)
 		WHERE MATCHDATE BETWEEN TRUNC(TO_DATE(#{month}, 'MM')) AND LAST_DAY(TRUNC(TO_DATE(#{month}, 'MM')))+0.99999 
-		ORDER BY MATCHDATE ASC
+		ORDER BY MATCHDATE ASC, MATCHNUM ASC
 	</select>
 	
 	<resultMap type="MatchDTO" id="getDetailResult2">
@@ -172,7 +172,7 @@
 	    open="INSERT ALL" close="SELECT * FROM DUAL">
 	        INTO MATCHES VALUES
 	        (
-	        	#{item.A}, #{item.B}, TO_DATE(#{item.C}, 'YYYY-MM-DD HH24:MI:SS'), #{item.D}, #{item.E}, #{item.F}, #{item.G}, #{item.H}
+	        	#{item.A}, #{item.B}, TO_DATE(#{item.C}, 'YYYY-MM-DD HH24:MI'), #{item.D}, #{item.E}, #{item.F}, #{item.G}, #{item.H}
 	        )
 	    </foreach>
 	</insert>
@@ -201,7 +201,7 @@
 	</update>
 	
 	<update id="updateMatchStatus" parameterType="MatchDTO">
-		UPDATE MATCHES SET MATCHSTATUS = 진행 중 WHERE MATCHNUM = #{matchNum}
+		UPDATE MATCHES SET MATCHSTATUS = #{matchStatus} WHERE MATCHNUM = #{matchNum}
 	</update>
 
 	
