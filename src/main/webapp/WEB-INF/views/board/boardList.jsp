@@ -16,7 +16,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
 
-            <h3 class="mb-4 fs-2">${kind}</h3>  
+            <h3 class="mb-4">${kind}</h3>
 
 					     
 					<form action="./list" method="get" class="input-group mb-4" style="max-width: 500px;">

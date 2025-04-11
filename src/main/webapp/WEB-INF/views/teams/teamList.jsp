@@ -16,7 +16,7 @@
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
-<div class="continer-fluid my-5">
+<div class="container my-5">
 	<div class="row col-md-8 offset-md-2">
 	
 	

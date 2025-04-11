@@ -13,7 +13,7 @@
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
-<div class="continer-fluid my-5">
+<div class="container" style="width: 1000px; min-width: 1000px;">
 	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
 		<!-- contents 내용 작성 -->
 		
@@ -102,7 +102,7 @@
 	<c:if test="${kind ne 'notice'}">
 	
 	
-		<div class="container-fluid my-5">
+		<div class="container" style="width: 1000px; min-width: 1000px;">
 			<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
 			
 		<form action="./addComment?boardNum=${dto.boardNum}" method="post" enctype="multipart/form-data">
