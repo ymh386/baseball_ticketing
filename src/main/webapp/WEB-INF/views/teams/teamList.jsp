@@ -16,11 +16,11 @@
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
-<div class="continer-fluid my-5">
+<div class="container my-5">
 	<div class="row col-md-8 offset-md-2">
 	
 	
-		<h3><strong>구단 소개</strong></h3>
+            <h3 class="mb-4 fs-2">구단 소개</h3>  	
 		<br>
 		<br>
 		<br>
