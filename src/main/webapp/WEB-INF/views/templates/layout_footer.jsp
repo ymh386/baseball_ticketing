@@ -5,7 +5,7 @@
     
 	  <footer>
 	    <div id="innerFooter">	      
-	      <div id="footerContent">© 2024 Company, Inc</div>
+	      <div id="footerContent">© 2025 Baseball Company, Inc</div>
 	    </div>
 	
 	  </footer>
