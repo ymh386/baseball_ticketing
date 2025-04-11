@@ -36,7 +36,7 @@
 	<task:executor id="myExecutor" pool-size="5" />
 	<task:scheduler id="myScheduler" pool-size="5" />
 
-<bean id="jobService" class="com.baseball.app.schedules.MatchStatusSchedule" />
+<bean id="matchStatusSchedule" class="com.baseball.app.schedules.MatchStatusSchedule" />
 
 </beans>
 
