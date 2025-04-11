@@ -18,27 +18,27 @@ import com.baseball.app.matches.MatchDTO;
 @EnableScheduling
 public class MatchStatusSchedule {
 	
-	@Autowired
-	private MatchDAO matchDAO;
-	
-	@Scheduled(cron = "*/10 * * * * *")
-	public void updateMatchStatus() throws Exception {
-		Long matchTime = 0L;
-		Calendar now = Calendar.getInstance();
-		Long nowTime = now.getTimeInMillis();
-		List<MatchDTO> list = new ArrayList<MatchDTO>();
-		
-		list = matchDAO.getAll();
-		
-		for(MatchDTO dto : list) {
-			matchTime = dto.getMatchDate().getTime() + dto.getMatchTime().getTime();
-			if(matchTime <= nowTime) {
-				System.out.println("경기진행 - 경기번호 : " + dto.getMatchNum());
-				matchDAO.updateMatchStatus(dto);
-			}
-		}
-		
-		
-	}
+//	@Autowired
+//	private MatchDAO matchDAO;
+//	
+//	@Scheduled(cron = "*/10 * * * * *")
+//	public void updateMatchStatus() throws Exception {
+//		Long matchTime = 0L;
+//		Calendar now = Calendar.getInstance();
+//		Long nowTime = now.getTimeInMillis();
+//		List<MatchDTO> list = new ArrayList<MatchDTO>();
+//		
+//		list = matchDAO.getAll();
+//		
+//		for(MatchDTO dto : list) {
+//			matchTime = dto.getMatchDate().getTime() + dto.getMatchTime().getTime();
+//			if(matchTime <= nowTime) {
+//				System.out.println("경기진행 - 경기번호 : " + dto.getMatchNum());
+//				matchDAO.updateMatchStatus(dto);
+//			}
+//		}
+//		
+//		
+//	}
 
 }
