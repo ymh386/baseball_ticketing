@@ -9,6 +9,22 @@
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/toTop.css" />
+<style>
+
+	.logo {
+		width: 100px;
+		height: 100px;
+	}
+
+	.bolder{
+		font-weight: bolder;
+	}
+
+	#select1{
+		width: 100px;
+	}
+
+</style>
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
@@ -16,9 +32,17 @@
 <div class="container-fluid my-5">
 	<div class="row col-md-8 offset-md-2">
 		<!-- contents 내용 작성 -->
-		<h1>경기 리스트</h1>
+		<h1 class="bolder">경기일정・결과</h1>
+		<c:if test="${not empty sessionScope.user and sessionScope.user.userId eq 'admin'}">
+			<div class="row">
+				<div class="col-md-4 offset-md-8">
+					<a href="./add" class="btn btn-success">경기등록</a>
+					<a href="./delete" class="btn btn-danger">경기삭제</a>
+				</div>
+			</div>
+		</c:if>
 						
-		<div>
+		<div class="mb-3">
 		<select id="select1" name="month" onchange="handleOnChange(this)" data-month="${changedMonth}">
 				
 			<c:forEach var="i" begin="01" end="12">
@@ -40,41 +64,55 @@
 		
 		
 		
-		<table class="table table-striped">
+		<table class="table text-center align-middle">
 			<thead>				
 				<tr>
-					<th>경기 번호</th>
-					<th>경기 일자</th>
-					<th>경기 시간</th>				
-					<th>경기장</th>
-					<th>상태</th>
-					<th>홈팀</th>
-					<th>홈팀 점수</th>
-					<th>원정팀</th>
-					<th>원정팀 점수</th>
+					
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach items="${list}" var="v">
-				<tr>
-					<td>${v.matchNum}</td>
-					<td>${v.matchDate}</td>
-					<td>${v.matchTime}</td>
-					<td>${v.stadiumDTO.stadiumName}</td>
-					<td>${v.matchStatus}</td>
-					<td>${v.homeTeamDTO.teamName}</td>
-					<td>${v.homeScore}</td>
-					<td>${v.awayTeamDTO.teamName}</td>
-					<td>${v.awayScore}</td>
-					
-					<td><button onclick="location.href='./detail?matchNum=${v.matchNum}'">
-					보기</button></td>
-				</tr>
+			<tbody class="table-group-divider">
+				<c:forEach items="${list}" var="v" varStatus="vs">
+
+				<tr style="cursor: pointer;" onclick="location.href='./detail?matchNum=${v.matchNum}'">
+					<td><h3>${matchDateList[vs.index]}</h3> <p>${matchTimeList[vs.index]}</p></td>
+					<td>
+						<h5 class = "bolder" style="color:darkgray">
+							<c:choose>
+								<c:when test="${v.homeTeam eq 1}"><img src="/resources/images/teams/kia.jpg" class="logo"></c:when>
+								<c:when test="${v.homeTeam eq 2}"><img src="/resources/images/teams/ssg.jpg" class="logo"></c:when>
+								<c:when test="${v.homeTeam eq 3}"><img src="/resources/images/teams/hanwha.jpg" class="logo"></c:when>
+								<c:when test="${v.homeTeam eq 4}"><img src="/resources/images/teams/kiwoom.jpg" class="logo"></c:when>
+								<c:when test="${v.homeTeam eq 5}"><img src="/resources/images/teams/samsung.jpg" class="logo"></c:when>
+								<c:when test="${v.homeTeam eq 6}"><img src="/resources/images/teams/lotte.jpg" class="logo"></c:when>
+								<c:when test="${v.homeTeam eq 7}"><img src="/resources/images/teams/kt.jpg" class="logo"></c:when>
+								<c:when test="${v.homeTeam eq 8}"><img src="/resources/images/teams/lg.jpg" class="logo"></c:when>
+								<c:when test="${v.homeTeam eq 9}"><img src="/resources/images/teams/nc.jpg" class="logo"></c:when>
+								<c:when test="${v.homeTeam eq 10}"><img src="/resources/images/teams/doosan.jpg" class="logo"></c:when>
+								<c:otherwise><img src="/resources/images/teams/kbo.jpg" class="logo"></c:otherwise>
+							</c:choose>
+							VS
+							<c:choose>
+								<c:when test="${v.awayTeam eq 1}"><img src="/resources/images/teams/kia.jpg" class="logo"></c:when>
+								<c:when test="${v.awayTeam eq 2}"><img src="/resources/images/teams/ssg.jpg" class="logo"></c:when>
+								<c:when test="${v.awayTeam eq 3}"><img src="/resources/images/teams/hanwha.jpg" class="logo"></c:when>
+								<c:when test="${v.awayTeam eq 4}"><img src="/resources/images/teams/kiwoom.jpg" class="logo"></c:when>
+								<c:when test="${v.awayTeam eq 5}"><img src="/resources/images/teams/samsung.jpg" class="logo"></c:when>
+								<c:when test="${v.awayTeam eq 6}"><img src="/resources/images/teams/lotte.jpg" class="logo"></c:when>
+								<c:when test="${v.awayTeam eq 7}"><img src="/resources/images/teams/kt.jpg" class="logo"></c:when>
+								<c:when test="${v.awayTeam eq 8}"><img src="/resources/images/teams/lg.jpg" class="logo"></c:when>
+								<c:when test="${v.awayTeam eq 9}"><img src="/resources/images/teams/nc.jpg" class="logo"></c:when>
+								<c:when test="${v.awayTeam eq 10}"><img src="/resources/images/teams/doosan.jpg" class="logo"></c:when>
+								<c:otherwise><img src="/resources/images/teams/kbo.jpg" class="logo"></c:otherwise>
+							</c:choose>
+						</h5>
+					</td>
+					<td class="bolder line">${v.homeTeamDTO.teamName} VS ${v.awayTeamDTO.teamName}</td>
+					<td class="line">${v.stadiumDTO.stadiumName}</td>
+					<td class="line">${v.matchStatus}</td>
 				</c:forEach>
 			</tbody>
 		</table>
-		<a href="./add" class="btn btn-success">경기등록</a>
-		<a href="./delete" class="btn btn-danger">경기삭제</a>
+		
 	</div>
 </div>
 
