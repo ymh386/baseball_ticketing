@@ -16,7 +16,9 @@
 <div class="continer-fluid my-5">
 	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
 		<!-- contents 내용 작성 -->
-		<h1>${kind} Detail</h1>
+		
+        <h3 class="mb-4 fs-2">${kind} Detail</h3>  
+		
 		
 	<div style="background-color: white; padding: 15px; border-radius: 8px; font-size: 14px;">
 	    <div style="font-size: 22px; font-weight: bold; margin-bottom: 15px; margin-top:15px;">

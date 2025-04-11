@@ -95,9 +95,14 @@
 		    
 		  </ul>
 		</nav>
-		<button type="button" onclick="location.href='/users/mypage'">뒤로 가기</button>
+		
+			<div>
+			<button type="button" class="btn btn-secondary" onclick="location.href='/users/mypage'">뒤로가기</button>
+		</div>
+		
 	</div>
 </div>
+	
  
 						
 			
