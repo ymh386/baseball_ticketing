@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- <link rel="stylesheet" href="/resources/css/reset.css" />
- --><link rel="stylesheet" href="/resources/css/header.css" />
+<link rel="stylesheet" href="/resources/css/contents.css" />
+
 	<header>
-		<div id="headerRow">
+		<div id="innerHeader">
 		
 			<div class="wrapper-menu" id="wrapper-menu1">
 				<ul class="menu" id="menu1">

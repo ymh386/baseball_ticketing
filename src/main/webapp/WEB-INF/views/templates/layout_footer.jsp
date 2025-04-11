@@ -3,9 +3,9 @@
     
     <button onclick="backToTop()" id="btn-back-to-top" title="위로 가기">Top</button>
     
-	  <footer >
-	    <div id="footerRow">	      
-	      <span >© 2024 Company, Inc</span>
+	  <footer>
+	    <div id="innerFooter">	      
+	      <div id="footerContent">© 2024 Company, Inc</div>
 	    </div>
 	
 	  </footer>
