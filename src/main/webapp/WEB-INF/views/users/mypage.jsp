@@ -11,6 +11,7 @@
 
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
+
 </head>
 <body>
 
@@ -154,7 +155,6 @@
 
 
 
-
 <div class="container my-5">
     <div class="row">
 
@@ -208,7 +208,7 @@
         <div class="col-md-4 mb-3">
             <div class="card text-center shadow-sm p-4 h-100 d-flex flex-column justify-content-center align-items-center">
                   <div class="text-center">
-                        <div class="mb-2" style="font-weight: 500;"><strong>point card</strong></div>
+                        <div class="mb-2" style="font-weight: 500;"><h3 class="">point card</h3></div>
                         <img
                             src="${pageContext.request.contextPath}/resources/images/teams/${
                                 teamName == '기아 타이거즈' ? 'kia' :

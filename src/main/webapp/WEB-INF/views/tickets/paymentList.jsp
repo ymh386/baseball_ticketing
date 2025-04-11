@@ -13,11 +13,12 @@
         display: inline-block;
     }
     </style>
+    
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
-<div class="continer-fluid my-5">
+<div class="container my-5">
 	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
 		<!-- contents 내용 작성 -->
 		<h1>결제내역</h1>
@@ -33,7 +34,7 @@
 					</form>
 		
 		<c:if test="${not empty list}">
-			<table class="table table-striped">
+			<table class="class=table table-striped">
 							    <thead class="table-primary">
 							        <tr>
 							            <th>결제번호</th>
@@ -95,9 +96,14 @@
 		    
 		  </ul>
 		</nav>
-		<button type="button" onclick="location.href='/users/mypage'">뒤로 가기</button>
+		
+			<div>
+			<button type="button" class="btn btn-secondary" onclick="location.href='/users/mypage'">뒤로가기</button>
+		</div>
+		
 	</div>
 </div>
+	
  
 						
 			

@@ -40,3 +40,9 @@
 <c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 </body>
 </html>
+
+
+
+
+
+
