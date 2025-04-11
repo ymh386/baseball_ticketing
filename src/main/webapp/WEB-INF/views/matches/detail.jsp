@@ -10,7 +10,10 @@
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc0f1aedeac18218bc9a1b59e6328574&libraries=services,clusterer,drawing"></script>
 <style>
-	
+	.card-img-top {
+    width: 280px;
+    height: 180px;
+	}
 </style>
 </head>
 <body>
