@@ -49,7 +49,7 @@ public class ExcelCellRef {
             else if( cell.getCellType() == CellType.NUMERIC ) {
             	if(DateUtil.isCellDateFormatted(cell)) {
             		Date date = cell.getDateCellValue();
-            		value = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+            		value = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
             	} else {
             		value = cell.getNumericCellValue() + "";	
             	}
