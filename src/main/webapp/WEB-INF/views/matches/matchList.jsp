@@ -44,7 +44,8 @@
 			<thead>				
 				<tr>
 					<th>경기 번호</th>
-					<th>경기 일자</th>					
+					<th>경기 일자</th>
+					<th>경기 시간</th>				
 					<th>경기장</th>
 					<th>상태</th>
 					<th>홈팀</th>
@@ -58,6 +59,7 @@
 				<tr>
 					<td>${v.matchNum}</td>
 					<td>${v.matchDate}</td>
+					<td>${v.matchTime}</td>
 					<td>${v.stadiumDTO.stadiumName}</td>
 					<td>${v.matchStatus}</td>
 					<td>${v.homeTeamDTO.teamName}</td>
@@ -71,7 +73,8 @@
 				</c:forEach>
 			</tbody>
 		</table>
-				
+		<a href="./add" class="btn btn-success">경기등록</a>
+		<a href="./delete" class="btn btn-danger">경기삭제</a>
 	</div>
 </div>
 

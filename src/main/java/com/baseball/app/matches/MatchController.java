@@ -1,11 +1,13 @@
 package com.baseball.app.matches;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.HandlerMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.baseball.app.boards.ReviewDTO;
 import com.baseball.app.pages.Pager;
@@ -35,6 +41,41 @@ public class MatchController {
 	
 	@Autowired
 	private MyModel myModel;
+	
+	@RequestMapping(value = {"/add", "/delete"})
+    public String excelpage() {
+        return "/matches/add";
+    }
+	
+	@ResponseBody
+    @PostMapping(value={"/add", "/delete"})
+    public void excelUpload(MultipartFile testFile, Model model, HttpServletRequest request, MultipartHttpServletRequest req) throws Exception {
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+        MultipartFile excelFile = req.getFile("excelFile");
+        
+        if(excelFile==null || excelFile.isEmpty()) {
+            throw new RuntimeException("엑셀파일을 선택하세요");
+        }
+        File destFile = null;
+        if(requestUrl.equals("/matches/add")) {
+        	model.addAttribute("kind", "add");
+        	destFile = new File("C:\\matchExcel\\upload\\"+excelFile.getOriginalFilename());
+        }else {
+        	model.addAttribute("kind", "delete");
+        	destFile = new File("C:\\matchExcel\\delete\\"+excelFile.getOriginalFilename());
+        }
+            try {
+                excelFile.transferTo(destFile);
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage(),e);
+            }
+            matchService.excelUpload(destFile, requestUrl);
+            
+            destFile.delete();
+            
+            
+            
+        }
 			
 	
 	@RequestMapping(value = "detail", method = RequestMethod.GET)

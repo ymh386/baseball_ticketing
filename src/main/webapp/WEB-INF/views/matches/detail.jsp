@@ -45,6 +45,7 @@
 				</div>
 			  </div>
 			  <div class="col align-self-center">
+				<p>${dto.matchTime}</p>
 			  	<h3>${dto.matchStatus}</h3>
 			  	<c:choose>
 			  		<c:when test="${dto.matchStatus eq '진행 중'}"><h1><span class="badge text-bg-primary">${dto.homeScore} : ${dto.awayScore}</span></h1></c:when>
