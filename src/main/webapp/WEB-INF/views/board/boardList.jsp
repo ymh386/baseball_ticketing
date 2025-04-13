@@ -10,13 +10,38 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boardList.css">
 <style>
 	#div1 {
-		height: 20%;
+		height: 110px;
 	}
 	
 	#div2 {
-		height: 60%;
-		margin: 0 20px;
-	}
+        height: 350px;
+        margin: 0 20px;
+        
+    }
+
+    #div2 table {
+        width: 100%;
+        border-collapse: collapse; /* 테이블 셀 경계선 합치기 */
+        border-radius: 10px; /* 테이블의 모서리를 둥글게 */
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* 미세한 그림자 */
+    }
+    
+    #div2 tr {
+    	height: 50px;
+    	border: 1px solid #d3d3d3; /* 테이블의 연한 회색 테두리 */
+    }
+
+    #div2 th {
+        background-color: #e6f0fa; /* 연한 파란 배경색 */
+        padding: 12px;
+        text-align: center;
+        
+    }
+
+    #div2 td {
+        padding: 12px;
+        
+    }
 	
 	#div3 {
 		height: 10%;
@@ -36,7 +61,7 @@
 	<div class="wrapper-main">
 	
 		<div class="container">
-		    <div class="row justify-content-center">
+		    <div class="row justify-content-center my-5">
 		        <div>	
 		            <div id="div1" class="d-flex justify-content-between align-items-center" style="gap: 2rem;">
 					    <!-- 제목 영역 -->
@@ -76,7 +101,7 @@
 		
 		
 		            <!-- 리스트 테이블을 감싼 div -->
-		            <div id="div2" >
+		            <div id="div2">
 					    <table class="table align-middle text-center fs-1">
 					        <thead>
 					            <tr>
@@ -108,24 +133,27 @@
 					        <input type="hidden" id="page" name="page">
 					    </form>
 					
-					    <nav>
-					        <ul class="pagination justify-content-center">
-					            <li class="page-item ${pager.startBtn == 1 ? 'disabled' : ''}">
-					                <a class="page-link" href="./list?page=${pager.startBtn - 1}">&laquo;</a>
-					            </li>
-					
-					            <c:forEach begin="${pager.startBtn}" end="${pager.endBtn}" var="i">
-					                <li class="page-item ${i == pager.page ? 'active' : ''}">
-					                    <a class="page-link" href="./list?page=${i}">${i}</a>
+					    <div class="d-flex justify-content-center mt-4">
+					        <nav>
+					            <ul class="pagination justify-content-center">
+					                <li class="page-item ${pager.startBtn == 1 ? 'disabled' : ''}">
+					                    <a class="page-link" href="./list?page=${pager.startBtn - 1}">&laquo;</a>
 					                </li>
-					            </c:forEach>
 					
-					            <li class="page-item ${pager.endCheck ? 'disabled' : ''}">
-					                <a class="page-link" href="./list?page=${pager.endBtn + 1}">&raquo;</a>
-					            </li>
-					        </ul>
-					    </nav>
+					                <c:forEach begin="${pager.startBtn}" end="${pager.endBtn}" var="i">
+					                    <li class="page-item ${i == pager.page ? 'active' : ''}">
+					                        <a class="page-link" href="./list?page=${i}">${i}</a>
+					                    </li>
+					                </c:forEach>
+					
+					                <li class="page-item ${pager.endCheck ? 'disabled' : ''}">
+					                    <a class="page-link" href="./list?page=${pager.endBtn + 1}">&raquo;</a>
+					                </li>
+					            </ul>
+					        </nav>
+					    </div>
 					</div>
+				</div>
 		
 		            <!-- 글쓰기 버튼 -->
 		            <div id="div4" class="text-end" 
@@ -133,12 +161,12 @@
 		            <c:choose>
 		                <c:when test="${kind eq 'notice' and sessionScope.user != null and sessionScope.user.userId eq 'admin'}">
 		                    
-		                        <a href="./add" class="btn btn-outline-success btn-lg">글 작성</a>
+		                        <a href="./add" class="btn btn-primary btn-lg mx-3">글 작성</a>
 		                    
 		                </c:when>
 		                <c:when test="${kind eq 'qna' and sessionScope.user != null}">
 		                    
-		                        <a href="./add" class="btn btn-outline-success btn-lg">글 작성</a>
+		                        <a href="./add" class="btn btn-primary btn-lg mx-3">글 작성</a>
 		                    
 		                </c:when>
 		                <c:otherwise>

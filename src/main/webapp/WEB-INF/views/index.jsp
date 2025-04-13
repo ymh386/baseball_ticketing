@@ -9,6 +9,11 @@
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
 
+<style>
+
+
+</style>
+
 </head>
 
 <body>
@@ -20,8 +25,8 @@
 	<div class="wrapper-main">
 	
 		<div id="wrapper-mainImg">		
-			<!-- <img id="mainImg1" src="/resources/images/design/lottelogo.jpg"> -->
-			<div class="divImg">이미지</div>
+			<img class="movingImg" src="/resources/images/design/300.png" alt="이미지">
+			
 		</div>
 		
 		<div id="wrapper-section">

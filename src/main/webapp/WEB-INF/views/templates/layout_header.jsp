@@ -13,6 +13,11 @@
 				<ul class="menu" id="menu1">
 					<!-- 경계선 -->
 			        <c:if test="${not empty user}">
+			        
+			        <li class="nav-item">
+			        	<a class="nav-link" href="#">${user.userId}님 접속</a>
+			        </li>
+			        
 	       			<li class="nav-item">
 			        	<a class="nav-link" href="/users/mypage">내정보</a>
 			        </li>

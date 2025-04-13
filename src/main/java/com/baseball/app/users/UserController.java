@@ -49,8 +49,11 @@ public class UserController {
     }
     // 로그인 화면
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public void login() throws Exception {
-    	
+    public void login(HttpSession session) throws Exception {
+    	// 임시용 로그인 로직 'admin'부여
+    	UserDTO user = new UserDTO();
+    	user.setUserId("admin");
+    	session.setAttribute("user", user);
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
