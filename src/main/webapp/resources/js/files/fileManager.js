@@ -4,6 +4,7 @@
 
 const add_file = document.getElementById("add_file");
 const files = document.getElementById("files");
+const attachedWrapper = document.getElementById("attached-wrapper");
 const del = document.getElementsByClassName("del");
 
 let count=files.getAttribute("data-files-size");
@@ -76,7 +77,7 @@ add_file.addEventListener("click", function(){
     child.classList.add('input-group-text', 'btn', 'btn-outline-danger', 'del')
     div.append(child);
 
-    files.append(div);
+    attachedWrapper.append(div);
 
     count++;
 })

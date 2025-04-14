@@ -48,6 +48,11 @@ public class MatchDAO {
 		return sqlSession.selectList(NAMESPACE + "getMatchList2", month);
 	}
 	
+	public List<MatchDTO> getMatchListHome() throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + "getMatchListHome");
+	}
+	
 	//getMatchListMonthly
 	public List<MatchDTO> getMatchListMonthly(Integer month) throws Exception {
 		
