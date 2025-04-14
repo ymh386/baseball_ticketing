@@ -18,38 +18,38 @@ import com.baseball.app.matches.MatchDTO;
 @EnableScheduling
 public class MatchStatusSchedule {
 	
-//	@Autowired
-//	private MatchDAO matchDAO;
-//	
-//	@Scheduled(cron = "0/10 * * * * *")
-//	public void updateMatchStatus() throws Exception {
-//		Thread.sleep(1000);
-//		Long matchTime = 0L;
-//		Long matchEndTime = 0L;
-//		Calendar now = Calendar.getInstance();
-//		Long nowTime = now.getTimeInMillis();
-//		List<MatchDTO> list = new ArrayList<MatchDTO>();
-//		
-//		try {
-//			list = matchDAO.getAll();
-//		} catch(Exception e) {
-//			System.out.println("--------------------------");
-//		}
-//		
-//		for(MatchDTO dto : list) {
-//			matchTime = dto.getMatchDate().getTime();
-//			matchEndTime = matchTime + 9000000L;
-//			if(dto.getMatchStatus().equals("진행 전") && matchTime <= nowTime) {
-//				System.out.println("경기진행 : 경기번호 " + dto.getMatchNum());
-//				dto.setMatchStatus("진행 중");
-//				matchDAO.updateMatchStatus(dto);
-//			} else if(dto.getMatchStatus().equals("진행 중") && matchEndTime <= nowTime) {
-//				System.out.println("경기종료 : 경기번호 " + dto.getMatchNum());
-//				dto.setMatchStatus("종료");
-//				matchDAO.updateMatchStatus(dto);
-//			}
-//		}
-//		Thread.sleep(1000);
-//	}
+	@Autowired
+	private MatchDAO matchDAO;
+	
+	@Scheduled(cron = "0/10 * * * * *")
+	public void updateMatchStatus() throws Exception {
+		Thread.sleep(1000);
+		Long matchTime = 0L;
+		Long matchEndTime = 0L;
+		Calendar now = Calendar.getInstance();
+		Long nowTime = now.getTimeInMillis();
+		List<MatchDTO> list = new ArrayList<MatchDTO>();
+		
+		try {
+			list = matchDAO.getAll();
+		} catch(Exception e) {
+			System.out.println("--------------------------");
+		}
+		
+		for(MatchDTO dto : list) {
+			matchTime = dto.getMatchDate().getTime();
+			matchEndTime = matchTime + 9000000L;
+			if(dto.getMatchStatus().equals("진행 전") && matchTime <= nowTime) {
+				System.out.println("경기진행 : 경기번호 " + dto.getMatchNum());
+				dto.setMatchStatus("진행 중");
+				matchDAO.updateMatchStatus(dto);
+			} else if(dto.getMatchStatus().equals("진행 중") && matchEndTime <= nowTime) {
+				System.out.println("경기종료 : 경기번호 " + dto.getMatchNum());
+				dto.setMatchStatus("종료");
+				matchDAO.updateMatchStatus(dto);
+			}
+		}
+		Thread.sleep(1000);
+	}
 
 }
