@@ -26,11 +26,11 @@
 	}
 
 	#div1 {
-		height: 20%;
+		height: 110px;
 	}
 
 	#div2 {
-		height: 70%;
+		height: 100%;
 		padding:0 43px;
 	}
 
@@ -52,7 +52,7 @@
 <div class="content">
 	<div class="wrapper-main">
 		<div class="container">
-		    <div class="row justify-content-center">	
+		    <div class="row justify-content-center my-5">	
 		        <div id="div1" class="d-flex justify-content-between align-items-center" style="gap: 2rem;">
 				<!-- contents 내용 작성 -->
 					<div  class="d-flex justify-content-center align-items-center"
@@ -63,14 +63,7 @@
 							box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);">
 						<h1 style="font-size: 2.5rem; margin: 0; color: #2c3e50; font-weight: 600;">경기일정・결과</h1>
 					</div>
-					<c:if test="${not empty sessionScope.user and sessionScope.user.userId eq 'admin'}">
-						<div class="row">
-							<div class="col-md-4 offset-md-8">
-								<a href="./add" class="btn btn-success">경기등록</a>
-								<a href="./delete" class="btn btn-danger">경기삭제</a>
-							</div>
-						</div>
-					</c:if>
+					
 					<div class="d-flex justify-content-center align-items-end" 
 					style="height: 100%; margin-right: 30px; margin-bottom: 30px;">
 						<select class="form-select" id="select1" name="month" onchange="handleOnChange(this)" data-month="${changedMonth}">
@@ -89,8 +82,21 @@
 								</c:choose>				
 							</c:forEach>
 						</select> 월
+
+						<div class="form-check mx-3">
+							<label class="form-check-label" for="myTeam">선호 팀 경기보기</label>
+							<input myTeamNum="${myTeamNum}" class="form-check-input" type="checkbox" value="" id="myTeam">
+						</div>
 					</div>
 				</div>
+				<c:if test="${not empty sessionScope.user and sessionScope.user.userId eq 'admin'}">
+					<div style="height: 80px;" class="d-flex justify-content-end align-items-center">
+						
+						<a href="./add" class="btn btn-success">경기등록</a>
+						<a href="./delete" class="btn btn-danger">경기삭제</a>
+						
+					</div>
+				</c:if>
 									
 				
 				

@@ -10,67 +10,81 @@
 <style>
 	#payment-button{ width:100%; padding:15px; background-color:#3065AC; color:white; border-radius:3px; font-size:16px; border:none; margin-top:10px}
 	.title {margin: 0 0 4px; font-size: 24px; font-weight: 600;color: #4e5968;}
+
+	#div1{
+		height: 110px;
+	}
 </style>
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
-<div class="continer-fluid my-5">
-	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
-		<!-- contents 내용 작성 -->
-		<h1>결제창</h1>
-		  <div class="container text-center">
-			<div class="row align-items-end">
-			  <div id="usePointInfo" class="col">
-				<label>사용 가능 포인트</label>
-						
-				<input type="text" value="${user.point}P" readonly>
-			  </div>
-			  <div class="col">
-				<form>
-					<div class="mb-3">
-					  <label class="form-label">티켓번호</label>
-					  <input type="text" class="form-control" value="${dto.ticketNum}" readonly>
+<div class="container my-5">
+	<div class="d-flex justify-content-center">
+	  	<div class="login-box border rounded p-4 shadow-sm bg-light">
+			<div class="text-center mb-4">
+				<img src="${pageContext.request.contextPath}/resources/images/teams/kbo.jpg" alt="KBO 로고" style="width: 150px;">
+			</div>
+			<!-- contents 내용 작성 -->
+			
+
+			<form action="./add" method="post">
+				<div class="innerDiv mb-3">
+				<label class="form-label w-100">티켓번호</label>
+				<div class="ipts d-flex justify-content-center">
+					<input type="text" class="form-control" value="${dto.ticketNum}" readonly style="width: 350px;">
+				</div>
+				</div>
+			
+				<div class="innerDiv mb-3">
+				<label class="form-label w-100">경기번호</label>
+				<div class="ipts d-flex justify-content-center">
+					<input type="text" class="form-control" value="${dto.matchNum}" readonly style="width: 350px;">
+				</div>
+				</div>
+			
+				<div class="innerDiv mb-3">
+					<label class="form-label w-100">좌석</label>
+					<div class="ipts d-flex justify-content-center">
+						<input type="text" class="form-control" value="${dto.seatNum}" readonly style="width: 350px;">
 					</div>
-					<div class="mb-3">
-					  <label class="form-label">경기번호</label>
-					  <input type="text" class="form-control" value="${dto.matchNum}" readonly>
+				</div>
+			
+				<div class="innerDiv mb-3">
+					<label class="form-labe w-100">가격</label>
+					<div class="ipts d-flex justify-content-center">
+						<input id="payPrice" type="text" class="form-control" value="${price}" readonly style="width: 350px;">
 					</div>
-					<div class="mb-3">
-						<label class="form-label">좌석</label>
-						<input type="text" class="form-control" value="${dto.seatNum}" readonly>
+				</div>
+
+				<div class="innerDiv mb-3">
+					<div id="usePointInfo">
+						<label class="form-labe w-100">사용 가능 포인트</label>
+						<div class="ipts d-flex justify-content-center">
+							<input type="text" class="form-control" value="${user.point}P" readonly style="width: 350px;">
+						</div>		
 					</div>
-					<div class="mb-3">
-						<label class="form-label">가격</label>
-						
-						<input id="payPrice" type="text" class="form-control" value="${price}" readonly>
-					</div>
+				</div>
+
+				<div class="innerDiv mb-3">
 					<div class="form-check">
-						<label class="form-check-label" for="point">
+						<label class="form-check-label w-100" for="point">
 							포인트 사용
 						</label>
 						<input class="form-check-input" type="checkbox" value="${user.point}" id="point">
 					</div>
-					
-				  </form>
-			  </div>
-			  <div class="col">
-			  </div>
-			</div>
-		  </div>
-		  <div class="container text-center">
-			<div class="row align-items-center">
-			  <div class="col">
-			  </div>
-			  <div id="pay" class="col">
-				<!-- 결제하기 버튼 생성 -->
-				<input data-userid="${dto.userId}" type="button" id="naverPayBtn" class="btn btn-success" value="네이버페이 결제">
-				<!-- <button data-userid="${dto.userId}" type="button" id="payBtn" class="btn btn-success">결제하기</button> -->
 				</div>
-			  <div class="col">
-				<button data-ticketnum="${dto.ticketNum}" data-matchnum="${dto.matchNum}" data-seatnum="${dto.seatNum}" id="cancel" type="button" class="btn btn-warning">결제취소</button>
-			</div>
-		  </div>
+			
+				<div class="d-flex justify-content-between gap-2 mt-5" style="width: 350px; margin: 0 auto;">
+					<div id="pay">
+						<!-- 결제하기 버튼 생성 -->
+						<input data-userid="${dto.userId}" type="button" id="naverPayBtn" class="btn btn-success" value="네이버페이 결제">
+						<!-- <button data-userid="${dto.userId}" type="button" id="payBtn" class="btn btn-success">결제하기</button> -->
+					</div>
+					<button data-ticketnum="${dto.ticketNum}" data-matchnum="${dto.matchNum}" data-seatnum="${dto.seatNum}" id="cancel" type="button" class="btn btn-warning">결제취소</button>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 

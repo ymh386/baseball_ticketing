@@ -13,27 +13,36 @@
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
-<div class="continer-fluid my-5">
-	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
-		<!-- contents 내용 작성 -->
-		 <h1>경기${kind}</h1>
-		<div>
-			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data"
-	        method="post" action= "${kind}">
-	        <div class="contents">
-	        <div>첨부파일은 한개만 등록 가능합니다.</div>
-	        <dl class="vm_name">
-	          <dt class="down w90">첨부 파일</dt>
-	            <dd><input id="excelFile" type="file" name="excelFile" /></dd>
-	          </dl>        
-	        </div>
-	        <div class="bottom">
-	          <button type="button" id="addExcelImpoartBtn" class="btn btn-success" onclick="check()" >
-				<span>추가</span></button>
-	        </div>
-	      </form>
+<div class="content">
+	<div class="wrapper-main">
+	
+		<div class="container">
+		    <div class="row justify-content-center my-5">
+				<!-- contents 내용 작성 -->
+				 <c:if test="${kind eq 'add'}">
+					<h1>경기 등록</h1>
+				 </c:if>
+				 <c:if test="${kind eq 'delete'}">
+					<h1>경기 삭제</h1>
+				 </c:if>		
+				<div>
+					<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data"
+					method="post" action= "./${kind}">
+					<div class="contents">
+					<div>첨부파일은 한개만 등록 가능합니다.</div>
+					<dl class="vm_name">
+					<dt class="down w90">첨부 파일</dt>
+						<dd><input id="excelFile" type="file" name="excelFile" /></dd>
+					</dl>        
+					</div>
+					<div class="bottom">
+					<button type="button" id="addExcelImpoartBtn" class="btn btn-primary" onclick="check()" >
+						<span>추가</span></button>
+					</div>
+				</form>
+				</div>
+			</div>
 		</div>
-		
 	</div>
 </div>
 

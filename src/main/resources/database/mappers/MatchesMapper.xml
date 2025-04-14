@@ -90,7 +90,7 @@
 		SELECT * FROM TICKETS WHERE MATCHNUM=#{matchNum} AND TICKETSTATUS IN ('결제중', '예매완료')
 	</select>
 	
-	<select id="getMatchList2" resultMap="getDetailResult2" parameterType="java.lang.Integer">
+	<select id="getMatchList2" resultMap="getDetailResult2" parameterType="Map">
 		SELECT M.*, S.*, TH.TEAMNAME AS THN, TH.FIELD AS THF, TA.TEAMNAME AS TAN, TA.FIELD AS TAF
 		FROM MATCHES M
 			LEFT OUTER JOIN
@@ -102,7 +102,12 @@
 			LEFT OUTER JOIN
 			STADIUMS S
 			ON (M.STADIUMNUM = S.STADIUMNUM)
-		WHERE MATCHDATE BETWEEN TRUNC(TO_DATE(#{month}, 'MM')) AND LAST_DAY(TRUNC(TO_DATE(#{month}, 'MM')))+0.99999 
+		WHERE MATCHDATE BETWEEN TRUNC(TO_DATE(#{month}, 'MM')) AND LAST_DAY(TRUNC(TO_DATE(#{month}, 'MM')))+0.99999
+		<choose>
+			<when test="myTeamNum != null || myTeamNum != null">
+				AND HOMETEAM = #{myTeamNum} OR AWAYTEAM = #{myTeamNum}
+			</when>
+		</choose> 
 		ORDER BY MATCHDATE ASC, MATCHNUM ASC
 	</select>
 	
