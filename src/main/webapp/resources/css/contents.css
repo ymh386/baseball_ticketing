@@ -124,7 +124,7 @@ header {
 .row {
 	width: 1200px;
 	min-width: 1200px;
-	height: 675px;
+	/* height: 675px; */
 	background-color: white;
 }
 

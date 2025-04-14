@@ -16,8 +16,14 @@
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
-<div class="container my-5">
-	<div class="row col-md-8 offset-md-2">
+
+
+
+<div class="content">
+	<div class="wrapper-main">
+
+		<div class="container my-5">
+			<div class="row col-md-8">
 	
 	
             <h3 class="mb-4 fs-2">구단 소개</h3>  	
@@ -80,9 +86,14 @@
 				</tr>
 				</c:forEach>
 			</tbody>
-		</table>
+	    	</table>
+		</div>
 	</div>
-</div>
+
+  </div>
+
+ </div>
+
 
 <!-- 모달 창 HTML 추가 -->
 <div class="modal" id="teamModal">

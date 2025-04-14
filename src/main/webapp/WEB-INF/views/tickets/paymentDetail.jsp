@@ -14,10 +14,10 @@
 
 
 
-<div class ="contents">
-	<div class ="wrapper-main">
-
-	<div class="container my-5">
+<div class="content">
+	<div class="wrapper-main">
+	
+		<div class="container my-5">
 	    <!-- 결제 상단 정보 -->
 	    <div class="mb-4">
 	        <h2 class="mb-3">결제 상세내역</h2>
