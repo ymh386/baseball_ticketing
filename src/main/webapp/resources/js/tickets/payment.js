@@ -19,24 +19,31 @@ point.addEventListener('click', ()=>{
             payPrice.value = 0
             usePoint = price
         }
+        
+        let ipDiv = document.createElement("div")
+        ipDiv.id = 'ipDiv'
+        ipDiv.classList.add('ipts', 'd-flex', 'justify-content-center')
         let upl = document.createElement('label')
         upl.id = 'upl'
+        upl.classList.add('form-label', 'w-100')
         upl.innerHTML='사용할 포인트'
         let upv = document.createElement('input')
         upv.id = 'upv'
         upv.type = 'text'
         let upvr = document.createAttribute('readonly')
         upv.setAttributeNode(upvr)
+        upv.classList.add('form-control')
         upv.value=usePoint + 'P'
+        ipDiv.append(upv)
         usePointInfo.append(upl)
-        usePointInfo.append(upv)
+        usePointInfo.append(ipDiv)
     }else{
         payPrice.value = price
         usePoint = 0;
         let upl = document.getElementById('upl')
-        let upv = document.getElementById('upv')
+        let ipDiv = document.getElementById('ipDiv')
+        ipDiv.remove()
         upl.remove()
-        upv.remove()
     }
 })
 

@@ -20,19 +20,34 @@
 	}
 
 	#div1 {
-		height: 20%;
+		height: 110px;
 	}
 
 	#div2 {
-		height: 40%;
+		height: 350px;
+	}
+
+	#div2-1 {
+		display: flex;
+		flex-direction: column;
 	}
 
 	#div3 {
-		height: 30%;
+		
+	}
+
+	#div3-1 {
+		display: flex;
+		flex-direction: column;
+	}
+
+	#div3-2 {
+		display: flex;
+		flex-direction: column;
 	}
 
 	#div4 {
-		height: 10%;
+		height: 110px;
 	}
 	
 </style>
@@ -45,11 +60,11 @@
 <div class="content">
 	<div id="wrapper-main">
 		<div class="container">
-			<div class="row justify-content-center">
+			<div class="row justify-content-center my-5">
 
 				<div id="div1" class="d-flex justify-content-center align-items-center" style="gap: 2rem;">
 					<div  class="d-flex justify-content-center align-items-center"
-						style="height: 60%; margin-left: 30px;
+						style="height: 60%;
 						background-color: #e6f0fa;
 						padding: 12px 30px;
 						border-radius: 12px;
@@ -63,7 +78,7 @@
 					<!-- contents 내용 작성  -->
 					
 					<div class="row d-flex justify-content-center align-items-center">
-						<div class="col d-flex justify-content-center">
+						<div class="col d-flex justify-content-end">
 							<div class="card shadow-lg rounded-4 text-center" style="width: 18rem;">
 								<h3 class="card-header bolder">HOME</h3>
 								<c:choose>
@@ -86,17 +101,19 @@
 							</div>
 						</div>
 						<div class="col d-flex justify-content-center">
-							<p class="text-muted">${matchTime}</p>
-							<h3>${dto.matchStatus}</h3>
-							<c:choose>
-							<c:when test="${dto.matchStatus eq '진행 전'}"><h1><span class="badge text-bg-light">${dto.homeScore} : ${dto.awayScore}</span></h1></c:when>
-								<c:when test="${dto.matchStatus eq '진행 중'}"><h1><span class="badge text-bg-primary">${dto.homeScore} : ${dto.awayScore}</span></h1></c:when>
-								<c:when test="${dto.matchStatus eq '중단'}"><h1><span class="badge text-bg-warning">${dto.homeScore} : ${dto.awayScore}</span></h1></c:when>
-								<c:otherwise><h1><span class="badge text-bg-secondary">${dto.homeScore} : ${dto.awayScore}</span></h1></c:otherwise>
-							</c:choose>
-							<p>${dto.homeTeamDTO.field}</p>
+							<div id="div2-1" class="text-center">
+								<p class="text-muted">${matchTime}</p>
+								<h3>${dto.matchStatus}</h3>
+								<c:choose>
+								<c:when test="${dto.matchStatus eq '진행 전'}"><h1><span class="badge text-bg-light">${dto.homeScore} : ${dto.awayScore}</span></h1></c:when>
+									<c:when test="${dto.matchStatus eq '진행 중'}"><h1><span class="badge text-bg-primary">${dto.homeScore} : ${dto.awayScore}</span></h1></c:when>
+									<c:when test="${dto.matchStatus eq '중단'}"><h1><span class="badge text-bg-warning">${dto.homeScore} : ${dto.awayScore}</span></h1></c:when>
+									<c:otherwise><h1><span class="badge text-bg-secondary">${dto.homeScore} : ${dto.awayScore}</span></h1></c:otherwise>
+								</c:choose>
+								<p>${dto.homeTeamDTO.field}</p>
+							</div>
 						</div>
-						<div class="col d-flex justify-content-center">
+						<div class="col d-flex justify-content-start">
 							<div class="card shadow-lg rounded-4 text-center" style="width: 18rem;">
 								<h3 class="card-header bolder">AWAY</h3>
 								<c:choose>
@@ -121,13 +138,16 @@
 					</div>
 				</div>
 				<div id="div3">
-					<div class="row d-flex justify-content-between align-items-center">
-						<div class="col">
-							<h5  class="bolder text-center">경기장 주변 식당 정보</h5>
-							<div id="map" lat="${dto.stadiumDTO.latitude}" lng="${dto.stadiumDTO.longitude}" style="width:400px;height:400px;" class="border rounded-3 shadow-sm"></div>
+					<div class="row d-flex justify-content-start align-items-center mt-5">
+						<div class="col d-flex justify-content-center">
+							<div id="div3-1">
+								<h5  class="bolder text-center">경기장 주변 식당 정보</h5>
+								<div id="map" lat="${dto.stadiumDTO.latitude}" lng="${dto.stadiumDTO.longitude}" style="width:400px;height:400px;" class="border rounded-3 shadow-sm"></div>
+							</div>
 						</div>
 						<div class="col">
-							<form>
+							
+							<form style="width: 488px;">
 								<div class="mb-3">
 								<label class="form-label">경기장</label>
 								<input type="text" class="form-control" value="${dto.stadiumDTO.stadiumName}" readonly>
@@ -141,22 +161,12 @@
 						</div>
 					</div>
 				</div>
-				<div id="div4">
-					<div class="row align-items-end">
-						<div class="col">
-							
-						</div>
-						<div class="col">
-							
-						</div>
-						<div class="col">
-							<fmt:formatDate var="today" value="<%= new java.util.Date() %>" pattern="yyyy-MM-dd"/>
-							<c:if test="${dto.matchDate >= today and dto.matchStatus eq '진행 전'}">
-								<a class="btn btn-outline-dark" href="./seatList?matchNum=${dto.matchNum}">예매하기</a>
-							</c:if>
-								<a class="btn btn-outline-dark" href="./getReviewList?matchNum=${dto.matchNum}">경기 리뷰</a>
-						</div>
-					</div>
+				<div id="div4" class="d-flex justify-content-end align-items-center">
+					<fmt:formatDate var="today" value="<%= new java.util.Date() %>" pattern="yyyy-MM-dd"/>
+					<c:if test="${dto.matchDate >= today and dto.matchStatus eq '진행 전'}">
+						<a class="btn btn-outline-dark" href="./seatList?matchNum=${dto.matchNum}">예매하기</a>
+					</c:if>
+					<a class="btn btn-outline-dark" href="./getReviewList?matchNum=${dto.matchNum}">경기 리뷰</a>
 				</div>
 			</div>
 		</div>

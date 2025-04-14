@@ -84,9 +84,9 @@ public class MatchService {
 	
 	
 	//
-	public List<MatchDTO> getMatchList(Integer month) throws Exception {
+	public List<MatchDTO> getMatchList(Map<String, Object> map) throws Exception {
 		
-		return matchDAO.getMatchList(month);
+		return matchDAO.getMatchList(map);
 	}
 	
 	//
