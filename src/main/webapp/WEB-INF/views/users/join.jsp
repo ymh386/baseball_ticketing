@@ -67,6 +67,10 @@
 <body>
     <c:import url="/WEB-INF/views/templates/layout_header.jsp" />
 
+
+<div class="content">
+	<div class="wrapper-main">
+
     <div class="container my-5">
         <div class="d-flex justify-content-center">
 	        <div class="login-box border rounded p-4 shadow-sm bg-light">
@@ -148,7 +152,8 @@
 	        </div>
         </div>
     </div>
-
+   </div>
+  </div>
     <c:import url="/WEB-INF/views/templates/layout_footer.jsp" />
     <c:import url="/WEB-INF/views/templates/boot_js.jsp" />
     <script src="/resources/js/users/join.js"></script>

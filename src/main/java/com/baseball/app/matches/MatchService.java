@@ -89,6 +89,12 @@ public class MatchService {
 		return matchDAO.getMatchList(month);
 	}
 	
+	//
+	public List<MatchDTO> getMatchListHome() throws Exception {
+		
+		return matchDAO.getMatchListHome();
+	}
+	
 	
 	//getMatchListMonthly
 	public List<MatchDTO> getMatchListMonthly(Integer month) throws Exception {

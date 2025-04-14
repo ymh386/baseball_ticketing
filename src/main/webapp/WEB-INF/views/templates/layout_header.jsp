@@ -3,11 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/contents.css" />
 
-	<header>
-		<div id="innerHeader">
+	<header id="header1">
+		<div id="innerHeader1">
 		
 			<div class="wrapper-menu" id="wrapper-menu1">
 				<ul class="menu" id="menu1">
@@ -45,12 +46,21 @@
 				</ul>
 			</div>
 		
+		</div>
+	</header>
+
+	<header id="header2">
+		<div id="innerHeader2">
+			
 			<div class="wrapper-menu" id="wrapper-menu2">
 			
 		      <ul class="menu" id="menu2">
 		      
-		        <li class="nav-item">
-		          <a class="nav-link" href="/">Home</a>
+		        <li class="nav-item"  id="homeLogo" style="background-color: white;">
+		          <a class="nav-link" href="/">
+		          	<img src="${pageContext.request.contextPath}/resources/images/design/kbo1.png" alt="KBO 로고"
+		          	style="width: 90%; height: 90%;"> 
+		          </a>
 		        </li>
 		        
 		        <li class="nav-item">

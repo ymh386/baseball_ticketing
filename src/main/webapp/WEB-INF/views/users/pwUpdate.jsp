@@ -11,6 +11,9 @@
 <body>
 	<c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
+<div class="content">
+	<div class="wrapper-main">
+
 	<div class="container d-flex justify-content-center align-items-center"
 		style="min-height: 80vh;">
 		<div class="card shadow p-4 col-md-6">
@@ -48,6 +51,8 @@
 			</form>
 		</div>
 	</div>
+  </div>
+ </div>
 
 	<c:import url="/WEB-INF/views/templates/layout_footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>

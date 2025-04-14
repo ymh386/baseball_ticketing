@@ -18,11 +18,15 @@
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
-<div class="container my-5">
-	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
-		<!-- contents 내용 작성 -->
-		<h1>결제내역</h1>
+<div class="content">
+	<div class="wrapper-main">
 
+
+		<div class="container my-5">
+			<div class="row col-md-8">
+				<!-- contents 내용 작성 -->
+				<h1>결제내역</h1>
+		
 
 			      <!-- 상태 선택 필터 -->
 					<form id="statusFilterForm">
@@ -101,10 +105,11 @@
 			<button type="button" class="btn btn-secondary" onclick="location.href='/users/mypage'">뒤로가기</button>
 		</div>
 		
-	</div>
-</div>
+	  </div>
+    </div>
 	
- 
+  </div>
+ </div>
 						
 			
 			<script>

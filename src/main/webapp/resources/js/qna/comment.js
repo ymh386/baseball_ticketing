@@ -59,7 +59,7 @@ for(let subWindowMaker of subWindowMakers) {
       text.setAttribute("contenteditable", "true")
   
       let goBtn = document.createElement("button");
-      goBtn.setAttribute("class", "subWindowBtns btn btn-success")
+      goBtn.setAttribute("class", "subWindowBtns btn btn-primary")
       goBtn.innerText="작성";
       
       subWindow.append(text);
@@ -146,6 +146,7 @@ for(let ctc of ctcs ) {
                       td4.innerHTML = dto.boardContent;
                       tr.append(td4);
 
+                      td5.setAttribute("class", "td5");
                       td5.innerHTML = dto.boardDate;
                       tr.append(td5);
                       
