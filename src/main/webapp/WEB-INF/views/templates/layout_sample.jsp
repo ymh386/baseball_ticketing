@@ -11,9 +11,17 @@
 <body>
 <c:import url="/WEB-INF/views/templates/layout_header.jsp"></c:import>
 
-<div class="continer-fluid my-5">
-	<div class="row col-md-8 offset-md-2" style="min-height: 60vh">
+<div class="content">
+	<div class="wrapper-main">
+	
+		<div class="container">
+		    <div class="row justify-content-center my-5">
 		<!-- contents 내용 작성 -->
+		
+				
+		
+			</div>
+		</div>
 	</div>
 </div>
 
