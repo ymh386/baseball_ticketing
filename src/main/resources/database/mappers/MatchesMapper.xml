@@ -135,6 +135,59 @@
 		</association>
   			  	
   	</resultMap>
+  	
+  	
+  	<select id="getMatchListHome" resultMap="getDetailResultHome">
+	  <![CDATA[
+	    SELECT * FROM (
+	      SELECT 
+	        ROWNUM R,
+	        M.*, 
+	        TH.TEAMNAME AS THN, 
+	        TH.FIELD AS THF, 
+	        TA.TEAMNAME AS TAN, 
+	        TA.FIELD AS TAF
+	      FROM MATCHES M
+	        LEFT OUTER JOIN TEAMS TH ON M.HOMETEAM = TH.TEAMNUM
+	        LEFT OUTER JOIN TEAMS TA ON M.AWAYTEAM = TA.TEAMNUM
+	        LEFT OUTER JOIN STADIUMS S ON M.STADIUMNUM = S.STADIUMNUM
+	      WHERE M.MATCHDATE >= SYSDATE
+	    ) 
+	    WHERE R <= 5
+	  ]]>
+	</select>
+  	
+	
+	<resultMap type="MatchDTO" id="getDetailResultHome">
+  		<id column="MATCHNUM" property="matchNum"/>
+		<result column="STADIUMNUM" property="stadiumNum"/>
+		<result column="MATCHDATE" property="matchDate"/>
+		<result column="MATCHDATE" property="matchTime"/>
+		<result column="HOMETEAM" property="homeTeam"/>
+		<result column="AWAYTEAM" property="awayTeam"/>
+		<result column="MATCHSTATUS" property="matchStatus"/>
+		<result column="HOMESCORE" property="homeScore"/>
+		<result column="AWAYSCORE" property="awayScore"/>
+		
+		<association property="homeTeamDTO" javaType="TeamDTO">
+			<id column="TEAMNUM" property="teamNum"/>
+			<result column="THN" property="teamName"/>
+			<result column="THF" property="field"/>
+		</association>
+		<association property="awayTeamDTO" javaType="TeamDTO">
+			<id column="TEAMNUM" property="teamNum"/>
+			<result column="TAN" property="teamName"/>
+			<result column="TAF" property="field"/>
+		</association>
+		<association property="stadiumDTO" javaType="StadiumDTO">
+			<id column="STADIUMNUM" property="stadiumNum"/>
+			<result column="STADIUMNAME" property="stadiumName"/>
+			<result column="LATITUDE" property="latitude"/>
+			<result column="LONGITUDE" property="longitude"/>
+		</association>
+  			  	
+  	</resultMap>
+  	
 	
 	<select id="getMatchList" resultType="MatchDTO">
 		SELECT * FROM MATCHES ORDER BY MATCHNUM ASC
