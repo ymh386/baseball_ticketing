@@ -73,7 +73,7 @@
                                 <p class="mb-1"><strong>경기 날짜:</strong> ${ticket['MATCHDATE']}</p>
                                 <p class="mb-2"><strong>티켓 상태:</strong> ${ticket['TICKETSTATUS']}</p>
 
-                                <c:if test="${ticket['TICKETSTATUS'] == '예매완료' and ticket['MATCHDATE'] >= today}">
+                                <c:if test="${ticket['TICKETSTATUS'] == '예매완료' }">
                                     <form action="./refund" method="POST" onsubmit="return confirm('정말로 환불하시겠습니까?')">
                                         <input type="hidden" name="paymentId" value="${ticket['PAYMENTID']}">
                                         <input type="hidden" name="ticketNum" value="${ticket['TICKETNUM']}">

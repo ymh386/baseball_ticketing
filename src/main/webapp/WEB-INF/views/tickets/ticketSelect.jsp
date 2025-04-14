@@ -16,6 +16,7 @@
         경기번호: ${ticket.matchNum} |
         좌석: ${ticket.seatNum}
     </p>
+    
 </div>
 
 

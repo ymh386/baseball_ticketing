@@ -43,9 +43,9 @@ public class MatchDAO {
 	}
 	
 	//getMatchList
-	public List<MatchDTO> getMatchList(Integer month) throws Exception {
+	public List<MatchDTO> getMatchList(Map<String, Object> map) throws Exception {
 		
-		return sqlSession.selectList(NAMESPACE + "getMatchList2", month);
+		return sqlSession.selectList(NAMESPACE + "getMatchList2", map);
 	}
 	
 	public List<MatchDTO> getMatchListHome() throws Exception {

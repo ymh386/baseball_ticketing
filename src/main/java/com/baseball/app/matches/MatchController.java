@@ -42,13 +42,21 @@ public class MatchController {
 	@Autowired
 	private MyModel myModel;
 	
-	@RequestMapping(value = {"/add", "/delete"})
-    public String excelpage() {
+	@RequestMapping(value = {"add", "delete"})
+    public String excelpage(HttpServletRequest request, Model model) {
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		
+		if(requestUrl.equals("/matches/add")) {
+        	model.addAttribute("kind", "add");
+        }else {
+        	model.addAttribute("kind", "delete");
+        }
+		
         return "/matches/add";
     }
 	
 	@ResponseBody
-    @PostMapping(value={"/add", "/delete"})
+    @PostMapping(value={"add", "delete"})
     public void excelUpload(MultipartFile testFile, Model model, HttpServletRequest request, MultipartHttpServletRequest req) throws Exception {
 		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
         MultipartFile excelFile = req.getFile("excelFile");
@@ -58,10 +66,8 @@ public class MatchController {
         }
         File destFile = null;
         if(requestUrl.equals("/matches/add")) {
-        	model.addAttribute("kind", "add");
         	destFile = new File("C:\\matchExcel\\upload\\"+excelFile.getOriginalFilename());
         }else {
-        	model.addAttribute("kind", "delete");
         	destFile = new File("C:\\matchExcel\\delete\\"+excelFile.getOriginalFilename());
         }
             try {
@@ -106,7 +112,13 @@ public class MatchController {
 	}
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public String getMatchList(Model model, Integer month) throws Exception {
+	public String getMatchList(Model model, HttpSession session, Integer month, Long myTeamNum) throws Exception {
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		if(userDTO != null && userDTO.getTeamNum() != null && myTeamNum != null) {
+			myTeamNum = userDTO.getTeamNum();
+		}else {
+			myTeamNum = null;
+		}
 		
 		System.out.println("month : " + month);
 		if(month == null) {
@@ -116,7 +128,11 @@ public class MatchController {
 		}
 		
 		System.out.println("month : " + month);
-		List<MatchDTO> list = matchService.getMatchList(month);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("month", month);
+		map.put("myTeamNum", myTeamNum);
+		List<MatchDTO> list = matchService.getMatchList(map);
 		List<String> matchTimeList = new ArrayList<String>();
 		List<String> matchDateList = new ArrayList<String>();
 		for(MatchDTO dto : list) {
@@ -124,6 +140,11 @@ public class MatchController {
 			matchDateList.add(dto.getMatchDate().toString().substring(5));
 		}
 		
+		if(userDTO != null && userDTO.getTeamNum() != null) {
+			myTeamNum = userDTO.getTeamNum();
+		}
+		
+		model.addAttribute("myTeamNum", myTeamNum);
 		model.addAttribute("list", list);	
 		model.addAttribute("matchDateList", matchDateList);
 		model.addAttribute("matchTimeList", matchTimeList);
